@@ -21,9 +21,9 @@ const Footer = () => {
       <a
         className="text-primary"
         target="_blank"
-        href="https://github.com/GurpreetSingh-Projects"
+        href="https://gurpreet-singh-chadha.vercel.app/"
       >
-        GurpreetSingh-Projects
+        Gurpreet Singh
       </a>
     </Typography>
   );

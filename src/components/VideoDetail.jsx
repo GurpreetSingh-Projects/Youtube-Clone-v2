@@ -107,10 +107,6 @@ const VideoDetail = () => {
     }
   }, []);
 
-  // var vidDetails = useSelector((state) => state.videos.videos.items);
-  // console.log("details -" + JSON.stringify(vidDetails));
-  // console.log("details -" + JSON.stringify(channelDetails));
-
   const { data } = useGetCommentsQuery(id, {
     keepUnusedDataFor: 24 * 3600,
   });
@@ -127,46 +123,20 @@ const VideoDetail = () => {
     skip: !id,
     keepUnusedDataFor: 24 * 3600,
   });
-  // let homeVids = useSelector((state) => state?.videos?.videos);
-  // console.log("homevides: " + homeVids);
-  // let mergedVideos = [...homeVids, ...getVideos];
-  // console.log(mergedVideos);
+
   useEffect(() => {
     if (getVideos) {
       dispatch(setRecommended(getVideos));
-      // dispatch(setVideos(...getVideos));
     }
   }, [getVideos]);
-  // const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+
   useEffect(() => {
     setShowSummary(false);
     const gemini = async () => {
-      // const url =
-      //   "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
-
-      // const payload = {
-      //   contents: [
-      //     {
-      //       parts: [
-      //         {
-      //           text: `Summarize this youtube video in atleast 100 words and in a single para with no formatting - ${
-      //             vidDetails?.snippet?.title
-      //           } with description set as - ${
-      //             vidDetails?.snippet?.localized?.description
-      //           } and has user comments - ${JSON.stringify(commentsList)} `,
-      //         },
-      //       ],
-      //     },
-      //   ],
-      // };
-      // const response = await axios.post(url, payload, {
-      //   headers: { "Content-Type": "application/json" },
-      //   params: { key: apiKey },
-      // });
       let response = await geminiApi(
         vidDetails?.snippet?.title,
         vidDetails?.snippet?.localized?.description,
-        commentsList
+        commentsList,
       );
       if (response?.data?.candidates[0]?.content?.parts[0]?.text.length > 2) {
         setWords([`${response?.data?.candidates[0]?.content?.parts[0]?.text}`]);
@@ -177,8 +147,6 @@ const VideoDetail = () => {
     };
     gemini();
   }, [vidDetails?.snippet?.title]);
-  // let words = [`${summary?.data?.candidates[0]?.content?.parts[0]?.text}`];
-  // console.log("Comments list - " + JSON.stringify(commentsList.items));
 
   return (
     <Box
@@ -390,7 +358,7 @@ const VideoDetail = () => {
                           <Box className="vidDetails">
                             <Box className="d-flex align-items-center">
                               {converter(
-                                channelDetails?.statistics?.subscriberCount
+                                channelDetails?.statistics?.subscriberCount,
                               )}
                               &nbsp;
                               <IconButton className="text-white">
@@ -464,7 +432,7 @@ const VideoDetail = () => {
                                     {moment(
                                       item?.snippet?.topLevelComment?.snippet
                                         ?.updatedAt,
-                                      "YYYYMMDD"
+                                      "YYYYMMDD",
                                     ).fromNow()}
                                   </span>
                                 </div>

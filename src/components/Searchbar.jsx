@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { searchbarToggle } from "../features/Searchbar/searchbarSlice";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import { motion } from "framer-motion";
-// import { geminiApi2 } from "../features/FetchApi/geminiApi";
+
 export default function Searchbar() {
   const [searchTerm, setSearchTerm] = useState("");
   var searchRecommendation = [

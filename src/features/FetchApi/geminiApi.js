@@ -1,7 +1,8 @@
 import axios from "axios";
+
 const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-const url =
-  "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
+const model = import.meta.env.VITE_GEMINI_MODEL;
+const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
 
 export const geminiApi = async (title, description, comments) => {
   const payload = {
@@ -9,8 +10,8 @@ export const geminiApi = async (title, description, comments) => {
       {
         parts: [
           {
-            text: `Summarize this youtube video in atleast 100 words and in a single para with no formatting - ${title} with description set as - ${description} and has user comments - ${JSON.stringify(
-              comments
+            text: `Summarize this video in atleast 100 words and single para with no formatting - ${title} with description set as - ${description} and has comments - ${JSON.stringify(
+              comments,
             )} `,
           },
         ],

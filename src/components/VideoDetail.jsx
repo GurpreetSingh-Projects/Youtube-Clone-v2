@@ -182,7 +182,7 @@ const VideoDetail = () => {
                 className="commentsHeading"
                 sx={{ fontWeight: 700, fontSize: "18px" }}
               >
-                A.I. Generated Quick Video Summary (Gemini 2.0 Flash ) -
+                AI Generated Summary (Powered by Gemini) -
               </Typography>
               {showSummary ? (
                 <Typography

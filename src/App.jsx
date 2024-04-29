@@ -11,7 +11,12 @@ export default function App() {
   return (
     <>
       <BrowserRouter>
-        <Box sx={{ backgroundColor: "black" }}>
+        <Box
+          m={0}
+          sx={{
+            backgroundColor: "black",
+          }}
+        >
           <Navbar />
           <Routes>
             <Route path="/" exact element={<Feed />} />

@@ -59,7 +59,8 @@ a {
   transition: background-color 0.3s ease-in-out;
 }
 
-.category-btn:hover {
+.category-btn:hover,
+.category-btn:focus {
   background-color: #fc1503 !important;
   color: white !important;
 }

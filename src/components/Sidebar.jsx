@@ -33,8 +33,7 @@ export const categories = [
   { id: 16, name: "Gym", icon: <FitnessCenterIcon /> },
   { id: 17, name: "Crypto", icon: <DeveloperModeIcon /> },
 ];
-const selectedCategory = "New";
-const Sidebar = () => {
+const Sidebar = ({ selectedCategory, setSelectedCategory }) => {
   return (
     <div>
       <Stack
@@ -47,9 +46,12 @@ const Sidebar = () => {
         {categories.map((category) => (
           <button
             key={category.id}
+            onClick={() => {
+              setSelectedCategory(category.name);
+            }}
             className="category-btn"
             style={{
-              background: category.name === selectedCategory && "FC1503",
+              background: category.name === selectedCategory && "#FC1503",
             }}
           >
             <span

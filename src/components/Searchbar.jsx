@@ -13,7 +13,12 @@ const Searchbar = () => (
       width: "30%",
     }}
   >
-    <input className="search-bar" placeholder="Search..." value={() => {}} />
+    <input
+      className="search-bar"
+      style={{ width: "85%" }}
+      placeholder="Search..."
+      value={() => {}}
+    />
     <IconButton type="submit" sx={{ p: "10px", color: "red" }}>
       <Search />
     </IconButton>

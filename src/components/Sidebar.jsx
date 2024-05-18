@@ -40,9 +40,9 @@ const Sidebar = () => {
       <Stack
         sx={{
           overflowY: "auto",
-          height: { sx: "auto", md: "95%" },
+          height: { sx: "auto", md: "100vh" },
           flexDirection: { md: "column" },
-        }}/
+        }}
       >
         {categories.map((category) => (
           <button
@@ -52,8 +52,21 @@ const Sidebar = () => {
               background: category.name === selectedCategory && "FC1503",
             }}
           >
-            <span>{category.icon}</span>
-            <span>{category.name}</span>
+            <span
+              style={{
+                color: category.name === selectedCategory ? "white" : "grey",
+                marginRight: "10px",
+              }}
+            >
+              {category.icon}
+            </span>
+            <span
+              style={{
+                opacity: category.name === selectedCategory ? "1" : "0.75",
+              }}
+            >
+              {category.name}
+            </span>
           </button>
         ))}
       </Stack>

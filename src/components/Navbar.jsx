@@ -1,5 +1,5 @@
 import { Stack } from "@mui/material";
-import logo from "../../public/assets/images/logo.png";
+import logo from "/assets/images/logo.png";
 import { Link } from "react-router-dom";
 import Searchbar from "./Searchbar";
 

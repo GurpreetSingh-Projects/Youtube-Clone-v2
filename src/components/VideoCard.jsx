@@ -9,21 +9,17 @@ import {
   demoChannelUrl,
   demoChannelTitle,
 } from "../utils/constants";
-const VideoCard = (props) => {
+export default function VideoCard(video) {
   console.log(video);
   return (
-    <>
-      <Card>
-        {/* <Link to={props.videoId ? `/video/${props.videoId}` : demoVideoUrl}> */}
-          <CardMedia
-            image={props.snippet?.thumbnails?.low?.url}
-            alt={snippet?.title}
-            sx={{ width: 350, height: 200 }}
-          ></CardMedia>
-        </Link>
-      </Card>
-    </>
+    <Card>
+      {/* <Link to={video.videoId ? `/video/${video.videoId}` : demoVideoUrl}>
+        <CardMedia
+          image={video.snippet?.thumbnails?.low?.url}
+          alt={snippet?.title}
+          sx={{ width: 350, height: 200 }}
+        ></CardMedia>
+      </Link> */}
+    </Card>
   );
-};
-
-export default VideoCard;
+}

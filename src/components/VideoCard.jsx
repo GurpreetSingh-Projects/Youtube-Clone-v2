@@ -9,17 +9,16 @@ import {
   demoChannelUrl,
   demoChannelTitle,
 } from "../utils/constants";
-export default function VideoCard(video) {
-  console.log(video);
+export default function VideoCard({ video }) {
   return (
     <Card>
-      {/* <Link to={video.videoId ? `/video/${video.videoId}` : demoVideoUrl}>
+      <Link to={`/video/${video?.id?.videoId}`}>
         <CardMedia
-          image={video.snippet?.thumbnails?.low?.url}
-          alt={snippet?.title}
+          image={video?.snippet?.thumbnails?.high?.url}
+          alt={video?.snippet?.title}
           sx={{ width: 350, height: 200 }}
         ></CardMedia>
-      </Link> */}
+      </Link>
     </Card>
   );
 }

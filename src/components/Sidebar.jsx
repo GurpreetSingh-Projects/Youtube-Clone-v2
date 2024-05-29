@@ -14,26 +14,25 @@ import TheaterComedyIcon from "@mui/icons-material/TheaterComedy";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 import DeveloperModeIcon from "@mui/icons-material/DeveloperMode";
 
-export const categories = [
-  { id: 1, name: "New", icon: <HomeIcon /> },
-  { id: 2, name: "JS Mastery", icon: <CodeIcon /> },
-  { id: 3, name: "Coding", icon: <CodeIcon /> },
-  { id: 4, name: "ReactJS", icon: <CodeIcon /> },
-  { id: 5, name: "NextJS", icon: <CodeIcon /> },
-  { id: 6, name: "Music", icon: <MusicNoteIcon /> },
-  { id: 7, name: "Education", icon: <SchoolIcon /> },
-  { id: 8, name: "Podcast", icon: <GraphicEqIcon /> },
-  { id: 9, name: "Movie", icon: <OndemandVideoIcon /> },
-  { id: 10, name: "Gaming", icon: <SportsEsportsIcon /> },
-  { id: 11, name: "Live", icon: <LiveTvIcon /> },
-  { id: 12, name: "Sport", icon: <FitnessCenterIcon /> },
-  { id: 13, name: "Fashion", icon: <CheckroomIcon /> },
-  { id: 14, name: "Beauty", icon: <FaceRetouchingNaturalIcon /> },
-  { id: 15, name: "Comedy", icon: <TheaterComedyIcon /> },
-  { id: 16, name: "Gym", icon: <FitnessCenterIcon /> },
-  { id: 17, name: "Crypto", icon: <DeveloperModeIcon /> },
-];
 const Sidebar = ({ selectedCategory, setSelectedCategory }) => {
+  const categories = [
+    { id: 1, name: "New", icon: <HomeIcon /> },
+    { id: 2, name: "Coding", icon: <CodeIcon /> },
+    { id: 3, name: "ReactJS", icon: <CodeIcon /> },
+    { id: 4, name: "NextJS", icon: <CodeIcon /> },
+    { id: 5, name: "Music", icon: <MusicNoteIcon /> },
+    { id: 6, name: "Education", icon: <SchoolIcon /> },
+    { id: 7, name: "Podcast", icon: <GraphicEqIcon /> },
+    { id: 8, name: "Movie", icon: <OndemandVideoIcon /> },
+    { id: 9, name: "Gaming", icon: <SportsEsportsIcon /> },
+    { id: 10, name: "Live", icon: <LiveTvIcon /> },
+    { id: 11, name: "Sport", icon: <FitnessCenterIcon /> },
+    { id: 12, name: "Fashion", icon: <CheckroomIcon /> },
+    { id: 13, name: "Beauty", icon: <FaceRetouchingNaturalIcon /> },
+    { id: 14, name: "Comedy", icon: <TheaterComedyIcon /> },
+    { id: 15, name: "Gym", icon: <FitnessCenterIcon /> },
+    { id: 16, name: "Crypto", icon: <DeveloperModeIcon /> },
+  ];
   return (
     <div>
       <Stack

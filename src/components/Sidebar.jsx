@@ -17,6 +17,7 @@ import DeveloperModeIcon from "@mui/icons-material/DeveloperMode";
 const Sidebar = ({ selectedCategory, setSelectedCategory }) => {
   const categories = [
     { id: 1, name: "New", icon: <HomeIcon /> },
+    { id: 1, name: "Daily Dose of Internet", icon: <HomeIcon /> },
     { id: 2, name: "Coding", icon: <CodeIcon /> },
     { id: 3, name: "ReactJS", icon: <CodeIcon /> },
     { id: 4, name: "NextJS", icon: <CodeIcon /> },

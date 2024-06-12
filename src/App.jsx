@@ -14,7 +14,7 @@ export default function App() {
         <Box
           m={0}
           sx={{
-            backgroundColor: "black",
+            backgroundColor: "#333",
           }}
         >
           <Navbar />

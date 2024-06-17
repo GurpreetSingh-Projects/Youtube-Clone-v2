@@ -17,7 +17,6 @@ const Searchbar = () => (
       className="search-bar"
       style={{ width: "85%" }}
       placeholder="Search..."
-      value={() => {}}
     />
     <IconButton type="submit" sx={{ p: "10px", color: "red" }}>
       <Search />

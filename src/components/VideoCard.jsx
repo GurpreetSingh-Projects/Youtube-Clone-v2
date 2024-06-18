@@ -24,7 +24,7 @@ export default function VideoCard({ video }) {
           image={video?.snippet?.thumbnails?.high?.url}
           alt={video?.snippet?.title}
           sx={{ width: 350, height: 200 }}
-        ></CardMedia>
+        />
       </Link>
       <CardContent sx={{ backgroundColor: "#1e1e1e", height: "106px" }}>
         <Link to={`/video/${video?.id?.videoId}`}>

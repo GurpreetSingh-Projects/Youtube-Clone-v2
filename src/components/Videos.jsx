@@ -1,9 +1,8 @@
 import { Box, Stack } from "@mui/material";
 import React from "react";
-import ChannelCard from "./ChannelCard";
-import VideoCard from "./VideoCard";
+import { ChannelCard, VideoCard } from "./index";
 
-const Videos = ({ videos }, {channelDetail}) => {
+const Videos = ({ videos }, { channelDetail }) => {
   console.log(videos);
   return (
     <Stack direction="row" flexWrap="wrap" justifyContent="start" gap={2}>

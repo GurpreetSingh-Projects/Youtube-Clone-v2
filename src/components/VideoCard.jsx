@@ -21,7 +21,9 @@ export default function VideoCard({ video }) {
     >
       <Link to={`/video/${video?.id?.videoId}`}>
         <CardMedia
-          image={video?.snippet?.thumbnails?.high?.url}
+          component="img"
+          loading="lazy"
+          image={video?.snippet?.thumbnails?.medium?.url}
           alt={video?.snippet?.title}
           sx={{ width: 350, height: 200 }}
         />
@@ -30,7 +32,9 @@ export default function VideoCard({ video }) {
         <Link to={`/video/${video?.id?.videoId}`}>
           <Typography variant="subtitle1" fontWeight="bold" color="grey">
             {/* {video?.snippet?.title?.slice(0, 50) || demoVideoTitle.slice(0, 50)} */}
-            <div dangerouslySetInnerHTML={{ __html: description }} />
+            <div
+              dangerouslySetInnerHTML={{ __html: description.slice(0, 90) }}
+            ></div>
           </Typography>
         </Link>
 

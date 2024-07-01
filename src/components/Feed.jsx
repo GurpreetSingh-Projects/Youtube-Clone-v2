@@ -1,9 +1,8 @@
 import { Box, Stack, Typography } from "@mui/material";
-import Sidebar from "./Sidebar";
-import Videos from "./Videos";
+import { Sidebar, Videos } from "./index";
 import { fetchApi } from "../utils/fetchApi";
 import { useEffect, useState } from "react";
-import ChannelCard from "./ChannelCard";
+
 const Feed = () => {
   const [selectedCategory, setSelectedCategory] = useState("New");
   const [videos, setVideos] = useState([]);

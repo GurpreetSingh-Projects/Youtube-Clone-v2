@@ -3,7 +3,9 @@ import { Search } from "@mui/icons-material";
 const Searchbar = () => (
   <Paper
     component="form"
-    onSubmit={() => {}}
+    onSubmit={(res) => {
+      setVideo(res);
+    }}
     sx={{
       borderRadius: 20,
       border: "1px solid #e3e3e3",
@@ -15,7 +17,7 @@ const Searchbar = () => (
   >
     <input
       className="search-bar"
-      style={{ width: "85%" }}
+      style={{ width: "85%", background: "transparent" }}
       placeholder="Search..."
     />
     <IconButton type="submit" sx={{ p: "10px", color: "red" }}>

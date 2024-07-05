@@ -1,5 +1,5 @@
 import { Box, Stack, Typography } from "@mui/material";
-import { Sidebar, Videos } from "./index";
+import { SearchFeed, Searchbar, Sidebar, Videos } from "./index";
 import { fetchApi } from "../utils/fetchApi";
 import { useEffect, useState } from "react";
 
@@ -39,7 +39,7 @@ const Feed = () => {
         </Box>
         <Box p={2} sx={{ overflowY: "auto", height: "90vh", flex: 2 }}>
           <Typography
-            variant="h4"
+            variant="h5"
             fontWeight="bold"
             mb={2}
             sx={{ color: "white" }}

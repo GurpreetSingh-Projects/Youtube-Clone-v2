@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchApi } from "../utils/fetchApi";
-import { Box, Card } from "@mui/material";
+import { Box, Card, Hidden } from "@mui/material";
 import { ChannelCard, Videos } from "./index";
 
 const ChannelDetail = () => {
@@ -23,16 +23,34 @@ const ChannelDetail = () => {
   }, [id]);
   return (
     <>
-      <Box minHeight="95vh">
+      <Box>
         <Box>
-          <div style={{ background: "white", zIndex: 10, height: 200 }}></div>
+          <div
+            style={{
+              zIndex: 100,
+              height: 200,
+              objectFit: "cover",
+              objectPosition: "center center",
+              width: "100%",
+              overflow: "hidden",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <img
+              src={channelDetail?.brandingSettings?.image?.bannerExternalUrl}
+              style={{ width: "100%" }}
+              alt=""
+            />
+          </div>
         </Box>
         <ChannelCard
           channelDetail={channelDetail}
           marginTop="-100px"
         ></ChannelCard>
       </Box>
-      <Box>
+      <Box className="d-flex align-items-center justify-content-center p-3">
         <Videos videos={channelVideos} />
       </Box>
     </>

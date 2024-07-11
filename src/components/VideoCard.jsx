@@ -9,7 +9,7 @@ import {
   demoChannelUrl,
   demoChannelTitle,
 } from "../utils/constants";
-export default function VideoCard({ video }) {
+export default function VideoCard({ video, channelDetail }) {
   const description = video.snippet.title.slice(0, 60);
   return (
     <Card

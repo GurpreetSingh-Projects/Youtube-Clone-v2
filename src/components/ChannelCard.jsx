@@ -3,15 +3,22 @@ import { Link } from "react-router-dom";
 import { demoProfilePicture } from "../utils/constants";
 
 const ChannelCard = ({ channelDetail, marginTop }) => {
-  console.log(channelDetail);
+  var subs = channelDetail?.statistics?.subscriberCount;
+  if (subs >= 1500 && subs < 100000) {
+    subs = subs / 100000;
+    subs += "k";
+  } else if (subs >= 100000) {
+    subs = subs / 1000000;
+    subs += "M";
+  }
+  console.log(subs);
+
   return (
     <Box
+      className="d-flex align-items-center justify-content-center"
       sx={{
         boxShadow: "none",
         borderRadius: "20px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
         width: { md: "320px", xs: "356px" },
         height: "326px",
         margin: "auto",
@@ -20,6 +27,7 @@ const ChannelCard = ({ channelDetail, marginTop }) => {
     >
       <Link to={`channel/${channelDetail?.id?.channelId}/`}>
         <CardContent
+          className="d-flex align-items-center justify-content-center"
           sx={{
             display: "flex",
             flexDirection: "column",
@@ -43,11 +51,7 @@ const ChannelCard = ({ channelDetail, marginTop }) => {
             }}
           />
           <Typography variant="h6">{channelDetail?.snippet?.title}</Typography>
-          {channelDetail?.statistics?.subscriberCount && (
-            <Typography>
-              {channelDetail?.statistics?.subscriberCount} Subscribers
-            </Typography>
-          )}
+          {subs && <Typography>{subs} Subscribers</Typography>}
         </CardContent>
       </Link>
     </Box>

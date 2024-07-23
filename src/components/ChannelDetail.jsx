@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchApi } from "../utils/fetchApi";
-import { Box, Card, Hidden } from "@mui/material";
+import { Box, Card, Hidden, Typography } from "@mui/material";
 import { ChannelCard, Videos } from "./index";
 
 const ChannelDetail = () => {
@@ -17,8 +17,10 @@ const ChannelDetail = () => {
       setChannelDetail(data?.items[0]);
     });
 
-    fetchApi(`search?channelId=${id}&part=snippet&order=date`).then((data) => {
-      setChannelVideos(data?.items);
+    fetchApi(
+      `search?channelId=${id}&part=snippet%2Cid&order=date&maxResults=50`
+    ).then((data) => {
+      setChannelVideos(data.items);
     });
   }, [id]);
   return (
@@ -50,8 +52,24 @@ const ChannelDetail = () => {
           marginTop="-100px"
         ></ChannelCard>
       </Box>
+      <Box className="d-flex align-items-center justify-content-center">
+        <Typography
+          style={{
+            fontSize: "15px",
+            color: "white",
+            textAlign: "center",
+            margin: "20px",
+            marginTop: "-20px",
+            maxWidth: "75vw",
+            textWrap: "wrap",
+            textOverflow: "ellipsis",
+          }}
+        >
+          {channelDetail?.brandingSettings?.channel?.description}
+        </Typography>
+      </Box>
       <Box className="d-flex align-items-center justify-content-center p-3">
-        <Videos videos={channelVideos} />
+        <Videos videos={channelVideos} nochannel="true" />
       </Box>
     </>
   );

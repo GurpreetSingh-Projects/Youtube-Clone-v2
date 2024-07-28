@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { Typography, Card, CardContent, CardMedia } from "@mui/material";
+import { Typography, Card, CardContent, CardMedia, Box } from "@mui/material";
 import { CheckCircle } from "@mui/icons-material";
-
+import Avatar from "@mui/material/Avatar";
 import {
   demoThumbnailUrl,
   demoVideoUrl,
@@ -9,8 +9,22 @@ import {
   demoChannelUrl,
   demoChannelTitle,
 } from "../utils/constants";
+import { useState, useEffect } from "react";
+import { fetchApi } from "../utils/fetchApi";
+
 export default function VideoCard({ video, channelDetail }) {
   const description = video.snippet.title.slice(0, 60);
+  const [vidChannelPic, setvidChannelPic] = useState("");
+
+  useEffect(() => {
+    fetchApi(
+      `channels?part=snippet%2Cstatistics&id=${video?.snippet?.channelId}`
+    ).then((data) => {
+      setvidChannelPic(data?.items[0]?.snippet?.thumbnails?.default?.url);
+      console.log(vidChannelPic);
+    });
+  }, []);
+
   return (
     <Card
       sx={{
@@ -33,7 +47,7 @@ export default function VideoCard({ video, channelDetail }) {
           <Typography variant="subtitle1" fontWeight="bold" color="grey">
             {/* {video?.snippet?.title?.slice(0, 50) || demoVideoTitle.slice(0, 50)} */}
             <div
-              dangerouslySetInnerHTML={{ __html: description.slice(0, 90) }}
+              dangerouslySetInnerHTML={{ __html: description.slice(0, 60) }}
             ></div>
           </Typography>
         </Link>
@@ -45,14 +59,20 @@ export default function VideoCard({ video, channelDetail }) {
               : demoChannelUrl
           }
         >
-          <Typography
-            variant="subtitle2"
-            color="white"
-            fontWeight="semibold"
-            m="5px"
-          >
-            {video?.snippet?.channelTitle || demoChannelUrl}
-          </Typography>
+          <Box className="d-flex align-items-center justify-content-start">
+            <Avatar src={vidChannelPic} sx={{ width: 24, height: 24 }} />
+            <Typography
+              variant="subtitle2"
+              color="white"
+              fontWeight="semibold"
+              m="5px"
+              style={{
+                textOverflow: "ellipsis",
+              }}
+            >
+              {video?.snippet?.channelTitle.slice(0, 40) || demoChannelUrl}
+            </Typography>
+          </Box>
         </Link>
       </CardContent>
     </Card>

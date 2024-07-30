@@ -93,3 +93,11 @@ a {
     width: 200px;
   }
 }
+.ytp-chrome-controls .ytp-button.ytp-youtube-button,
+.ytp-small-mode .ytp-chrome-controls .ytp-button.ytp-youtube-button,
+.ytp-embed .ytp-chrome-controls .ytp-button.ytp-youtube-button,
+.ytp-embed.ytp-small-mode .ytp-chrome-controls .ytp-button.ytp-youtube-button,
+.ytp-dni.ytp-embed .ytp-chrome-controls .ytp-button.ytp-youtube-button,
+.ytp-title-enable-channel-logo .ytp-title-channel {
+  display: none !important;
+}

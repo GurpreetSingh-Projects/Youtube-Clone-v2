@@ -47,6 +47,7 @@ export default function VideoCard({ video, channelDetail }) {
           <Typography variant="subtitle1" fontWeight="bold" color="grey">
             {/* {video?.snippet?.title?.slice(0, 50) || demoVideoTitle.slice(0, 50)} */}
             <div
+              style={{ fontSize: "13px", marginBottom: "5px" }}
               dangerouslySetInnerHTML={{ __html: description.slice(0, 60) }}
             ></div>
           </Typography>
@@ -59,7 +60,7 @@ export default function VideoCard({ video, channelDetail }) {
               : demoChannelUrl
           }
         >
-          <Box className="d-flex align-items-center justify-content-start">
+          <Box className="d-flex justify-content-start">
             <Avatar src={vidChannelPic} sx={{ width: 24, height: 24 }} />
             <Typography
               variant="subtitle2"

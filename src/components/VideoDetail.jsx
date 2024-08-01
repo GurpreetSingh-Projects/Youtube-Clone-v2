@@ -15,7 +15,7 @@ function VideoDetail() {
     );
   }, [id]);
   return (
-    <Box sx={{ height: "95vh", background: "inherit" }}>
+    <Box sx={{ background: "inherit", position: "sticky" }}>
       <Stack direction={{ xs: "column", md: "row" }}>
         <Box flex={1}>
           <Box sx={{ width: "100%", position: "sticky", top: "80px" }}>
@@ -28,6 +28,18 @@ function VideoDetail() {
             />
             <Typography color="white" variant="h6" fontWeight="bold" p={2}>
               {currVid?.snippet?.localized?.title}
+            </Typography>
+            <Typography
+              color="grey"
+              variant="subtitle2"
+              fontWeight="normal"
+              p={2}
+              pt={0}
+              textAlign="justify"
+              letterSpacing={-0.5}
+              textWrap="no-wrap"
+            >
+              {currVid?.snippet?.localized?.description}
             </Typography>
           </Box>
         </Box>

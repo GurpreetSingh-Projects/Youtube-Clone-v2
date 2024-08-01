@@ -26,7 +26,7 @@ function VideoDetail() {
               muted
               controls
             />
-            <Typography color="white" variant="h5" fontWeight="bold" p={2}>
+            <Typography color="white" variant="h6" fontWeight="bold" p={2}>
               {currVid?.snippet?.localized?.title}
             </Typography>
           </Box>

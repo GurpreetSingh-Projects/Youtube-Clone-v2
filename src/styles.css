@@ -32,7 +32,7 @@ a {
 }
 
 .react-player {
-  height: 77vh !important;
+  height: 75vh !important;
   width: 100% !important;
 }
 
@@ -68,10 +68,47 @@ a {
 .category-btn:hover span {
   color: white !important;
 }
-
+.categoryBar {
+  flex-direction: column;
+}
+.logoImg {
+  height: 35px;
+}
+.channelBanner {
+  height: 200px;
+}
+/* .react-player {
+  position: sticky;
+  top: 70px;
+} */
 @media screen and (max-width: 900px) {
+  .categoryBar {
+    flex-direction: row !important;
+  }
   .category-btn {
-    margin: 10px;
+    justify-content: center;
+    cursor: pointer;
+    background: transparent;
+    color: white;
+    outline: none;
+    border: none;
+    padding: 6px 20px;
+    width: auto !important;
+    text-wrap: nowrap;
+    margin: 4px;
+    border-radius: 99px;
+    outline: 1px solid grey;
+    transition: background-color 0.3s ease-in-out;
+  }
+  .logoImg {
+    height: 30px;
+  }
+  .channelBanner {
+    height: 120px;
+  }
+  .channelProfilePic {
+    height: 100px !important;
+    width: 100px !important;
   }
 }
 

@@ -26,27 +26,26 @@ const ChannelDetail = () => {
   return (
     <>
       <Box>
-        <Box>
-          <div
-            style={{
-              zIndex: 100,
-              height: 200,
-              objectFit: "cover",
-              objectPosition: "center center",
-              width: "100%",
-              overflow: "hidden",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <img
-              src={channelDetail?.brandingSettings?.image?.bannerExternalUrl}
-              style={{ width: "100%" }}
-              alt=""
-            />
-          </div>
+        <Box
+          className="channelBanner"
+          sx={{
+            zIndex: "100",
+            objectFit: "cover",
+            objectPosition: "center center",
+            width: "100%",
+            overflow: "hidden",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <img
+            src={channelDetail?.brandingSettings?.image?.bannerExternalUrl}
+            style={{ width: "100%" }}
+            alt=""
+          />
         </Box>
+
         <ChannelCard
           channelDetail={channelDetail}
           marginTop="-100px"
@@ -59,7 +58,8 @@ const ChannelDetail = () => {
             color: "white",
             textAlign: "center",
             margin: "20px",
-            marginTop: "-20px",
+
+            marginTop: { lg: "-20px", sm: "-50px" },
             maxWidth: "75vw",
             textWrap: "wrap",
             textOverflow: "ellipsis",

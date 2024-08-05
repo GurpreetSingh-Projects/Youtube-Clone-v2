@@ -17,7 +17,12 @@ const SearchFeed = () => {
   return (
     <>
       <Box sx={{ display: "flex", flex: "column" }}>
-        <Box style={{ borderRight: "1px solid #3d3d3d" }}>
+        {/* <Box
+          sx={{
+            borderRight: "1px solid #3d3d3d",
+            display: { sm: "none", md: "block" },
+          }}
+        >
           <Sidebar />
           <Typography
             className="copyright"
@@ -26,13 +31,13 @@ const SearchFeed = () => {
           >
             Copyright @GurpreetSingh-Projects
           </Typography>
-        </Box>
+        </Box> */}
         <Box p={2} sx={{ overflowY: "auto", height: "90vh", flex: 2 }}>
           <Typography
             variant="h5"
             fontWeight="bold"
             mb={2}
-            sx={{ color: "white" }}
+            sx={{ color: "white", fontSize: "13px" }}
           >
             Showing Search results for{" "}
             <span style={{ color: "#f31503" }}>{searchTerm}</span>

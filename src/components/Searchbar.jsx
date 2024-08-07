@@ -21,8 +21,9 @@ export default function Searchbar() {
         border: "1px solid #e3e3e3",
         pl: 2,
         boxShadow: "none",
+        display: "flex",
         mr: { sm: 5 },
-        width: "30%",
+        width: { md: "30%", sm: "50%" },
       }}
     >
       <input

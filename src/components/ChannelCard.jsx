@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { demoProfilePicture } from "../utils/constants";
 
 const ChannelCard = ({ channelDetail, marginTop }) => {
+  console.log("Hi, ChannelCard here :)")
   var subs = channelDetail?.statistics?.subscriberCount;
   if (subs >= 1500 && subs < 100000) {
     subs = subs / 100000;

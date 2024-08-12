@@ -4,6 +4,7 @@ import { fetchApi } from "../utils/fetchApi";
 import { useEffect, useState } from "react";
 
 const Feed = () => {
+  console.log("Hi, Feed here :)");
   const [selectedCategory, setSelectedCategory] = useState("New");
   const [videos, setVideos] = useState([]);
   useEffect(() => {

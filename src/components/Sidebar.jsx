@@ -1,4 +1,4 @@
-import { Stack } from "@mui/material";
+import { Skeleton, Stack } from "@mui/material";
 import { Category } from "@mui/icons-material";
 import HomeIcon from "@mui/icons-material/Home";
 import MusicNoteIcon from "@mui/icons-material/MusicNote";
@@ -16,8 +16,9 @@ import DeveloperModeIcon from "@mui/icons-material/DeveloperMode";
 import SlideshowIcon from "@mui/icons-material/Slideshow";
 
 const Sidebar = ({ selectedCategory, setSelectedCategory }) => {
+  console.log("Hi, sidebar here :)");
   const categories = [
-    { id: 1, name: "New", icon: <HomeIcon /> },
+    { id: 0, name: "New", icon: <HomeIcon /> },
     { id: 1, name: "Daily Dose of Internet", icon: <SlideshowIcon /> },
     { id: 2, name: "Coding", icon: <CodeIcon /> },
     { id: 3, name: "ReactJS", icon: <CodeIcon /> },

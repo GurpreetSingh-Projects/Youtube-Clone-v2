@@ -5,6 +5,7 @@ import { Box, Card, Hidden, Typography } from "@mui/material";
 import { ChannelCard, Videos } from "./index";
 
 const ChannelDetail = () => {
+  console.log("Hi, ChannelDetail here :)");
   const [channelDetail, setChannelDetail] = useState(null);
   const [channelVideos, setChannelVideos] = useState([]);
 

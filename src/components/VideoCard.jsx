@@ -35,67 +35,65 @@ export default function VideoCard({ video, channelDetail }) {
   }, [video.snippet.channelId]);
 
   return (
-    <Grow>
-      <Card
-        className="videoCard"
+    <Card
+      className="videoCard"
+      sx={{
+        boxShadow: "none",
+        borderRadius: "10px",
+      }}
+    >
+      <Link to={`/video/${video?.id?.videoId}`}>
+        <CardMedia
+          component="img"
+          loading="lazy"
+          image={video?.snippet?.thumbnails?.medium?.url}
+          alt={video?.snippet?.title}
+          sx={{ objectFit: "cover" }}
+        />
+      </Link>
+      <CardContent
         sx={{
-          boxShadow: "none",
-          borderRadius: "10px",
+          display: "flex",
+          backgroundColor: "#1e1e1e",
+          height: "100px",
+          alignItems: "center",
+          justifyContent: "start",
         }}
       >
-        <Link to={`/video/${video?.id?.videoId}`}>
-          <CardMedia
-            component="img"
-            loading="lazy"
-            image={video?.snippet?.thumbnails?.medium?.url}
-            alt={video?.snippet?.title}
-            sx={{ objectFit: "cover" }}
+        <Link
+          to={
+            video?.snippet?.channelId
+              ? `/channel/${video?.snippet?.channelId}`
+              : demoChannelUrl
+          }
+        >
+          <Avatar
+            src={stats?.items[0]?.snippet?.thumbnails?.default?.url}
+            sx={{ width: 40, height: 40, marginRight: 2 }}
           />
         </Link>
-        <CardContent
-          sx={{
-            display: "flex",
-            backgroundColor: "#1e1e1e",
-            height: "100px",
-            alignItems: "center",
-            justifyContent: "start",
-          }}
-        >
-          <Link
-            to={
-              video?.snippet?.channelId
-                ? `/channel/${video?.snippet?.channelId}`
-                : demoChannelUrl
-            }
-          >
-            <Avatar
-              src={stats?.items[0]?.snippet?.thumbnails?.default?.url}
-              sx={{ width: 40, height: 40, marginRight: 2 }}
-            />
-          </Link>
-          <Link to={`/video/${video?.id?.videoId}`}>
-            <Box className="">
-              <Typography variant="subtitle1" fontWeight="bold" color="white">
-                <div
-                  className="my-2 vidDescription"
-                  dangerouslySetInnerHTML={{ __html: description }}
-                ></div>
-              </Typography>
-              <Typography
-                variant="subtitle2"
-                color="grey"
-                fontWeight="semibold"
-                sx={{
-                  textOverflow: "ellipsis",
-                }}
-              >
-                {video?.snippet?.channelTitle.slice(0, 40) || demoChannelUrl}
-                <b />
-              </Typography>
-            </Box>
-          </Link>
-        </CardContent>
-      </Card>
-    </Grow>
+        <Link to={`/video/${video?.id?.videoId}`}>
+          <Box className="">
+            <Typography variant="subtitle1" fontWeight="bold" color="white">
+              <div
+                className="my-2 vidDescription"
+                dangerouslySetInnerHTML={{ __html: description }}
+              ></div>
+            </Typography>
+            <Typography
+              variant="subtitle2"
+              color="grey"
+              fontWeight="semibold"
+              sx={{
+                textOverflow: "ellipsis",
+              }}
+            >
+              {video?.snippet?.channelTitle.slice(0, 40) || demoChannelUrl}
+              <b />
+            </Typography>
+          </Box>
+        </Link>
+      </CardContent>
+    </Card>
   );
 }

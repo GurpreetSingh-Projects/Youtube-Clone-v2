@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import { BorderRight } from "@mui/icons-material";
 
 const SearchFeed = () => {
+  console.log("Hi, Searchbar here :)");
   const [videos, setVideos] = useState([]);
   const { searchTerm } = useParams();
   useEffect(() => {

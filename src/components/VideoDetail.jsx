@@ -4,6 +4,7 @@ import ReactPlayer from "react-player/youtube";
 import { useParams } from "react-router-dom";
 import { fetchApi } from "../utils/fetchApi";
 function VideoDetail() {
+  console.log("Hi, videodetail here :)");
   const { id } = useParams();
   const [currVid, setCurrVid] = useState("");
   console.log(currVid);

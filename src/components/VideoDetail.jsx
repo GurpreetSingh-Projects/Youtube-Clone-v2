@@ -10,11 +10,11 @@ function VideoDetail() {
   const [currVid, setCurrVid] = useState("");
   const { videos, setVideos } = useContext(CreateContext);
   useEffect(() => {
-    fetchApi(`videos?part=contentDetails%2Csnippet%2Cstatistics&id=${id}`).then(
-      (data) => {
-        setCurrVid(data.items[0]);
-      }
-    );
+    // fetchApi(`videos?part=contentDetails%2Csnippet%2Cstatistics&id=${id}`).then(
+    //   (data) => {
+    //     setCurrVid(data.items[0]);
+    //   }
+    // );
     fetchApi(`search?part=snippet&relatedToVideoId=${id}&type=video`).then(
       (res) => {
         setVideos(res.items);

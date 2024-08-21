@@ -69,7 +69,7 @@ export default function VideoCard({ video, channelDetail }) {
           loading="lazy"
           image={video?.snippet?.thumbnails?.medium?.url}
           alt={video?.snippet?.title}
-          sx={{ width: 350, height: 200 }}
+          sx={{ width: { lg: "350", sm: "100%" }, height: 200 }}
         />
       </Link>
       <CardContent

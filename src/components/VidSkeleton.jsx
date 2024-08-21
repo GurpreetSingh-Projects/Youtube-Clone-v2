@@ -1,8 +1,8 @@
 import { Skeleton } from "@mui/material";
 const VidSkeleton = () => {
   return (
-    <div className="skeleton">
-      <div className="skeletonWrapper">
+    <div className="d-flex flex-wrap">
+      <div className="skeletonWrapper col-12 col-md-4 bg-gray">
         <Skeleton variant="rectangular" sx={{ height: 180, margin: 1 }} />
         <div className="d-flex mt-3 ">
           <Skeleton
@@ -20,7 +20,7 @@ const VidSkeleton = () => {
           </div>
         </div>
       </div>
-      <div className="skeletonWrapper">
+      <div className="skeletonWrapper col-12 col-md-4 bg-gray">
         <Skeleton variant="rectangular" sx={{ height: 180, margin: 1 }} />
         <div className="d-flex mt-3 ">
           <Skeleton
@@ -38,7 +38,7 @@ const VidSkeleton = () => {
           </div>
         </div>
       </div>
-      <div className="skeletonWrapper">
+      <div className="skeletonWrapper col-12 col-md-4 bg-gray">
         <Skeleton variant="rectangular" sx={{ height: 180, margin: 1 }} />
         <div className="d-flex mt-3 ">
           <Skeleton
@@ -56,7 +56,7 @@ const VidSkeleton = () => {
           </div>
         </div>
       </div>
-      <div className="skeletonWrapper">
+      <div className="skeletonWrapper col-12 col-md-4 bg-gray">
         <Skeleton variant="rectangular" sx={{ height: 180, margin: 1 }} />
         <div className="d-flex mt-3 ">
           <Skeleton
@@ -74,7 +74,7 @@ const VidSkeleton = () => {
           </div>
         </div>
       </div>
-      <div className="skeletonWrapper">
+      <div className="skeletonWrapper col-12 col-md-4 bg-gray">
         <Skeleton variant="rectangular" sx={{ height: 180, margin: 1 }} />
         <div className="d-flex mt-3 ">
           <Skeleton
@@ -92,7 +92,7 @@ const VidSkeleton = () => {
           </div>
         </div>
       </div>
-      <div className="skeletonWrapper">
+      <div className="skeletonWrapper col-12 col-md-4 bg-gray">
         <Skeleton variant="rectangular" sx={{ height: 180, margin: 1 }} />
         <div className="d-flex mt-3 ">
           <Skeleton

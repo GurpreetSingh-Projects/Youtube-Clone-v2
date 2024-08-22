@@ -14,12 +14,15 @@ import { fetchApi } from "./utils/fetchApi";
 export const CreateContext = createContext();
 
 export default function App() {
+  const [fdata, setFdata] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("New");
   const [videos, setVideos] = useState([]);
   useEffect(() => {
-    fetchApi(`search?part=snippet&q=${selectedCategory}`).then((res) => {
-      setVideos(res.items);
-    });
+    fetchApi(`search?part=snippet&q=${selectedCategory}&type=video`).then(
+      (res) => {
+        setVideos(res.items);
+      }
+    );
   }, [selectedCategory]);
 
   return (

@@ -77,6 +77,10 @@ a {
 .channelBanner {
   height: 200px;
 }
+#hide,
+#show {
+  cursor: pointer !important;
+}
 /* .react-player {
   position: sticky;
   top: 70px;

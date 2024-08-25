@@ -38,7 +38,7 @@ const SearchFeed = () => {
             variant="h5"
             fontWeight="bold"
             mb={2}
-            sx={{ color: "white", fontSize: "13px" }}
+            sx={{ color: "white", fontSize: "16px" }}
           >
             Showing Search results for{" "}
             <span style={{ color: "#f31503" }}>{searchTerm}</span>

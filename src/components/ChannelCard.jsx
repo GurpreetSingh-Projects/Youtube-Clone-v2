@@ -1,9 +1,13 @@
 import { Box, CardContent, CardMedia, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { demoProfilePicture } from "../utils/constants";
 
 const ChannelCard = ({ channelDetail, marginTop }) => {
-  console.log("Hi, ChannelCard here :)")
+  const navigate = useNavigate();
+  const replaceUrl = (url) => {
+    navigate(url, { replace: true });
+  };
+  console.log("Hi, ChannelCard here :)");
   var subs = channelDetail?.statistics?.subscriberCount;
   if (subs >= 1500 && subs < 100000) {
     subs = subs / 100000;
@@ -26,35 +30,34 @@ const ChannelCard = ({ channelDetail, marginTop }) => {
         marginTop,
       }}
     >
-      <Link to={`channel/${channelDetail?.id?.channelId}/`}>
-        <CardContent
-          className="d-flex align-items-center justify-content-center"
+      <CardContent
+        onClick={() => replaceUrl(`/channel/${channelDetail?.id?.channelId}/`)}
+        className="d-flex align-items-center justify-content-center"
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "10px",
+          justifyContent: "center",
+          textAlign: "center",
+          color: "white",
+        }}
+      >
+        <CardMedia
+          className="channelProfilePic"
+          image={
+            channelDetail?.snippet?.thumbnails?.high?.url || demoProfilePicture
+          }
+          alt={channelDetail?.snippet?.title}
           sx={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "10px",
-            justifyContent: "center",
-            textAlign: "center",
-            color: "white",
+            borderRadius: "50%",
+            height: "180px",
+            width: "180px",
+            border: "1px solid grey",
           }}
-        >
-          <CardMedia className="channelProfilePic"
-            image={
-              channelDetail?.snippet?.thumbnails?.high?.url ||
-              demoProfilePicture
-            }
-            alt={channelDetail?.snippet?.title}
-            sx={{
-              borderRadius: "50%",
-              height: "180px",
-              width: "180px",
-              border: "1px solid grey",
-            }}
-          />
-          <Typography variant="h6">{channelDetail?.snippet?.title}</Typography>
-          {subs && <Typography>{subs} Subscribers</Typography>}
-        </CardContent>
-      </Link>
+        />
+        <Typography variant="h6">{channelDetail?.snippet?.title}</Typography>
+        {subs && <Typography>{subs} Subscribers</Typography>}
+      </CardContent>
     </Box>
   );
 };

@@ -37,7 +37,7 @@ export default function VideoCard({ video, channelDetail }) {
     <div>
       <Skeleton
         variant="rectangular"
-        sx={{ width: 350, height: 180, margin: 1 }}
+        sx={{ width: 300, height: 180, margin: 1 }}
       />
       <div className="d-flex mt-3 ">
         <Skeleton
@@ -49,9 +49,9 @@ export default function VideoCard({ video, channelDetail }) {
           <Skeleton
             className="mb-2"
             variant="rectangular"
-            sx={{ width: 280, height: 25 }}
+            sx={{ width: 240, height: 25 }}
           />
-          <Skeleton variant="rectangular" sx={{ width: 280, height: 15 }} />
+          <Skeleton variant="rectangular" sx={{ width: 240, height: 15 }} />
         </div>
       </div>
     </div>

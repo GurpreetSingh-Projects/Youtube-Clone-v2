@@ -98,9 +98,21 @@ export default function VideoCard({ video, channelDetail }) {
             <Typography variant="subtitle1" fontWeight="bold" color="grey">
               {/* {video?.snippet?.title?.slice(0, 50) || demoVideoTitle.slice(0, 50)} */}
               <div
-                style={{ fontSize: "15px", marginBottom: "5px" }}
+                className="fs-6 my-2 overflow-hidden"
+                style={{
+                  textTransform: "capitalize",
+                  height: "7vh",
+                  lineHeight: "22px",
+                  textOverflow: "ellipsis",
+                }}
                 dangerouslySetInnerHTML={{ __html: description.slice(0, 60) }}
               ></div>
+              <span
+                className="d-inline"
+                style={{ display: "inline !important" }}
+              >
+                ...
+              </span>
             </Typography>
             <Typography
               variant="subtitle2"

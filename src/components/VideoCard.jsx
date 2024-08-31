@@ -107,12 +107,12 @@ export default function VideoCard({ video, channelDetail }) {
                 }}
                 dangerouslySetInnerHTML={{ __html: description.slice(0, 60) }}
               ></div>
-              <span
+              {/* <span
                 className="d-inline"
                 style={{ display: "inline !important" }}
               >
                 ...
-              </span>
+              </span> */}
             </Typography>
             <Typography
               variant="subtitle2"

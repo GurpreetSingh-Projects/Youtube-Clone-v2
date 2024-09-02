@@ -24,8 +24,6 @@ const ChannelCard = ({ channelDetail, marginTop }) => {
       sx={{
         boxShadow: "none",
         borderRadius: "20px",
-        width: { md: "320px", xs: "356px" },
-        height: "326px",
         margin: "auto",
         marginTop,
       }}

@@ -37,11 +37,11 @@ const Sidebar = ({ selectedCategory, setSelectedCategory }) => {
     { id: 16, name: "Crypto", icon: <DeveloperModeIcon /> },
   ];
   return (
-    <div>
+    <div className="sidebar">
       <Stack
         sx={{
           overflowY: "auto",
-          height: { sx: "auto", md: "100vh" },
+          height: { sx: "auto", md: "92vh" },
           overflowX: "scroll",
         }}
         className="categoryBar"

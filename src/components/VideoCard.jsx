@@ -20,7 +20,7 @@ import { useState, useEffect, Suspense } from "react";
 import { fetchApi } from "../utils/fetchApi";
 
 export default function VideoCard({ video, channelDetail }) {
-  const description = video.snippet.title.slice(0, 60);
+  const description = video.snippet.title;
   const [vidChannelPic, setvidChannelPic] = useState("");
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -35,10 +35,7 @@ export default function VideoCard({ video, channelDetail }) {
 
   return loading ? (
     <div>
-      <Skeleton
-        variant="rectangular"
-        sx={{ width: 300, height: 180, margin: 1 }}
-      />
+      <Skeleton variant="rectangular" sx={{ height: 180, margin: 1 }} />
       <div className="d-flex mt-3 ">
         <Skeleton
           className="me-3"
@@ -49,16 +46,16 @@ export default function VideoCard({ video, channelDetail }) {
           <Skeleton
             className="mb-2"
             variant="rectangular"
-            sx={{ width: 240, height: 25 }}
+            sx={{ height: 25 }}
           />
-          <Skeleton variant="rectangular" sx={{ width: 240, height: 15 }} />
+          <Skeleton variant="rectangular" sx={{ width: 270, height: 15 }} />
         </div>
       </div>
     </div>
   ) : (
     <Card
+      className="videoCard"
       sx={{
-        width: { md: "320px", xs: "100%" },
         boxShadow: "none",
         borderRadius: "10px",
       }}
@@ -69,14 +66,14 @@ export default function VideoCard({ video, channelDetail }) {
           loading="lazy"
           image={video?.snippet?.thumbnails?.medium?.url}
           alt={video?.snippet?.title}
-          sx={{ width: { lg: "350", sm: "100%" }, height: 200 }}
+          sx={{ objectFit: "cover" }}
         />
       </Link>
       <CardContent
         sx={{
           display: "flex",
           backgroundColor: "#1e1e1e",
-          height: "106px",
+          height: "100px",
           alignItems: "center",
           justifyContent: "start",
         }}
@@ -95,34 +92,23 @@ export default function VideoCard({ video, channelDetail }) {
           }
         >
           <Box className="">
-            <Typography variant="subtitle1" fontWeight="bold" color="grey">
-              {/* {video?.snippet?.title?.slice(0, 50) || demoVideoTitle.slice(0, 50)} */}
+            <Typography variant="subtitle1" fontWeight="bold" color="white">
               <div
-                className="fs-6 my-2 overflow-hidden"
-                style={{
-                  textTransform: "capitalize",
-                  height: "7vh",
-                  lineHeight: "22px",
-                  textOverflow: "ellipsis",
-                }}
-                dangerouslySetInnerHTML={{ __html: description.slice(0, 60) }}
+                className="my-2 vidDescription"
+                dangerouslySetInnerHTML={{ __html: description }}
               ></div>
-              {/* <span
-                className="d-inline"
-                style={{ display: "inline !important" }}
-              >
-                ...
-              </span> */}
             </Typography>
             <Typography
               variant="subtitle2"
-              color="white"
+              color="grey"
               fontWeight="semibold"
               sx={{
                 textOverflow: "ellipsis",
               }}
             >
               {video?.snippet?.channelTitle.slice(0, 40) || demoChannelUrl}
+              <b />
+              {}
             </Typography>
           </Box>
         </Link>

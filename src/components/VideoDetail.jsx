@@ -7,7 +7,6 @@ function VideoDetail() {
   console.log("Hi, videodetail here :)");
   const { id } = useParams();
   const [currVid, setCurrVid] = useState("");
-  const [len, setLen] = useState(430);
   console.log(currVid);
 
   useEffect(() => {
@@ -17,21 +16,18 @@ function VideoDetail() {
       }
     );
   }, [id]);
-  function viewDescription() {
-    if (len == 430) {
-      setLen(currVid.snippet.localized.description.length);
-      document.getElementById("more").style.display = "none";
-      document.getElementById("hide").style.display = "inline";
-    } else setLen(430);
-  }
-  function hideDescription() {
-    setLen(430);
-    document.getElementById("hide").style.display = "none";
-    document.getElementById("more").style.display = "inline";
+  function extendDescription() {
+    var val = document.getElementById("vidDescription").style.webkitLineClamp;
+    if (val == 99)
+      document.getElementById("vidDescription").style.webkitLineClamp = 2;
+    else document.getElementById("vidDescription").style.webkitLineClamp = 99;
   }
 
   return (
-    <Box sx={{ background: "inherit", position: "sticky" }}>
+    <Box
+      className="vidDetail"
+      sx={{ background: "inherit", position: "sticky", marginBottom: "50vh" }}
+    >
       <Stack direction={{ xs: "column", md: "row" }}>
         <Box flex={1}>
           <Box sx={{ width: "100%", position: "sticky", top: "80px" }}>
@@ -42,36 +38,23 @@ function VideoDetail() {
               muted
               controls
             />
-            <Typography color="white" variant="h6" fontWeight="bold" p={2}>
+            <Typography
+              color="white"
+              variant="h6"
+              fontWeight="bold"
+              px={3}
+              mt={3}
+            >
               {currVid?.snippet?.localized?.title}
             </Typography>
-            <Typography
+            <div
               color="grey"
-              variant="subtitle2"
-              fontWeight="normal"
-              p={2}
-              pt={0}
-              textAlign="justify"
-              letterSpacing={-0.5}
+              id="vidDescription"
+              className="vidDescription text-white px-4 mt-3"
+              onClick={extendDescription}
             >
-              {currVid?.snippet?.localized?.description.slice(0, len)}
-              <span
-                id="more"
-                onClick={viewDescription}
-                style={{ cursor: "pointer" }}
-                className="text-white cursor-pointer ms-1"
-              >
-                more...
-              </span>
-              <span
-                onClick={hideDescription}
-                id="hide"
-                style={{ display: "none", cursor: "pointer" }}
-                className="text-white cursor-pointer ms-1"
-              >
-                ...hide
-              </span>
-            </Typography>
+              {currVid?.snippet?.localized?.description}
+            </div>
           </Box>
         </Box>
       </Stack>

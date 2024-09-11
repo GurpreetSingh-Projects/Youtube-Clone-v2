@@ -3,6 +3,7 @@
   padding: 0px;
   list-style: none;
   border: none;
+  transition: all 0.3s ease-in-out !important;
 }
 html,
 body {
@@ -10,7 +11,45 @@ body {
   padding: 0;
   box-sizing: border-box;
 }
-
+.backgroundImg {
+  background-image: linear-gradient(
+      324deg,
+      transparent 0%,
+      transparent 45%,
+      rgba(186, 186, 186, 0.04) 45%,
+      rgba(186, 186, 186, 0.04) 47%,
+      transparent 47%,
+      transparent 100%
+    ),
+    linear-gradient(
+      208deg,
+      transparent 0%,
+      transparent 40%,
+      rgba(186, 186, 186, 0.04) 40%,
+      rgba(186, 186, 186, 0.04) 80%,
+      transparent 80%,
+      transparent 100%
+    ),
+    linear-gradient(
+      202deg,
+      transparent 0%,
+      transparent 20%,
+      rgba(186, 186, 186, 0.04) 20%,
+      rgba(186, 186, 186, 0.04) 40%,
+      transparent 40%,
+      transparent 100%
+    ),
+    linear-gradient(
+      338deg,
+      transparent 0%,
+      transparent 10%,
+      rgba(186, 186, 186, 0.04) 10%,
+      rgba(186, 186, 186, 0.04) 72%,
+      transparent 72%,
+      transparent 100%
+    ),
+    linear-gradient(90deg, rgb(0, 0, 0), rgb(0, 0, 0));
+}
 a {
   text-decoration: none;
   color: black;
@@ -35,13 +74,25 @@ a {
   height: 75vh !important;
   width: 100% !important;
 }
-
+.sidebar {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  border-radius: 10px;
+  padding: 0px 5px;
+}
 .search-bar {
   border: none;
   outline: none;
   width: 350px;
 }
 
+.vidDescription {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: 14px;
+}
 .category-btn {
   font-weight: bold !important;
   text-transform: capitalize;
@@ -56,7 +107,7 @@ a {
   padding: 7px 25px;
   margin: 10px 0px;
   border-radius: 99px;
-  transition: background-color 0.3s ease-in-out;
+  transition: color 0.1s !important;
 }
 
 .category-btn:hover,
@@ -85,6 +136,17 @@ a {
   position: sticky;
   top: 70px;
 } */
+.videos {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+.videoCard {
+  width: 100%;
+  height: 100%;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
+    rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
 @media screen and (max-width: 900px) {
   .categoryBar {
     flex-direction: row !important;
@@ -102,7 +164,7 @@ a {
     margin: 4px;
     border-radius: 99px;
     outline: 1px solid grey;
-    transition: background-color 0.3s ease-in-out;
+    transition: background-color ease-in-out0.3s ease-in-out;
   }
   .logoImg {
     height: 30px;
@@ -141,4 +203,21 @@ a {
 .ytp-dni.ytp-embed .ytp-chrome-controls .ytp-button.ytp-youtube-button,
 .ytp-title-enable-channel-logo .ytp-title-channel {
   display: none !important;
+}
+
+@media only screen and (max-width: 768px) {
+  .videos {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@media only screen and (min-width: 769px) and (max-width: 1400px) {
+  .videos {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media only screen and (min-width: 1401px) {
+  .videos {
+    grid-template-columns: repeat(5, 1fr);
+  }
 }

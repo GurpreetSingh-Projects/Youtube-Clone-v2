@@ -13,9 +13,10 @@ export default function App() {
       <BrowserRouter>
         <Box
           m={0}
-          sx={{
-            backgroundColor: "#333",
-          }}
+          className="backgroundImg"
+          // sx={{
+          //   backgroundColor: "#333",
+          // }}
         >
           <Navbar />
           <Routes>

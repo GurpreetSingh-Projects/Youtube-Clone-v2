@@ -1,7 +1,7 @@
 import { Box, Stack, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
 import ReactPlayer from "react-player/youtube";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { fetchApi } from "../utils/fetchApi";
 function VideoDetail() {
   console.log("Hi, videodetail here :)");
@@ -26,7 +26,7 @@ function VideoDetail() {
   return (
     <Box
       className="vidDetail"
-      sx={{ background: "inherit", position: "sticky", marginBottom: "50vh" }}
+      sx={{ background: "inherit", position: "sticky" }}
     >
       <Stack direction={{ xs: "column", md: "row" }}>
         <Box flex={1}>
@@ -52,9 +52,15 @@ function VideoDetail() {
               id="vidDescription"
               className="vidDescription text-white px-4 mt-3"
               onClick={extendDescription}
+              style={{ cursor: "pointer" }}
             >
               {currVid?.snippet?.localized?.description}
             </div>
+            <Link to={`/channel/${currVid?.snippet?.channelId}`}>
+              <Typography variant={{ sm: "subtitle1", md: "6" }} color="#fff">
+                {currVid?.snippet?.channelTitle}
+              </Typography>
+            </Link>
           </Box>
         </Box>
       </Stack>

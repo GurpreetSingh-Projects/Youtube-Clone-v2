@@ -1,8 +1,9 @@
 import { Box, Stack, Typography } from "@mui/material";
-import { SearchFeed, Searchbar, Sidebar, Videos } from "./index";
+import { SearchFeed, Searchbar, Sidebar } from "./index";
 import { fetchApi } from "../utils/fetchApi";
-import { useEffect, useState } from "react";
-
+import React, { Suspense, lazy, useEffect, useState } from "react";
+import VidSkeleton from "./VidSkeleton";
+const VidComponent = lazy(() => import("../components/Videos"));
 const Feed = () => {
   console.log("Hi, Feed here :)");
   const [selectedCategory, setSelectedCategory] = useState("New");
@@ -19,7 +20,7 @@ const Feed = () => {
         <Box
           sx={{
             height: { sx: "auto", md: "100%", overflow: "hidden" },
-            borderRight: "1px solid #3d3d3d",
+            // borderRight: "1px solid #3d3d3d",
             px: {
               sx: 0,
               md: 2,
@@ -38,7 +39,17 @@ const Feed = () => {
             Copyright @GurpreetSingh-Projects
           </Typography>
         </Box>
-        <Box p={2} sx={{ overflowY: "auto", height: "90vh", flex: 2 }}>
+        <Box
+          p={2}
+          sx={{
+            overflowY: "auto",
+            height: "90vh",
+            width: "100%",
+            flex: 2,
+            background: "#ffffff1a",
+            borderRadius: "10px",
+          }}
+        >
           <Typography
             variant="h5"
             fontWeight="bold"
@@ -47,7 +58,10 @@ const Feed = () => {
           >
             {selectedCategory} <span style={{ color: "#f31503" }}>videos</span>
           </Typography>
-          <Videos videos={videos} />
+
+          <Suspense fallback={<VidSkeleton />}>
+            <VidComponent videos={videos} />
+          </Suspense>
         </Box>
       </Stack>
     </>

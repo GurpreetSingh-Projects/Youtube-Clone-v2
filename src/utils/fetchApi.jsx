@@ -5,7 +5,7 @@ const BASE_URL = "https://www.googleapis.com/youtube/v3";
 const options = {
   method: "GET",
   params: {
-    maxResults: "5",
+    maxResults: "20",
     type: "video",
   },
 };

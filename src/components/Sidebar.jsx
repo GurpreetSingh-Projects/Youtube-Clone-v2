@@ -38,43 +38,29 @@ const Sidebar = ({ selectedCategory, setSelectedCategory }) => {
   ];
   return (
     <div className="sidebar">
-      <Stack
-        sx={{
-          overflowY: "auto",
-          height: { sx: "auto", md: "92vh" },
-          overflowX: "scroll",
-        }}
-        className="categoryBar"
-      >
+      <ul className="d-flex flex-col flex-wrap categoryBar ps-0">
         {categories.map((category) => (
-          <button
+          <li
             key={category.id}
             onClick={() => {
               setSelectedCategory(category.name);
             }}
-            className="category-btn"
+            className="category-btn hvr-sweep-to-right"
             style={{
               background: category.name === selectedCategory && "#FC1503",
             }}
           >
             <span
               style={{
-                color: category.name === selectedCategory ? "white" : "grey",
                 marginRight: "10px",
               }}
             >
               {category.icon}
             </span>
-            <span
-              style={{
-                opacity: category.name === selectedCategory ? "1" : "0.75",
-              }}
-            >
-              {category.name}
-            </span>
-          </button>
+            <span>{category.name}</span>
+          </li>
         ))}
-      </Stack>
+      </ul>
     </div>
   );
 };

@@ -22,37 +22,18 @@ import { fetchApi } from "../utils/fetchApi";
 export default function VideoCard({ video, channelDetail }) {
   const description = video.snippet.title;
   const [vidChannelPic, setvidChannelPic] = useState("");
-  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     fetchApi(
       `channels?part=snippet%2Cstatistics&id=${video?.snippet?.channelId}`
     ).then((data) => {
       setvidChannelPic(data?.items[0]?.snippet?.thumbnails?.default?.url);
       console.log(vidChannelPic);
-      setLoading(false);
+      setTimeout(() => {}, 2000);
     });
   }, []);
 
-  return loading ? (
-    <div>
-      <Skeleton variant="rectangular" sx={{ height: 180, margin: 1 }} />
-      <div className="d-flex mt-3 ">
-        <Skeleton
-          className="me-3"
-          variant="circular"
-          sx={{ width: 50, height: 50 }}
-        />
-        <div className="">
-          <Skeleton
-            className="mb-2"
-            variant="rectangular"
-            sx={{ height: 25 }}
-          />
-          <Skeleton variant="rectangular" sx={{ width: 270, height: 15 }} />
-        </div>
-      </div>
-    </div>
-  ) : (
+  return (
     <Card
       className="videoCard"
       sx={{

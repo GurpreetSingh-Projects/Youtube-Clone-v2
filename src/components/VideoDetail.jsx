@@ -56,11 +56,27 @@ function VideoDetail() {
             >
               {currVid?.snippet?.localized?.description}
             </div>
-            <Link to={`/channel/${currVid?.snippet?.channelId}`}>
-              <Typography variant={{ sm: "subtitle1", md: "6" }} color="#fff">
-                {currVid?.snippet?.channelTitle}
-              </Typography>
-            </Link>
+
+            <Stack
+              direction="row"
+              className="d-flex w-100 justify-content-between px-4 mt-3"
+              sx=""
+            >
+              <Link to={`/channel/${currVid?.snippet?.channelId}`}>
+                <Typography variant={{ sm: "subtitle1", md: "6" }} color="#fff">
+                  {currVid?.snippet?.channelTitle}
+                </Typography>
+              </Link>
+              <Box className="d-flex gap-2">
+                <Typography variant="body1" sx={{ opacity: 0.7 }} color="#fff">
+                  {currVid?.statistics?.viewCount}
+                  &nbsp; Views
+                </Typography>
+                <Typography variant="body1" sx={{ opacity: 0.7 }} color="#fff">
+                  {currVid?.statistics?.likeCount} &nbsp;Likes
+                </Typography>
+              </Box>
+            </Stack>
           </Box>
         </Box>
       </Stack>

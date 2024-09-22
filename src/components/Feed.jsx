@@ -1,8 +1,15 @@
 import { Box, Stack, Typography } from "@mui/material";
-import { SearchFeed, Searchbar, Sidebar } from "./index";
+import { SearchFeed, Searchbar, Sidebar, VideoDetail } from "./index";
 import { fetchApi } from "../utils/fetchApi";
-import React, { Suspense, lazy, useEffect, useState } from "react";
+import React, {
+  Suspense,
+  lazy,
+  useEffect,
+  useState,
+  createContext,
+} from "react";
 import VidSkeleton from "./VidSkeleton";
+export const CreateContext = createContext();
 const VidComponent = lazy(() => import("../components/Videos"));
 const Feed = () => {
   console.log("Hi, Feed here :)");
@@ -59,9 +66,11 @@ const Feed = () => {
             {selectedCategory} <span style={{ color: "#f31503" }}>videos</span>
           </Typography>
 
-          <Suspense fallback={<VidSkeleton />}>
-            <VidComponent videos={videos} />
-          </Suspense>
+          <CreateContext.Provider value={videos}>
+            <Suspense fallback={<VidSkeleton />}>
+              <VidComponent />
+            </Suspense>
+          </CreateContext.Provider>
         </Box>
       </Stack>
     </>

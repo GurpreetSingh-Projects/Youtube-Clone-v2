@@ -1,13 +1,16 @@
 import { Box, Stack, Typography } from "@mui/material";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import ReactPlayer from "react-player/youtube";
 import { useParams, Link } from "react-router-dom";
 import { fetchApi } from "../utils/fetchApi";
+import { CreateContext } from "./Feed";
+import { Videos } from ".";
 function VideoDetail() {
   console.log("Hi, videodetail here :)");
   const { id } = useParams();
   const [currVid, setCurrVid] = useState("");
   console.log(currVid);
+  const videos = useContext(CreateContext);
 
   useEffect(() => {
     fetchApi(`videos?part=contentDetails%2Csnippet%2Cstatistics&id=${id}`).then(
@@ -80,6 +83,9 @@ function VideoDetail() {
           </Box>
         </Box>
       </Stack>
+      <Box className="bg-red" flex={1}>
+        {console.log("hey" + videos)}
+      </Box>
     </Box>
   );
 }

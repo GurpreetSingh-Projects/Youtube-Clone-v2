@@ -89,7 +89,6 @@ export default function VideoCard({ video, channelDetail }) {
             >
               {video?.snippet?.channelTitle.slice(0, 40) || demoChannelUrl}
               <b />
-              {}
             </Typography>
           </Box>
         </Link>

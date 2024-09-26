@@ -218,7 +218,7 @@ a {
 }
 @media only screen and (min-width: 1401px) {
   .videos {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 /* Sweep To Right */

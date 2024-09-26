@@ -1,8 +1,10 @@
 import { Box, Stack } from "@mui/material";
-import React from "react";
+import React, { createContext, useContext } from "react";
 import { ChannelCard, VideoCard } from "./index";
-const Videos = ({ videos }, { channelDetail }) => {
-  console.log(videos);
+import { CreateContext } from "./Feed";
+const Videos = () => {
+  const videos = useContext(CreateContext);
+
   return (
     <div className="videos">
       {videos.map((item, idx) => (

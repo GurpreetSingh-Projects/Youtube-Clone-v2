@@ -7,7 +7,6 @@ const ChannelCard = ({ channelDetail, marginTop }) => {
   const replaceUrl = (url) => {
     navigate(url, { replace: true });
   };
-  console.log("Hi, ChannelCard here :)");
   var subs = channelDetail?.statistics?.subscriberCount;
   if (subs >= 1500 && subs < 100000) {
     subs = subs / 100000;
@@ -16,7 +15,6 @@ const ChannelCard = ({ channelDetail, marginTop }) => {
     subs = subs / 1000000;
     subs += "M";
   }
-  console.log(subs);
 
   return (
     <Box

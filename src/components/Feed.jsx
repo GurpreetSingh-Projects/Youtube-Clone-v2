@@ -7,23 +7,19 @@ import React, {
   useEffect,
   useState,
   createContext,
+  useContext,
 } from "react";
 import VidSkeleton from "./VidSkeleton";
-export const CreateContext = createContext();
+import { CreateContext } from "../App";
 const VidComponent = lazy(() => import("../components/Videos"));
 const Feed = () => {
-  console.log("Hi, Feed here :)");
-  const [selectedCategory, setSelectedCategory] = useState("New");
-  const [videos, setVideos] = useState([]);
-  useEffect(() => {
-    fetchApi(`search?part=snippet&q=${selectedCategory}`).then((res) => {
-      setVideos(res.items);
-    });
-  }, [selectedCategory]);
+  var { selectedCategory, setSelectedCategory } = useContext(CreateContext);
 
   return (
     <>
-      <Stack sx={{ flexDirection: { sx: "column", md: "row" } }}>
+      <Stack
+        sx={{ flexDirection: { sx: "column", md: "row", height: "100%" } }}
+      >
         <Box
           sx={{
             height: { sx: "auto", md: "100%", overflow: "hidden" },
@@ -38,19 +34,12 @@ const Feed = () => {
             selectedCategory={selectedCategory}
             setSelectedCategory={setSelectedCategory}
           />
-          <Typography
-            className="copyright"
-            variant="body2"
-            sx={{ mt: 1.5, color: "white" }}
-          >
-            Copyright @GurpreetSingh-Projects
-          </Typography>
         </Box>
         <Box
           p={2}
           sx={{
             overflowY: "auto",
-            height: "90vh",
+            height: "87vh",
             width: "100%",
             flex: 2,
             background: "#ffffff1a",
@@ -66,11 +55,9 @@ const Feed = () => {
             {selectedCategory} <span style={{ color: "#f31503" }}>videos</span>
           </Typography>
 
-          <CreateContext.Provider value={videos}>
-            <Suspense fallback={<VidSkeleton />}>
-              <VidComponent />
-            </Suspense>
-          </CreateContext.Provider>
+          <Suspense fallback={<VidSkeleton />}>
+            <VidComponent />
+          </Suspense>
         </Box>
       </Stack>
     </>

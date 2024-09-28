@@ -1,15 +1,13 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchApi } from "../utils/fetchApi";
 import { Box, Card, Hidden, Typography } from "@mui/material";
 import { ChannelCard, Videos } from "./index";
+import { CreateContext } from "../App";
 
 const ChannelDetail = () => {
-  console.log("Hi, ChannelDetail here :)");
   const [channelDetail, setChannelDetail] = useState(null);
-  const [channelVideos, setChannelVideos] = useState([]);
-
-  console.log(channelDetail, channelVideos);
+  const { setVideos } = useContext(CreateContext);
 
   const { id } = useParams();
 
@@ -21,7 +19,7 @@ const ChannelDetail = () => {
     fetchApi(
       `search?channelId=${id}&part=snippet%2Cid&order=date&maxResults=50`
     ).then((data) => {
-      setChannelVideos(data.items);
+      setVideos(data.items);
     });
   }, [id]);
   return (
@@ -70,7 +68,7 @@ const ChannelDetail = () => {
         </Typography>
       </Box>
       <Box className="d-flex align-items-center justify-content-center p-3">
-        <Videos videos={channelVideos} nochannel="true" />
+        <Videos />
       </Box>
     </>
   );

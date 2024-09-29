@@ -2,9 +2,16 @@ import { Stack } from "@mui/material";
 import logo from "/assets/images/logo.png";
 import { Link } from "react-router-dom";
 import { Searchbar } from "./index";
+import { useContext, useEffect } from "react";
+import { CreateContext } from "../App";
 
 const Navbar = () => {
-  console.log("Hi, Navbar here lol :)");
+  const { setSelectedCategory } = useContext(CreateContext);
+
+  function resetState() {
+    setSelectedCategory("New");
+  }
+
   return (
     <Stack
       direction="row"
@@ -18,7 +25,11 @@ const Navbar = () => {
         background: "inherit",
       }}
     >
-      <Link to="/" style={{ display: "flex", alignItems: "center" }}>
+      <Link
+        to="/"
+        onClick={resetState}
+        style={{ display: "flex", alignItems: "center" }}
+      >
         <img className="logoImg" src={logo} alt="logo" />
       </Link>
       <Searchbar />

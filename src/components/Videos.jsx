@@ -1,10 +1,14 @@
 import { Box, Stack } from "@mui/material";
 import React, { createContext, useContext } from "react";
-import { ChannelCard, VideoCard } from "./index";
-import { CreateContext } from "./Feed";
-const Videos = () => {
-  const videos = useContext(CreateContext);
-
+import { ChannelCard, ChannelDetail, VideoCard } from "./index";
+import { CreateContext } from "../App";
+const Videos = (pattern) => {
+  const { videos } = useContext(CreateContext);
+  if (pattern == "column") {
+    document
+      .getElementsByClassName("videos")
+      .classList.replace("videos", "col-12 w-100");
+  }
   return (
     <div className="videos">
       {videos.map((item, idx) => (

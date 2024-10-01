@@ -32,7 +32,6 @@ export default function Searchbar() {
         placeholder="Search..."
         onChange={(e) => {
           setSearchTerm(e.target.value);
-          // console.log(searchTerm);
         }}
       />
       <IconButton type="submit" sx={{ p: "10px", color: "red" }}>

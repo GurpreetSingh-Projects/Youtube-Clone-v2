@@ -7,25 +7,44 @@ import {
   ChannelDetail,
   SearchFeed,
 } from "./components";
+import Footer from "./components/Footer";
+import { createContext, useEffect, useState } from "react";
+import { fetchApi } from "./utils/fetchApi";
+export const CreateContext = createContext();
+
 export default function App() {
+  const [selectedCategory, setSelectedCategory] = useState("New");
+  const [videos, setVideos] = useState([]);
+  useEffect(() => {
+    fetchApi(`search?part=snippet&q=${selectedCategory}`).then((res) => {
+      setVideos(res.items);
+    });
+  }, [selectedCategory]);
+
   return (
     <>
       <BrowserRouter>
-        <Box
-          m={0}
-          className="backgroundImg"
-          // sx={{
-          //   backgroundColor: "#333",
-          // }}
+        <CreateContext.Provider
+          value={{ videos, setVideos, selectedCategory, setSelectedCategory }}
         >
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<Feed />} />
-            <Route path="/video/:id" element={<VideoDetail />} />
-            <Route path="/channel/:id" element={<ChannelDetail />} />
-            <Route path="/search/:searchTerm" element={<SearchFeed />} />
-          </Routes>
-        </Box>
+          <Box
+            m={0}
+            pb={1}
+            className="backgroundImg"
+            // sx={{
+            //   backgroundColor: "#333",
+            // }}
+          >
+            <Navbar />
+            <Routes>
+              <Route path="/" element={<Feed />} />
+              <Route path="/video/:id" element={<VideoDetail />} />
+              <Route path="/channel/:id" element={<ChannelDetail />} />
+              <Route path="/search/:searchTerm" element={<SearchFeed />} />
+            </Routes>
+            <Footer />
+          </Box>
+        </CreateContext.Provider>
       </BrowserRouter>
     </>
   );

@@ -3,19 +3,21 @@ import { useState, useEffect, useContext } from "react";
 import ReactPlayer from "react-player/youtube";
 import { useParams, Link } from "react-router-dom";
 import { fetchApi } from "../utils/fetchApi";
-import { CreateContext } from "./Feed";
-import { Videos } from ".";
+import { CreateContext } from "../App";
+import Videos from "./Videos";
 function VideoDetail() {
-  console.log("Hi, videodetail here :)");
   const { id } = useParams();
   const [currVid, setCurrVid] = useState("");
-  console.log(currVid);
-  const videos = useContext(CreateContext);
-
+  const { videos, setVideos } = useContext(CreateContext);
   useEffect(() => {
     fetchApi(`videos?part=contentDetails%2Csnippet%2Cstatistics&id=${id}`).then(
       (data) => {
         setCurrVid(data.items[0]);
+      }
+    );
+    fetchApi(`search?part=snippet&relatedToVideoId=${id}&type=video`).then(
+      (res) => {
+        setVideos(res.items);
       }
     );
   }, [id]);
@@ -28,10 +30,10 @@ function VideoDetail() {
 
   return (
     <Box
-      className="vidDetail"
+      className="vidDetail d-flex"
       sx={{ background: "inherit", position: "sticky" }}
     >
-      <Stack direction={{ xs: "column", md: "row" }}>
+      <Stack className="col-9" direction={{ xs: "column", md: "row" }}>
         <Box flex={1}>
           <Box sx={{ width: "100%", position: "sticky", top: "80px" }}>
             <ReactPlayer
@@ -83,9 +85,9 @@ function VideoDetail() {
           </Box>
         </Box>
       </Stack>
-      <Box className="bg-red" flex={1}>
-        {console.log("hey" + videos)}
-      </Box>
+      <Stack className="col-3" direction="column">
+        <Videos pattern="column" />
+      </Stack>
     </Box>
   );
 }

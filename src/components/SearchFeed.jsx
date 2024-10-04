@@ -1,16 +1,14 @@
 import { Box, Typography } from "@mui/material";
-import { Sidebar, Videos } from "./index";
+import { Videos } from "./index";
 import { fetchApi } from "../utils/fetchApi";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { BorderRight } from "@mui/icons-material";
-import SearchVideos from "./SearchVideos";
+import { CreateContext } from "../App";
 export const SearchContext = createContext();
 
 const SearchFeed = () => {
-  console.log("Hi, Searchbar here :)");
   const { searchTerm } = useParams();
-  const [videos, setVideos] = useState([]);
+  const { setVideos } = useContext(CreateContext);
   useEffect(() => {
     fetchApi(`search?part=snippet&q=${searchTerm}`).then((res) => {
       setVideos(res.items);
@@ -45,9 +43,7 @@ const SearchFeed = () => {
             Showing Search results for&nbsp;
             <span style={{ color: "#f31503" }}>{searchTerm}</span>
           </Typography>
-          <SearchContext.Provider value={videos}>
-            <SearchVideos />
-          </SearchContext.Provider>
+          <Videos />
         </Box>
       </Box>
     </>

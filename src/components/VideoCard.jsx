@@ -28,10 +28,9 @@ export default function VideoCard({ video, channelDetail }) {
       `channels?part=snippet%2Cstatistics&id=${video?.snippet?.channelId}`
     ).then((data) => {
       setvidChannelPic(data?.items[0]?.snippet?.thumbnails?.default?.url);
-      console.log(vidChannelPic);
-      setTimeout(() => {}, 2000);
+
     });
-  }, []);
+  }, [video.snippet.channelId]);
 
   return (
     <Card
@@ -59,12 +58,6 @@ export default function VideoCard({ video, channelDetail }) {
           justifyContent: "start",
         }}
       >
-        <Link to={`/video/${video?.id?.videoId}`}>
-          <Avatar
-            src={vidChannelPic}
-            sx={{ width: 40, height: 40, marginRight: 2 }}
-          />
-        </Link>
         <Link
           to={
             video?.snippet?.channelId
@@ -72,6 +65,12 @@ export default function VideoCard({ video, channelDetail }) {
               : demoChannelUrl
           }
         >
+          <Avatar
+            src={vidChannelPic}
+            sx={{ width: 40, height: 40, marginRight: 2 }}
+          />
+        </Link>
+        <Link to={`/video/${video?.id?.videoId}`}>
           <Box className="">
             <Typography variant="subtitle1" fontWeight="bold" color="white">
               <div

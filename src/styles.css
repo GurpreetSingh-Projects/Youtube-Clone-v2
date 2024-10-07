@@ -75,6 +75,8 @@ a {
   width: 100% !important;
 }
 .sidebar {
+  height: 85vh;
+  overflow: scroll;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(15px);
   border-radius: 10px;
@@ -214,6 +216,11 @@ a {
 @media only screen and (min-width: 769px) and (max-width: 1400px) {
   .videos {
     grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media only screen and (max-width: 650px) {
+  .videos {
+    grid-template-columns: repeat(1, 1fr);
   }
 }
 @media only screen and (min-width: 1401px) {

@@ -7,6 +7,7 @@ import {
   ChannelDetail,
   SearchFeed,
 } from "./components";
+
 import Footer from "./components/Footer";
 import { createContext, useEffect, useState } from "react";
 import { fetchApi } from "./utils/fetchApi";
@@ -38,9 +39,13 @@ export default function App() {
             <Navbar />
             <Routes>
               <Route path="/" element={<Feed />} />
-              <Route path="/video/:id" element={<VideoDetail />} />
-              <Route path="/channel/:id" element={<ChannelDetail />} />
-              <Route path="/search/:searchTerm" element={<SearchFeed />} />
+              <Route exact path="/video/:id" element={<VideoDetail />} />
+              <Route exact path="/channel/:id" element={<ChannelDetail />} />
+              <Route
+                exact
+                path="/search/:searchTerm"
+                element={<SearchFeed />}
+              />
             </Routes>
             <Footer />
           </Box>

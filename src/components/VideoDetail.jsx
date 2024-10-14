@@ -86,7 +86,7 @@ function VideoDetail() {
         </Box>
       </Stack>
       <Stack className="col-3" direction="column">
-        <Videos pattern="column" />
+        <Videos suggested="true" />
       </Stack>
     </Box>
   );

@@ -143,6 +143,11 @@ a {
   grid-template-columns: repeat(5, 1fr);
   gap: 10px;
 }
+.suggestedvideos {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 10px;
+}
 .videosMobile {
   display: grid;
   grid-template-columns: repeat(1, 1fr);

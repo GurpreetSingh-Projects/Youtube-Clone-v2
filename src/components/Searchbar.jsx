@@ -13,7 +13,7 @@ export default function Searchbar() {
     }
   };
   return (
-    <Grow in={1}>
+    <Grow in={true}>
       <Stack
         direction="row"
         className="col-4 d-flex ms-3 justify-content-center"

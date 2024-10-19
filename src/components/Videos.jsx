@@ -2,7 +2,7 @@ import { Box, Stack } from "@mui/material";
 import React, { createContext, useContext } from "react";
 import { ChannelCard, ChannelDetail, VideoCard } from "./index";
 import { CreateContext } from "../App";
-const Videos = (suggested) => {
+const Videos = ({ suggested }) => {
   const { videos } = useContext(CreateContext);
   return suggested ? (
     <div className="suggestedvideos">

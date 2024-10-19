@@ -37,7 +37,7 @@ const Sidebar = ({ selectedCategory, setSelectedCategory }) => {
   ];
   return (
     <div className="sidebar">
-      <ul className="d-flex flex-col flex-wrap categoryBar ps-0">
+      <ul className="d-flex flex-col flex-md-wrap categoryBar ps-0">
         {categories.map((category) => (
           <li
             key={category.id}

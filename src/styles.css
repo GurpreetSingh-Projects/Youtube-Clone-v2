@@ -174,9 +174,17 @@ a {
     width: auto !important;
     text-wrap: nowrap;
     margin: 4px;
-    border-radius: 0px 99px 99px 0px;
+    border-radius: 99px !important;
     outline: 1px solid grey;
     transition: background-color ease-in-out 0.3s ease-in-out;
+  }
+  .hvr-sweep-to-right,
+  .hvr-sweep-to-right:before,
+  .hvr-sweep-to-right:hover,
+  .hvr-sweep-to-right:focus,
+  .hvr-sweep-to-right:active {
+    transition: none !important;
+    border-radius: 99px !important;
   }
   .logoImg {
     height: 30px;
@@ -187,6 +195,14 @@ a {
   .channelProfilePic {
     height: 100px !important;
     width: 100px !important;
+  }
+  .sidebar {
+    height: fit-content;
+    overflow: scroll;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    border-radius: 10px !important;
+    padding: 0px 5px;
   }
 }
 

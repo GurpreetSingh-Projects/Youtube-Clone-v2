@@ -75,7 +75,7 @@ a {
   width: 100% !important;
 }
 .sidebar {
-  height: 85vh;
+  height: 90vh;
   overflow: scroll;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(15px);
@@ -126,6 +126,8 @@ a {
 }
 .logoImg {
   height: 35px;
+  padding: 5px 15px;
+  border-radius: 999px;
 }
 .channelBanner {
   height: 200px;
@@ -304,4 +306,7 @@ a {
   -webkit-transform: scaleX(1);
   border-radius: 0px 99px 99px 0px;
   transform: scaleX(1);
+}
+.sidebar-hidden {
+  display: none;
 }

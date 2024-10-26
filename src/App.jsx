@@ -17,6 +17,8 @@ export default function App() {
   const [fdata, setFdata] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("New");
   const [videos, setVideos] = useState([]);
+  const [sidebar, setSidebar] = useState(true);
+  const [currVid, setCurrVid] = useState("q4z7zpG9XA");
   useEffect(() => {
     fetchApi(`search?part=snippet&q=${selectedCategory}&type=video`).then(
       (res) => {
@@ -29,7 +31,16 @@ export default function App() {
     <>
       <BrowserRouter>
         <CreateContext.Provider
-          value={{ videos, setVideos, selectedCategory, setSelectedCategory }}
+          value={{
+            videos,
+            setVideos,
+            selectedCategory,
+            setSelectedCategory,
+            sidebar,
+            setSidebar,
+            currVid,
+            setCurrVid,
+          }}
         >
           <Box
             m={0}

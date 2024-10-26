@@ -4,7 +4,7 @@ import { ChannelCard, ChannelDetail, VideoCard } from "./index";
 import { CreateContext } from "../App";
 const Videos = ({ suggested }) => {
   const { videos } = useContext(CreateContext);
-  console.log(videos);
+  // console.log(videos);
 
   return suggested ? (
     <div className="suggestedvideos">

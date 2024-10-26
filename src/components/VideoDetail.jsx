@@ -2,39 +2,42 @@ import { Box, Stack, Typography } from "@mui/material";
 import { useState, useEffect, useContext } from "react";
 import ReactPlayer from "react-player/youtube";
 import { useParams, Link } from "react-router-dom";
-import { fetchApi } from "../utils/fetchApi";
+import { fetchApi, fetchApi1 } from "../utils/fetchApi";
 import { CreateContext } from "../App";
 import Videos from "./Videos";
+import { VidStats } from "./VideoCard";
 function VideoDetail() {
   const { id } = useParams();
-  const [currVid, setCurrVid] = useState("");
+  const [currVidDetails, setCurrVidDetails] = useState(null);
   const { videos, setVideos } = useContext(CreateContext);
+  // console.log("Searched for keyword - " + id);
   useEffect(() => {
-    // fetchApi(`videos?part=contentDetails%2Csnippet%2Cstatistics&id=${id}`).then(
-    //   (data) => {
-    //     setCurrVid(data.items[0]);
-    //   }
-    // );
-    fetchApi(`search?part=snippet&relatedToVideoId=${id}&type=video`).then(
-      (res) => {
-        setVideos(res.items);
-      }
-    );
+    fetchApi1(
+      `videos?part=snippet%2CcontentDetails%2Cstatistics&id=${id}`
+    ).then((res) => {
+      setCurrVidDetails(res.items[0]);
+    });
+    alert("Fetched Current details - " + JSON.stringify(currVidDetails));
+
+    // related videos
+    fetchApi(`search?part=snippet&q=${id}&type=video`).then((res) => {
+      setVideos(res.items);
+    });
   }, [id]);
+
   function extendDescription() {
     var val = document.getElementById("vidDescription").style.webkitLineClamp;
     if (val == 99)
       document.getElementById("vidDescription").style.webkitLineClamp = 2;
     else document.getElementById("vidDescription").style.webkitLineClamp = 99;
   }
-
   return (
     <Box
       className="vidDetail d-flex"
       sx={{ background: "inherit", position: "sticky" }}
     >
       <Stack className="col-9" direction={{ xs: "column", md: "row" }}>
-        <Box flex={1}>
+        <Box flex={1} className="mb-5">
           <Box sx={{ width: "100%", position: "sticky", top: "80px" }}>
             <ReactPlayer
               className="react-player"
@@ -50,7 +53,7 @@ function VideoDetail() {
               px={3}
               mt={3}
             >
-              {currVid?.snippet?.localized?.title}
+              {currVidDetails?.snippet?.localized?.title}
             </Typography>
             <div
               color="grey"
@@ -59,7 +62,7 @@ function VideoDetail() {
               onClick={extendDescription}
               style={{ cursor: "pointer" }}
             >
-              {currVid?.snippet?.localized?.description}
+              {currVidDetails?.snippet?.localized?.description}
             </div>
 
             <Stack
@@ -67,18 +70,18 @@ function VideoDetail() {
               className="d-flex w-100 justify-content-between px-4 mt-3"
               sx=""
             >
-              <Link to={`/channel/${currVid?.snippet?.channelId}`}>
+              <Link to={`/channel/${currVidDetails?.snippet?.channelId}`}>
                 <Typography variant={{ sm: "subtitle1", md: "6" }} color="#fff">
-                  {currVid?.snippet?.channelTitle}
+                  {currVidDetails?.snippet?.channelTitle}
                 </Typography>
               </Link>
               <Box className="d-flex gap-2">
                 <Typography variant="body1" sx={{ opacity: 0.7 }} color="#fff">
-                  {currVid?.statistics?.viewCount}
+                  {currVidDetails?.statistics?.viewCount}
                   &nbsp; Views
                 </Typography>
                 <Typography variant="body1" sx={{ opacity: 0.7 }} color="#fff">
-                  {currVid?.statistics?.likeCount} &nbsp;Likes
+                  {currVidDetails?.statistics?.likeCount} &nbsp;Likes
                 </Typography>
               </Box>
             </Stack>

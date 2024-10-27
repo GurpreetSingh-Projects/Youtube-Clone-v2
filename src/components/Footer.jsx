@@ -18,6 +18,7 @@ const Footer = () => {
       Copyright ©&nbsp;
       <a
         className="text-primary"
+        target="_blank"
         href="https://github.com/GurpreetSingh-Projects"
       >
         GurpreetSingh-Projects

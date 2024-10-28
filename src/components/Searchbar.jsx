@@ -16,37 +16,29 @@ export default function Searchbar() {
     <Grow in={true}>
       <Stack
         direction="row"
-        className="col-4 d-flex ms-3 justify-content-center"
+        className="d-flex ms-3 justify-content-center"
       >
         <Paper
           id="searchBarContainer"
-          className="w-100 animate__flash py-0"
+          className="w-100 animate__flash py-0 px-3 d-flex"
           component="form"
           onSubmit={handleSubmit}
           sx={{
             borderRadius: 20,
             border: "1px solid #e3e3e3",
-            pl: 2,
             boxShadow: "none",
-            display: "flex",
             mr: { sm: 5 },
-            width: { md: "30%", sm: "50%" },
             transform: "scale(0.9)",
           }}
         >
           <input
-            className=" search-bar"
-            style={{ background: "transparent" }}
+            className="search-bar bg-transparent w-100"
             placeholder="Search..."
             onChange={(e) => {
               setSearchTerm(e.target.value);
             }}
           />
-          <IconButton
-            className="d-flex"
-            type="submit"
-            sx={{ p: "10px", color: "red" }}
-          >
+          <IconButton type="submit" sx={{ p: "10px", color: "red" }}>
             <Search />
           </IconButton>
         </Paper>

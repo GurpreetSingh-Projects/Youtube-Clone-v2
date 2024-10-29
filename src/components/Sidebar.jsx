@@ -14,8 +14,11 @@ import TheaterComedyIcon from "@mui/icons-material/TheaterComedy";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 import DeveloperModeIcon from "@mui/icons-material/DeveloperMode";
 import SlideshowIcon from "@mui/icons-material/Slideshow";
+import { useContext } from "react";
+import { CreateContext } from "../App";
 
 const Sidebar = ({ selectedCategory, setSelectedCategory }) => {
+  const { sidebar } = useContext(CreateContext);
   const categories = [
     { id: 0, name: "New", icon: <HomeIcon /> },
     { id: 1, name: "Daily Dose of Internet", icon: <SlideshowIcon /> },
@@ -35,7 +38,7 @@ const Sidebar = ({ selectedCategory, setSelectedCategory }) => {
     { id: 15, name: "Gym", icon: <FitnessCenterIcon /> },
     { id: 16, name: "Crypto", icon: <DeveloperModeIcon /> },
   ];
-  return (
+  return sidebar ? (
     <div className="sidebar">
       <ul className="d-flex flex-col flex-md-wrap categoryBar ps-0">
         {categories.map((category) => (
@@ -56,11 +59,13 @@ const Sidebar = ({ selectedCategory, setSelectedCategory }) => {
             >
               {category.icon}
             </span>
-            <span>{category.name}</span>
+            <span className="text-nowrap">{category.name}</span>
           </li>
         ))}
       </ul>
     </div>
+  ) : (
+    <></>
   );
 };
 

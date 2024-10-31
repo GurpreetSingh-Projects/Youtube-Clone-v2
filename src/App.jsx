@@ -20,7 +20,7 @@ export default function App() {
   const [sidebar, setSidebar] = useState(true);
   const [currVid, setCurrVid] = useState("q4z7zpG9XA");
   useEffect(() => {
-    fetchApi(`search?part=snippet&q=${selectedCategory}&type=video`).then(
+    fetchApi(`search?part=snippet&q=${selectedCategory}`).then(
       (res) => {
         setVideos(res.items);
       }

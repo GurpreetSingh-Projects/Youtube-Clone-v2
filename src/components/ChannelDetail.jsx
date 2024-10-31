@@ -16,11 +16,11 @@ const ChannelDetail = () => {
       setChannelDetail(data?.items[0]);
     });
 
-    fetchApi(
-      `search?channelId=${id}&part=snippet%2Cid&order=date&maxResults=50`
-    ).then((data) => {
-      setVideos(data.items);
-    });
+    fetchApi(`search?channelId=${id}&part=snippet%2Cid&order=date`).then(
+      (data) => {
+        setVideos(data.items);
+      }
+    );
   }, [id]);
   return (
     <>

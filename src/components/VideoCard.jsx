@@ -11,8 +11,11 @@ import Avatar from "@mui/material/Avatar";
 import { demoChannelUrl } from "../utils/constants";
 import { useState, useEffect, createContext, useContext } from "react";
 import { fetchApi } from "../utils/fetchApi";
+import { converter } from "../utils/constants";
+
 import VidSkeleton from "./VidSkeleton";
 import { CreateContext } from "../App";
+
 export const VidStats = createContext();
 
 export default function VideoCard({ video, channelDetail }) {
@@ -20,15 +23,15 @@ export default function VideoCard({ video, channelDetail }) {
   const description = video.snippet.title;
   const navigate = useNavigate();
   const { currVid, setCurrVid } = useContext(CreateContext);
+
   useEffect(() => {
     fetchApi(
-      `channels?part=snippet%2CcontentDetails%2Cstatistics%2Cstatus&id=${video?.snippet?.channelId}`
+      `channels?part=snippet%2Cstatistics&id=${video?.snippet?.channelId}`
     ).then((res) => {
-      // console.log(res);
+      console.log(res);
       setStats(res);
     });
   }, [video.snippet.channelId]);
-
   return (
     <Zoom in={true} style={{ transitionDelay: "0s" }}>
       <Card
@@ -89,7 +92,10 @@ export default function VideoCard({ video, channelDetail }) {
                   textOverflow: "ellipsis",
                 }}
               >
-                {video?.snippet?.channelTitle.slice(0, 40) || demoChannelUrl}
+                {video?.snippet?.channelTitle.slice(0, 40) || demoChannelUrl}{" "}
+                &nbsp;
+                {converter(stats?.items[0]?.statistics?.subscriberCount)} &nbsp;
+                {converter(stats?.items[0]?.statistics?.viewCount)}
                 <b />
               </Typography>
             </Box>

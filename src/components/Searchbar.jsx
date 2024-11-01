@@ -1,48 +1,59 @@
-import { Paper, IconButton, Stack, Grow } from "@mui/material";
-import { Search } from "@mui/icons-material";
-import { useState } from "react";
+import { Paper, IconButton, Box, Grow } from "@mui/material";
+import { Close, Search } from "@mui/icons-material";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { CreateContext } from "../App";
 
 export default function Searchbar() {
+  const { searchbar, setSearchbar } = useContext(CreateContext);
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
+    toggleSearch();
     if (searchTerm) {
       navigate(`/search/${searchTerm}`);
     }
   };
+  function toggleSearch() {
+    setSearchbar(!searchbar);
+  }
+
   return (
-    <Grow in={true}>
-      <Stack
-        direction="row"
-        className="d-flex ms-3 justify-content-center"
+    <form id="searchBarContainer" onSubmit={handleSubmit}>
+      <div
+        className="row d-flex flex-nowrap bg-white"
+        style={{
+          borderRadius: 99,
+          border: "1px solid #e3e3e3",
+        }}
       >
-        <Paper
-          id="searchBarContainer"
-          className="w-100 animate__flash py-0 px-3 d-flex"
-          component="form"
-          onSubmit={handleSubmit}
-          sx={{
-            borderRadius: 20,
-            border: "1px solid #e3e3e3",
-            boxShadow: "none",
-            mr: { sm: 5 },
-            transform: "scale(0.9)",
+        <IconButton
+          className="col-1"
+          type="submit"
+          sx={{ p: "10px", color: "red", width: "fit-content" }}
+        >
+          <Search />
+        </IconButton>
+        <input
+          className="search-bar col-10"
+          placeholder="Search..."
+          onChange={(e) => {
+            setSearchTerm(e.target.value);
+          }}
+          autoFocus
+          required
+        />
+        <IconButton
+          className="col-1"
+          sx={{ p: "10px", color: "black", width: "fit-content" }}
+          onClick={() => {
+            toggleSearch();
           }}
         >
-          <input
-            className="search-bar bg-transparent w-100"
-            placeholder="Search..."
-            onChange={(e) => {
-              setSearchTerm(e.target.value);
-            }}
-          />
-          <IconButton type="submit" sx={{ p: "10px", color: "red" }}>
-            <Search />
-          </IconButton>
-        </Paper>
-      </Stack>
-    </Grow>
+          <Close />
+        </IconButton>
+      </div>
+    </form>
   );
 }

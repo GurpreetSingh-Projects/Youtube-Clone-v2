@@ -1,22 +1,50 @@
 import logo from "/assets/images/logo.jpg";
 import { Link } from "react-router-dom";
 import { Searchbar } from "./index";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { CreateContext } from "../App";
-import { Paper, IconButton, Stack, Zoom, Grow, Box } from "@mui/material";
+import { Paper, IconButton, Stack, Box, Grow } from "@mui/material";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { Menu, Search } from "@mui/icons-material";
+import { Search } from "@mui/icons-material";
+import { AnimatePresence, motion } from "framer-motion";
+import { Typewriter } from "react-simple-typewriter";
+
 const Navbar = () => {
-  const { setSelectedCategory, sidebar, setSidebar } =
+  const { searchbar, setSearchbar, setSelectedCategory, sidebar, setSidebar } =
     useContext(CreateContext);
+
   function resetState() {
     setSelectedCategory("New");
   }
+
   function toggleSidebar() {
     setSidebar(!sidebar);
   }
+
+  const containerVariants = {
+    hidden: {
+      scale: 0.5,
+      opacity: 0,
+      y: 500,
+    },
+    visible: {
+      scale: 1,
+      opacity: 1,
+      y: 0,
+    },
+    exit: {
+      scale: 0.5,
+      opacity: 0,
+      y: 500,
+    },
+  };
+
+  function toggleSearch() {
+    setSearchbar(!searchbar);
+  }
+
   return (
     <Stack
       className="px-3 py-2"
@@ -26,43 +54,90 @@ const Navbar = () => {
         position: "sticky",
         top: 0,
         justifyContent: "space-between",
-        zIndex: "9999",
+        zIndex: 9999,
         background: "inherit",
       }}
     >
-      <Box className="col-4">
+      <Box className="col-3">
         <Link
           to="/"
           className="d-flex align-items-center justify-between"
           onClick={resetState}
-          sx={{ display: "flex", alignItems: "center" }}
+          style={{ display: "flex", alignItems: "center" }}
         >
-          <Grow in={true} style={{ transitionDelay: "1500ms" }}>
-            <img className="logoImg animate__bounce" src={logo} alt="logo" />
+          <Grow in={true}>
+            <img className="logoImg" src={logo} alt="logo" />
           </Grow>
         </Link>
       </Box>
-      <Box className="col-4">
-        <Searchbar />
-      </Box>
-      <Box className="col-4">
+      <div className="col-6">
+        <div className="text-white fs-6 text-center fst-italic d-none d-md-block w-100">
+          Search for &quot;
+          <span>
+            <Typewriter
+              words={[
+                "How to code a responsive website",
+                "Top web development trends",
+                "CSS animations tutorial for beginners",
+                "JavaScript vs TypeScript: Which is better?",
+                "Best practices for SEO in web design",
+                "How to optimize website performance",
+                "What's!",
+                "Welcome to React!",
+                "Enjoy coding!",
+              ]}
+              loop={true}
+              cursor
+              cursorStyle="|"
+              typeSpeed={70}
+              deleteSpeed={50}
+              delaySpeed={1000}
+            />
+          </span>
+          &quot;
+        </div>
+        <AnimatePresence>
+          {searchbar && (
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              transition={{ duration: 0.3 }} // Adjust duration as needed
+              variants={containerVariants}
+              className="position-fixed"
+              style={{ inset: 0 }}
+            >
+              <div className="searchbarBox" onClick={toggleSearch} />
+              <Searchbar />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+      <Box className="col-3">
         <Stack
-          className="col-0 d-flex align-items-center justify-content-end"
           direction="row"
+          spacing={2} // Added spacing for better alignment
+          className="d-flex align-items-center justify-content-end"
         >
-          <Grow in={true} style={{ transitionDelay: "1500ms" }}>
-            <Box className="d-flex align-items-center gap-3">
-              <IconButton className="text-white">
-                <HelpOutlineIcon />
-              </IconButton>
-              <IconButton className="text-white">
-                <NotificationsIcon />
-              </IconButton>
-
-              <IconButton className="text-white">
-                <AccountCircleIcon />
-              </IconButton>
-            </Box>
+          <Grow in={true}>
+            <IconButton className="text-white" onClick={toggleSearch}>
+              <Search />
+            </IconButton>
+          </Grow>
+          <Grow in={true}>
+            <IconButton className="text-white">
+              <HelpOutlineIcon />
+            </IconButton>
+          </Grow>
+          <Grow in={true}>
+            <IconButton className="text-white">
+              <NotificationsIcon />
+            </IconButton>
+          </Grow>
+          <Grow in={true}>
+            <IconButton className="text-white">
+              <AccountCircleIcon />
+            </IconButton>
           </Grow>
         </Stack>
       </Box>

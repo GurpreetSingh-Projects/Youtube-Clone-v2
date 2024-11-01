@@ -33,75 +33,74 @@ export default function VideoCard({ video, channelDetail }) {
     });
   }, [video.snippet.channelId]);
   return (
-    <Zoom in={true} style={{ transitionDelay: "0s" }}>
-      <Card
-        className="videoCard"
+    <Card
+      className="videoCard"
+      sx={{
+        boxShadow: "none",
+        borderRadius: "3px",
+      }}
+    >
+      <Link
+        to={`/video/${video?.id?.videoId}`}
+        onClick={() => {
+          setCurrVid(video);
+        }}
+      >
+        <CardMedia
+          component="img"
+          loading="lazy"
+          image={video?.snippet?.thumbnails?.medium?.url}
+          alt={video?.snippet?.title}
+          sx={{ objectFit: "cover", height: "180px" }}
+        />
+      </Link>
+      <CardContent
         sx={{
-          boxShadow: "none",
-          borderRadius: "3px",
+          display: "flex",
+          backgroundColor: "#1e1e1e",
+          height: "100px",
+          alignItems: "center",
+          justifyContent: "start",
         }}
       >
         <Link
-          to={`/video/${video?.id?.videoId}`}
-          onClick={() => {
-            setCurrVid(video);
-          }}
+          to={
+            video?.snippet?.channelId
+              ? `/channel/${video?.snippet?.channelId}`
+              : demoChannelUrl
+          }
         >
-          <CardMedia
-            component="img"
-            loading="lazy"
-            image={video?.snippet?.thumbnails?.medium?.url}
-            alt={video?.snippet?.title}
-            sx={{ objectFit: "cover" }}
+          <Avatar
+            src={stats?.items[0]?.snippet?.thumbnails?.default?.url}
+            sx={{ width: 40, height: 40, marginRight: 2 }}
           />
         </Link>
-        <CardContent
-          sx={{
-            display: "flex",
-            backgroundColor: "#1e1e1e",
-            height: "100px",
-            alignItems: "center",
-            justifyContent: "start",
-          }}
-        >
-          <Link
-            to={
-              video?.snippet?.channelId
-                ? `/channel/${video?.snippet?.channelId}`
-                : demoChannelUrl
-            }
-          >
-            <Avatar
-              src={stats?.items[0]?.snippet?.thumbnails?.default?.url}
-              sx={{ width: 40, height: 40, marginRight: 2 }}
-            />
-          </Link>
-          <Link to={`/video/${video?.id?.videoId}`}>
-            <Box className="">
-              <Typography variant="subtitle1" fontWeight="bold" color="white">
-                <div
-                  className="my-2 vidDescription"
-                  dangerouslySetInnerHTML={{ __html: description }}
-                ></div>
-              </Typography>
-              <Typography
-                variant="subtitle2"
-                color="grey"
-                fontWeight="semibold"
-                sx={{
-                  textOverflow: "ellipsis",
-                }}
-              >
-                {video?.snippet?.channelTitle.slice(0, 40) || demoChannelUrl}{" "}
-                &nbsp;
-                {converter(stats?.items[0]?.statistics?.subscriberCount)} &nbsp;
-                {converter(stats?.items[0]?.statistics?.viewCount)}
-                <b />
-              </Typography>
-            </Box>
-          </Link>
-        </CardContent>
-      </Card>
-    </Zoom>
+        <Link to={`/video/${video?.id?.videoId}`}>
+          <Box className="">
+            <Typography variant="subtitle1" fontWeight="bold" color="white">
+              <div
+                className="vidDescription"
+                dangerouslySetInnerHTML={{ __html: description }}
+              ></div>
+            </Typography>
+            <Typography
+              variant="subtitle2"
+              className="vidDetails"
+              color="#aaa"
+              fontWeight="semibold"
+              sx={{
+                textOverflow: "ellipsis",
+              }}
+            >
+              {video?.snippet?.channelTitle.slice(0, 40) || demoChannelUrl}{" "}
+              &nbsp;
+              {converter(stats?.items[0]?.statistics?.subscriberCount)} &nbsp;
+              {converter(stats?.items[0]?.statistics?.viewCount)}
+              <b />
+            </Typography>
+          </Box>
+        </Link>
+      </CardContent>
+    </Card>
   );
 }

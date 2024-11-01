@@ -39,7 +39,7 @@ const Feed = () => {
           p={2}
           sx={{
             overflowY: "auto",
-            height: "87vh",
+            height: "88vh",
             width: "100%",
             flex: 2,
             background: "#ffffff1a",
@@ -58,6 +58,17 @@ const Feed = () => {
           <Suspense fallback={<VidSkeleton />}>
             <VidComponent />
           </Suspense>
+
+          {/* Loader */}
+
+          {/* <Box className="w-100 d-flex justify-content-center">
+            <div className="lds-ellipsis">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+          </Box> */}
         </Box>
       </Stack>
     </>

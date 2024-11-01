@@ -19,12 +19,11 @@ export default function App() {
   const [videos, setVideos] = useState([]);
   const [sidebar, setSidebar] = useState(true);
   const [currVid, setCurrVid] = useState("q4z7zpG9XA");
+  const [searchbar, setSearchbar] = useState(false);
   useEffect(() => {
-    fetchApi(`search?part=snippet&q=${selectedCategory}`).then(
-      (res) => {
-        setVideos(res.items);
-      }
-    );
+    fetchApi(`search?part=snippet&q=${selectedCategory}`).then((res) => {
+      setVideos(res.items);
+    });
   }, [selectedCategory]);
 
   return (
@@ -40,16 +39,11 @@ export default function App() {
             setSidebar,
             currVid,
             setCurrVid,
+            searchbar,
+            setSearchbar,
           }}
         >
-          <Box
-            m={0}
-            pb={1}
-            className="backgroundImg"
-            // sx={{
-            //   backgroundColor: "#333",
-            // }}
-          >
+          <Box m={0} pb={1} className="backgroundImg">
             <Navbar />
             <Routes>
               <Route path="/" element={<Feed />} />

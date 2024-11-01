@@ -3,6 +3,7 @@
   padding: 0px;
   list-style: none;
   border: none;
+  outline: none;
   transition: all 0.5s ease-in-out !important;
 }
 html,
@@ -12,43 +13,7 @@ body {
   box-sizing: border-box;
 }
 .backgroundImg {
-  background-image: linear-gradient(
-      324deg,
-      transparent 0%,
-      transparent 45%,
-      rgba(186, 186, 186, 0.04) 45%,
-      rgba(186, 186, 186, 0.04) 47%,
-      transparent 47%,
-      transparent 100%
-    ),
-    linear-gradient(
-      208deg,
-      transparent 0%,
-      transparent 40%,
-      rgba(186, 186, 186, 0.04) 40%,
-      rgba(186, 186, 186, 0.04) 80%,
-      transparent 80%,
-      transparent 100%
-    ),
-    linear-gradient(
-      202deg,
-      transparent 0%,
-      transparent 20%,
-      rgba(186, 186, 186, 0.04) 20%,
-      rgba(186, 186, 186, 0.04) 40%,
-      transparent 40%,
-      transparent 100%
-    ),
-    linear-gradient(
-      338deg,
-      transparent 0%,
-      transparent 10%,
-      rgba(186, 186, 186, 0.04) 10%,
-      rgba(186, 186, 186, 0.04) 72%,
-      transparent 72%,
-      transparent 100%
-    ),
-    linear-gradient(90deg, rgb(0, 0, 0), rgb(0, 0, 0));
+  background: black;
 }
 a {
   text-decoration: none;
@@ -76,24 +41,26 @@ a {
 }
 .sidebar {
   height: 90vh;
-  overflow: scroll;
+  overflow-y: scroll;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(15px);
   border-radius: 10px;
   padding: 0px 5px;
 }
-.search-bar {
+/* .search-bar {
   border: none;
   outline: none;
-  width: 350px;
-}
+} */
 
 .vidDescription {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  font-size: 14px;
+  font-size: 13px;
+}
+.vidDetails {
+  font-size: 12px !important;
 }
 .category-btn {
   font-weight: bold !important;
@@ -106,8 +73,9 @@ a {
   color: white;
   outline: none;
   border: none;
-  padding: 7px 25px;
+  padding: 7px 15px;
   margin: 10px 0px;
+  margin-right: 10px;
   border-radius: 0px 99px 99px 0px;
   transition: color 0s;
 }
@@ -116,7 +84,10 @@ a {
   background-color: #fc1503 !important;
   color: white !important;
 }
-
+.category-btn:hover {
+  z-index: 9999;
+  translate: 7px 0px;
+}
 .category-btn:hover span {
   color: white !important;
   transition: color 0.05s !important;
@@ -160,6 +131,9 @@ a {
   height: 100%;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
     rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
+.navbarIconWrapper {
+  gap: 16px;
 }
 @media screen and (max-width: 900px) {
   .categoryBar {
@@ -206,6 +180,23 @@ a {
     border-radius: 10px !important;
     padding: 0px 5px;
   }
+  .searchbarBox {
+    position: fixed;
+    inset: 0px;
+    height: 100vh;
+    width: 100vw;
+    backdrop-filter: blur(10px);
+    filter: saturate(0.75);
+  }
+  #searchBarContainer {
+    position: fixed;
+    top: 100px;
+    left: 5% !important;
+    right: 5% !important;
+  }
+  .navbarIconWrapper {
+    gap: 0px;
+  }
 }
 
 @media screen and (max-width: 800px) {
@@ -222,9 +213,9 @@ a {
   .react-player {
     height: 45vh !important;
   }
-  .search-bar {
+  /* .search-bar {
     width: 200px;
-  }
+  } */
 }
 .ytp-chrome-controls .ytp-button.ytp-youtube-button,
 .ytp-small-mode .ytp-chrome-controls .ytp-button.ytp-youtube-button,
@@ -309,4 +300,79 @@ a {
 }
 .sidebar-hidden {
   display: none;
+}
+.searchbarBox {
+  position: fixed;
+  inset: 0px;
+  height: 100%;
+  width: 100%;
+  backdrop-filter: blur(10px);
+  filter: saturate(0.75);
+  transition: all 0.5s;
+}
+#searchBarContainer {
+  position: fixed;
+  top: 150px;
+  left: 30%;
+  right: 30%;
+}
+/* Spinner Code */
+.lds-ellipsis,
+.lds-ellipsis div {
+  box-sizing: border-box;
+}
+.lds-ellipsis {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-ellipsis div {
+  position: absolute;
+  top: 33.33333px;
+  width: 13.33333px;
+  height: 13.33333px;
+  border-radius: 50%;
+  background: white;
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+.lds-ellipsis div:nth-child(1) {
+  left: 8px;
+  animation: lds-ellipsis1 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(2) {
+  left: 8px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(3) {
+  left: 32px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(4) {
+  left: 56px;
+  animation: lds-ellipsis3 0.6s infinite;
+}
+@keyframes lds-ellipsis1 {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes lds-ellipsis3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+@keyframes lds-ellipsis2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(24px, 0);
+  }
 }

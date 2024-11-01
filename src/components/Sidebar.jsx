@@ -1,5 +1,5 @@
 import { Skeleton, Stack } from "@mui/material";
-import { Category } from "@mui/icons-material";
+import { Category, Translate } from "@mui/icons-material";
 import HomeIcon from "@mui/icons-material/Home";
 import MusicNoteIcon from "@mui/icons-material/MusicNote";
 import CodeIcon from "@mui/icons-material/Code";
@@ -16,7 +16,7 @@ import DeveloperModeIcon from "@mui/icons-material/DeveloperMode";
 import SlideshowIcon from "@mui/icons-material/Slideshow";
 import { useContext } from "react";
 import { CreateContext } from "../App";
-
+import { motion } from "framer-motion";
 const Sidebar = ({ selectedCategory, setSelectedCategory }) => {
   const { sidebar } = useContext(CreateContext);
   const categories = [
@@ -38,18 +38,45 @@ const Sidebar = ({ selectedCategory, setSelectedCategory }) => {
     { id: 15, name: "Gym", icon: <FitnessCenterIcon /> },
     { id: 16, name: "Crypto", icon: <DeveloperModeIcon /> },
   ];
+  const containerVariants = {
+    hidden: { opacity: 1 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.05,
+        duration: 0.3,
+      },
+    },
+  };
+  const itemVariants = {
+    hidden: { opacity: 1, x: -250 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.01,
+      },
+    },
+  };
   return sidebar ? (
     <div className="sidebar">
-      <ul className="d-flex flex-col flex-md-wrap categoryBar ps-0">
+      <motion.ul
+        className="d-flex flex-col flex-md-wrap categoryBar ps-0"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
         {categories.map((category) => (
-          <li
+          <motion.li
             key={category.id}
             onClick={() => {
               setSelectedCategory(category.name);
             }}
+            variants={itemVariants}
             className="category-btn hvr-sweep-to-right"
             style={{
               background: category.name === selectedCategory && "#FC1503",
+              translate: category.name === selectedCategory && "5px 0px",
             }}
           >
             <span
@@ -60,9 +87,9 @@ const Sidebar = ({ selectedCategory, setSelectedCategory }) => {
               {category.icon}
             </span>
             <span className="text-nowrap">{category.name}</span>
-          </li>
+          </motion.li>
         ))}
-      </ul>
+      </motion.ul>
     </div>
   ) : (
     <></>

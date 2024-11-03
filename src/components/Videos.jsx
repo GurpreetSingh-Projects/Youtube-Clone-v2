@@ -1,6 +1,6 @@
-import { Box, Stack } from "@mui/material";
-import React, { createContext, useContext } from "react";
-import { ChannelCard, ChannelDetail, VideoCard } from "./index";
+import { Box } from "@mui/material";
+import { useContext } from "react";
+import { ChannelCard, VideoCard } from "./index";
 import { CreateContext } from "../App";
 import { motion } from "framer-motion";
 const Videos = ({ suggested }) => {
@@ -8,19 +8,30 @@ const Videos = ({ suggested }) => {
   // console.log(videos);
 
   const slideUp = {
-    hidden: { opacity: 1, y: -100 },
+    hidden: { opacity: 0 },
     visible: {
+      scale: 1,
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        duration: 0.3,
+      },
+    },
+  };
+  const itemVariants = {
+    hidden: { opacity: 0, scale: 0.8, y: 100 },
+    visible: {
+      scale: 1,
       opacity: 1,
       y: 0,
       transition: {
-        staggerChildren: 0.05,
-        duration: 0.3,
+        duration: 0.5,
       },
     },
   };
   return suggested ? (
     <motion.div
-      inital="hidden"
+      initial="hidden"
       animate="visible"
       variants={slideUp}
       className="suggestedvideos"
@@ -33,16 +44,16 @@ const Videos = ({ suggested }) => {
     </motion.div>
   ) : (
     <motion.div
-      inital="hidden"
+      initial="hidden"
       animate="visible"
-      variant="slideUp"
+      variants={slideUp}
       className="videos"
     >
       {videos.map((item, idx) => (
-        <Box className="videoCard" key={idx}>
+        <motion.div variants={itemVariants} className="videoCard" key={idx}>
           {item.id.videoId && <VideoCard video={item} />}
           {item.id.channelId && <ChannelCard channelDetail={item} />}
-        </Box>
+        </motion.div>
       ))}
     </motion.div>
   );

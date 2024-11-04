@@ -70,9 +70,12 @@ const Navbar = () => {
           </Grow>
         </Link>
       </Box>
-      <div className="col-6">
-        <div className="text-white fs-6 text-center fst-italic d-none d-md-block w-100">
-          Search for &quot;
+      <div className="col-6 d-flex">
+        <div className="col-5 text-white fs-6 fst-italic d-none d-md-block text-end">
+          Search for&nbsp;
+        </div>
+        <div className="col-7 text-white fs-6 fst-italic d-none d-md-block">
+          &quot;
           <span>
             <Typewriter
               words={[

@@ -1,5 +1,5 @@
 import { Box, Stack, Typography } from "@mui/material";
-import { SearchFeed, Searchbar, Sidebar, VideoDetail } from "./index";
+import { SearchFeed, Searchbar, Sidebar, VideoDetail, Videos } from "./index";
 import { fetchApi } from "../utils/fetchApi";
 import React, {
   Suspense,
@@ -9,9 +9,9 @@ import React, {
   createContext,
   useContext,
 } from "react";
-import VidSkeleton from "./VidSkeleton";
+// import VidSkeleton from "./VidSkeleton";
 import { CreateContext } from "../App";
-const VidComponent = lazy(() => import("../components/Videos"));
+// const VidComponent = lazy(() => import("../components/Videos"));
 const Feed = () => {
   var { selectedCategory, setSelectedCategory } = useContext(CreateContext);
 
@@ -55,9 +55,10 @@ const Feed = () => {
             {selectedCategory} <span style={{ color: "#f31503" }}>videos</span>
           </Typography>
 
-          <Suspense fallback={<VidSkeleton />}>
-            <VidComponent />
-          </Suspense>
+          {/* <Suspense fallback={<VidSkeleton />}> */}
+          {/* <VidComponent /> */}
+          {/* </Suspense> */}
+          <Videos />
 
           {/* Loader */}
 

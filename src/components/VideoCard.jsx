@@ -5,15 +5,12 @@ import {
   CardContent,
   CardMedia,
   Box,
-  Zoom,
 } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import { demoChannelUrl } from "../utils/constants";
 import { useState, useEffect, createContext, useContext } from "react";
 import { fetchApi } from "../utils/fetchApi";
 import { converter } from "../utils/constants";
-
-import VidSkeleton from "./VidSkeleton";
 import { CreateContext } from "../App";
 
 export const VidStats = createContext();

@@ -8,13 +8,12 @@ const Videos = ({ suggested }) => {
   // console.log(videos);
 
   const slideUp = {
-    hidden: { opacity: 0 },
+    hidden: { opacity: 0.5 },
     visible: {
       scale: 1,
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
-        duration: 0.3,
+        staggerChildren: 0.15,
       },
     },
   };

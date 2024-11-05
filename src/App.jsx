@@ -11,6 +11,7 @@ import {
 import Footer from "./components/Footer";
 import { createContext, useEffect, useState } from "react";
 import { fetchApi } from "./utils/fetchApi";
+import { Counter } from "./features/counter/Counter";
 export const CreateContext = createContext();
 
 export default function App() {
@@ -28,6 +29,7 @@ export default function App() {
 
   return (
     <>
+      {/* <Counter /> */}
       <BrowserRouter>
         <CreateContext.Provider
           value={{
@@ -47,6 +49,7 @@ export default function App() {
             <Navbar />
             <Routes>
               <Route path="/" element={<Feed />} />
+              {/* <Route path="/*" element={<Feed />} /> */}
               <Route exact path="/video/:id" element={<VideoDetail />} />
               <Route exact path="/channel/:id" element={<ChannelDetail />} />
               <Route

@@ -10,9 +10,16 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Search } from "@mui/icons-material";
 import { AnimatePresence, motion } from "framer-motion";
 import { Typewriter } from "react-simple-typewriter";
+import { useDispatch, useSelector } from "react-redux";
+import { searchbarToggle } from "../features/Searchbar/searchbarSlice";
 
 const Navbar = () => {
-  const { searchbar, setSearchbar, setSelectedCategory, sidebar, setSidebar } =
+  const searchbar = useSelector((state) => state.searchbar);
+
+  console.log(searchbar);
+  const dispatch = useDispatch();
+
+  const { setSelectedCategory, sidebar, setSidebar } =
     useContext(CreateContext);
 
   function resetState() {
@@ -42,7 +49,7 @@ const Navbar = () => {
   };
 
   function toggleSearch() {
-    setSearchbar(!searchbar);
+    dispatch(searchbarToggle());
   }
 
   return (

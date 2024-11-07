@@ -4,7 +4,8 @@
   list-style: none;
   border: none;
   outline: none;
-  transition: all 0.5s ease-in-out !important;
+  /* transition: all 0.5s ease-in-out !important; */
+  transition: none;
 }
 html,
 body {
@@ -46,6 +47,10 @@ a {
   backdrop-filter: blur(15px);
   border-radius: 10px;
   padding: 0px 5px;
+  width: 250px;
+}
+.sidebar * {
+  transition: all 0.6s ease-in-out !important;
 }
 /* .search-bar {
   border: none;

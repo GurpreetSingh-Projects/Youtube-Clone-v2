@@ -10,11 +10,12 @@ import React, {
   useContext,
 } from "react";
 // import VidSkeleton from "./VidSkeleton";
-import { CreateContext } from "../App";
+import { useSelector } from "react-redux";
 // const VidComponent = lazy(() => import("../components/Videos"));
-const Feed = () => {
-  var { selectedCategory, setSelectedCategory } = useContext(CreateContext);
 
+const Feed = () => {
+  // var { selectedCategory, setSelectedCategory } = useContext(CreateContext);
+  const category = useSelector((state) => state.category.selectedCategory);
   return (
     <>
       <Stack
@@ -30,10 +31,7 @@ const Feed = () => {
             },
           }}
         >
-          <Sidebar
-            selectedCategory={selectedCategory}
-            setSelectedCategory={setSelectedCategory}
-          />
+          <Sidebar />
         </Box>
         <Box
           p={2}
@@ -52,7 +50,8 @@ const Feed = () => {
             mb={2}
             sx={{ color: "white" }}
           >
-            {selectedCategory} <span style={{ color: "#f31503" }}>videos</span>
+            {category}&nbsp;
+            <span style={{ color: "#f31503" }}>videos</span>
           </Typography>
 
           {/* <Suspense fallback={<VidSkeleton />}> */}

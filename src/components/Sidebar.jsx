@@ -1,5 +1,5 @@
 import { Skeleton, Stack } from "@mui/material";
-import { Category, Translate } from "@mui/icons-material";
+import { Category, Translate, Whatshot } from "@mui/icons-material";
 import HomeIcon from "@mui/icons-material/Home";
 import MusicNoteIcon from "@mui/icons-material/MusicNote";
 import CodeIcon from "@mui/icons-material/Code";
@@ -17,11 +17,13 @@ import SlideshowIcon from "@mui/icons-material/Slideshow";
 import { useContext } from "react";
 import { CreateContext } from "../App";
 import { motion } from "framer-motion";
-const Sidebar = ({ selectedCategory, setSelectedCategory }) => {
+import { useDispatch, useSelector } from "react-redux";
+import { setCategory } from "../features/Category/categorySlice";
+const Sidebar = () => {
   const { sidebar } = useContext(CreateContext);
   const categories = [
-    { id: 0, name: "New", icon: <HomeIcon /> },
-    { id: 1, name: "Daily Dose of Internet", icon: <SlideshowIcon /> },
+    { id: 0, name: "Trending", icon: <Whatshot /> },
+    { id: 1, name: "New", icon: <HomeIcon /> },
     { id: 2, name: "Coding", icon: <CodeIcon /> },
     { id: 3, name: "ReactJS", icon: <CodeIcon /> },
     { id: 4, name: "NextJS", icon: <CodeIcon /> },
@@ -58,6 +60,13 @@ const Sidebar = ({ selectedCategory, setSelectedCategory }) => {
       },
     },
   };
+  function changeCategory(category) {
+    dispatch(setCategory(category));
+  }
+  const dispatch = useDispatch();
+  const activeCategory = useSelector(
+    (state) => state.category.selectedCategory
+  );
   return sidebar ? (
     <div className="sidebar">
       <motion.ul
@@ -70,13 +79,13 @@ const Sidebar = ({ selectedCategory, setSelectedCategory }) => {
           <motion.li
             key={category.id}
             onClick={() => {
-              setSelectedCategory(category.name);
+              changeCategory(category.name);
             }}
             variants={itemVariants}
-            className="category-btn hvr-sweep-to-right"
+            className="category-btn hvr-sweep-to-right d-flex align-items-center"
             style={{
-              background: category.name === selectedCategory && "#FC1503",
-              translate: category.name === selectedCategory && "5px 0px",
+              background: category.name === activeCategory && "#FC1503",
+              translate: category.name === activeCategory && "5px 0px",
             }}
           >
             <span

@@ -8,22 +8,20 @@ import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Search } from "@mui/icons-material";
+import MenuIcon from "@mui/icons-material/Menu";
 import { AnimatePresence, motion } from "framer-motion";
 import { Typewriter } from "react-simple-typewriter";
 import { useDispatch, useSelector } from "react-redux";
 import { searchbarToggle } from "../features/Searchbar/searchbarSlice";
+import { setCategory } from "../features/Category/categorySlice";
 
 const Navbar = () => {
-  const searchbar = useSelector((state) => state.searchbar);
-
-  console.log(searchbar);
   const dispatch = useDispatch();
 
-  const { setSelectedCategory, sidebar, setSidebar } =
-    useContext(CreateContext);
+  const { sidebar, setSidebar } = useContext(CreateContext);
 
   function resetState() {
-    setSelectedCategory("New");
+    dispatch(setCategory("Trending"));
   }
 
   function toggleSidebar() {
@@ -51,7 +49,7 @@ const Navbar = () => {
   function toggleSearch() {
     dispatch(searchbarToggle());
   }
-
+  const searchbar = useSelector((state) => state.searchbar);
   return (
     <Stack
       className="px-3 py-2"
@@ -75,6 +73,9 @@ const Navbar = () => {
           <Grow in={true}>
             <img className="logoImg" src={logo} alt="logo" />
           </Grow>
+          <IconButton className="text-white">
+            <MenuIcon />
+          </IconButton>
         </Link>
       </Box>
       <div className="col-6 d-flex">
@@ -126,7 +127,7 @@ const Navbar = () => {
       <Box className="col-3">
         <Stack
           direction="row"
-          spacing={2} // Added spacing for better alignment
+          spacing={2}
           className="d-flex align-items-center justify-content-end"
         >
           <Grow in={true}>

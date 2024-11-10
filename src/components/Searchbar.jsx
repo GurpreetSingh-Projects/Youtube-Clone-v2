@@ -1,12 +1,13 @@
 import { Paper, IconButton, Box, Grow } from "@mui/material";
 import { Close, Search } from "@mui/icons-material";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { CreateContext } from "../App";
+import { useDispatch } from "react-redux";
+import { searchbarToggle } from "../features/Searchbar/searchbarSlice";
 
 export default function Searchbar() {
-  const { searchbar, setSearchbar } = useContext(CreateContext);
   const [searchTerm, setSearchTerm] = useState("");
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -16,7 +17,7 @@ export default function Searchbar() {
     }
   };
   function toggleSearch() {
-    setSearchbar(!searchbar);
+    dispatch(searchbarToggle());
   }
 
   return (

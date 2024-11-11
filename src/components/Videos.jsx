@@ -1,12 +1,9 @@
 import { Box } from "@mui/material";
-import { useContext } from "react";
 import { ChannelCard, VideoCard } from "./index";
-import { CreateContext } from "../App";
 import { motion } from "framer-motion";
+import { useSelector } from "react-redux";
 const Videos = ({ suggested }) => {
-  const { videos } = useContext(CreateContext);
-  // console.log(videos);
-
+  const videos = useSelector((state) => state.videos.videos);
   const slideUp = {
     hidden: { opacity: 0.5 },
     visible: {

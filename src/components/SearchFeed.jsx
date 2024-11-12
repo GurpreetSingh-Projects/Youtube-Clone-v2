@@ -4,14 +4,16 @@ import { fetchApi } from "../utils/fetchApi";
 import { createContext, useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { CreateContext } from "../App";
+import { useDispatch } from "react-redux";
+import { setVideos } from "../features/Videos/videoSlice";
 export const SearchContext = createContext();
 
 const SearchFeed = () => {
   const { searchTerm } = useParams();
-  const { setVideos } = useContext(CreateContext);
+  const dispatch = useDispatch();
   useEffect(() => {
     fetchApi(`search?part=snippet&q=${searchTerm}`).then((res) => {
-      setVideos(res.items);
+      dispatch(setVideos(res.items));
     });
   }, [searchTerm]);
 

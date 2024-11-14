@@ -1,11 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import {
-  Typography,
-  Card,
-  CardContent,
-  CardMedia,
-  Box,
-} from "@mui/material";
+import { Typography, Card, CardContent, CardMedia, Box } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import { demoChannelUrl } from "../utils/constants";
 import { useState, useEffect, createContext, useContext } from "react";

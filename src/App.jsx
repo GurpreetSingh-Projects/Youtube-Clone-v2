@@ -11,19 +11,21 @@ import {
 import Footer from "./components/Footer";
 import { createContext, useEffect, useState } from "react";
 import { fetchApi } from "./utils/fetchApi";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setVideos } from "./features/Videos/videoSlice";
 export const CreateContext = createContext();
 
 export default function App() {
-  const [videos, setVideos] = useState([]);
   const [sidebar, setSidebar] = useState(true);
   const [currVid, setCurrVid] = useState("q4z7zpG9XA");
   const category = useSelector((state) => state.category.selectedCategory);
   console.log(category);
-
+  const dispatch = useDispatch();
   useEffect(() => {
     fetchApi(`search?part=snippet&q=${category}`).then((res) => {
-      setVideos(res.items);
+      // setVideos(res.items);
+      dispatch(setVideos(res.items));
+      console.log(res.items);
     });
   }, [category]);
 
@@ -33,8 +35,6 @@ export default function App() {
       <BrowserRouter>
         <CreateContext.Provider
           value={{
-            videos,
-            setVideos,
             sidebar,
             setSidebar,
             currVid,
@@ -45,7 +45,7 @@ export default function App() {
             <Navbar />
             <Routes>
               <Route path="/" element={<Feed />} />
-              {/* <Route path="/*" element={<Feed />} /> */}
+              <Route path="/*" element={<Feed />} />
               <Route exact path="/video/:id" element={<VideoDetail />} />
               <Route exact path="/channel/:id" element={<ChannelDetail />} />
               <Route

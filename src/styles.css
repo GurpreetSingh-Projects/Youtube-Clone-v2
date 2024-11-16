@@ -140,7 +140,15 @@ a {
 .navbarIconWrapper {
   gap: 16px;
 }
+.cardImg {
+  object-fit: cover;
+  height: 180px;
+}
 @media screen and (max-width: 900px) {
+  .cardImg {
+    object-fit: cover;
+    height: 200px;
+  }
   .categoryBar {
     flex-direction: row !important;
   }
@@ -184,6 +192,8 @@ a {
     backdrop-filter: blur(15px);
     border-radius: 10px !important;
     padding: 0px 5px;
+    font-size: 12px;
+    width: auto;
   }
   .searchbarBox {
     position: fixed;

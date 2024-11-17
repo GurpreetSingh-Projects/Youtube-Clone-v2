@@ -37,7 +37,7 @@ export default function Searchbar() {
           <Search />
         </IconButton>
         <input
-          className="search-bar col-10"
+          className="search-bar col-9 col-md-10"
           placeholder="Search..."
           onChange={(e) => {
             setSearchTerm(e.target.value);

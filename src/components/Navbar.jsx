@@ -52,7 +52,7 @@ const Navbar = () => {
   const searchbar = useSelector((state) => state.searchbar);
   return (
     <Stack
-      className="px-3 py-2"
+      className="px-1 py-2 px-md-3 py-md-2"
       direction="row"
       alignItems="center"
       sx={{
@@ -73,7 +73,7 @@ const Navbar = () => {
           <Grow in={true}>
             <img className="logoImg" src={logo} alt="logo" />
           </Grow>
-          <IconButton className="text-white">
+          <IconButton className="text-white d-none">
             <MenuIcon />
           </IconButton>
         </Link>
@@ -127,8 +127,7 @@ const Navbar = () => {
       <Box className="col-3">
         <Stack
           direction="row"
-          spacing={2}
-          className="d-flex align-items-center justify-content-end"
+          className="d-flex align-items-center justify-content-end gap-0 gap-md-3"
         >
           <Grow in={true}>
             <IconButton className="text-white" onClick={toggleSearch}>

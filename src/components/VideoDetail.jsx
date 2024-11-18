@@ -40,14 +40,14 @@ function VideoDetail() {
   }
   return (
     <Box
-      className="vidDetail d-flex"
+      className="vidDetail d-flex flex-wrap flex-column flex-md-row"
       sx={{ background: "inherit", position: "sticky" }}
     >
-      <Stack className="col-9" direction={{ xs: "column", md: "row" }}>
+      <Stack className="col-md-9" direction={{ xs: "column", md: "row" }}>
         <Box flex={1} className="mb-5">
           <Box sx={{ width: "100%", position: "sticky", top: "80px" }}>
             <ReactPlayer
-              className="react-player"
+              className="react-player mb-3 mb-md-0"
               url={`https://www.youtube.com/watch?v=${id}`}
               playing={true}
               muted
@@ -55,18 +55,16 @@ function VideoDetail() {
             />
 
             <Typography
-              color="white"
               variant="h6"
               fontWeight="bold"
-              px={3}
-              mt={3}
+              className=" px-1 mt-3 px-md-3 mt-md-3 text-white"
             >
               {currVidDetails?.snippet?.localized?.title}
             </Typography>
             <div
               color="grey"
               id="vidDescription"
-              className="vidDescription text-white px-4 mt-3"
+              className="vidDescription text-white px-1 px-md-4 mt-0 mt-md-3"
               onClick={extendDescription}
               style={{ cursor: "pointer" }}
             >
@@ -75,16 +73,16 @@ function VideoDetail() {
 
             <Stack
               direction="row"
-              className="d-flex align-items-center w-100 justify-content-between px-4 mt-3"
+              className="d-flex align-items-center w-100 justify-content-between px-2 px-md-4 mt-2 mt-md-3"
             >
               <Link
-                className="d-flex flex-wrap align-items-center gap-2"
+                className="d-flex align-items-center gap-1 gap-md-2 mt-2 mt-md-0"
                 to={`/channel/${currVidDetails?.snippet?.channelId}`}
               >
                 <Avatar
                   src={currVidDetails?.snippet?.thumbnails?.default?.url}
                 ></Avatar>
-                <Typography sx={{ sm: "subtitle1", md: "6" }} color="#fff">
+                <Typography sx={{ sm: "6", md: "6" }} color="#fff">
                   {currVidDetails?.snippet?.channelTitle}
                 </Typography>
               </Link>
@@ -135,7 +133,7 @@ function VideoDetail() {
           </Box>
         </Box>
       </Stack>
-      <Stack className="col-3" direction="column">
+      <Stack className="col-md-3" direction="column">
         <Videos suggested="true" />
       </Stack>
     </Box>

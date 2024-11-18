@@ -40,9 +40,9 @@ export default function VideoCard({ video, channelDetail }) {
         <CardMedia
           component="img"
           loading="lazy"
+          className="cardImg"
           image={video?.snippet?.thumbnails?.medium?.url}
           alt={video?.snippet?.title}
-          sx={{ objectFit: "cover", height: "180px" }}
         />
       </Link>
       <CardContent

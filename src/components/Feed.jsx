@@ -53,6 +53,7 @@ const Feed = () => {
             {category}&nbsp;
             <span style={{ color: "#f31503" }}>videos</span>
           </Typography>
+          <Sidebar class="sidebarTopModification" reverse />
 
           {/* <Suspense fallback={<VidSkeleton />}> */}
           {/* <VidComponent /> */}

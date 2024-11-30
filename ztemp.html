@@ -30,8 +30,8 @@
       }
       .notebook {
         position: relative;
-        width: 60vw;
-        height: 80vh;
+        width: 60vw; /* Adjust width as needed */
+        height: 80vh; /* Adjust height as needed */
         perspective: 1500px;
         background: #f0f0f0;
       }
@@ -73,24 +73,30 @@
         height: 100%;
         overflow: hidden;
         background: #f0f0f0;
+        display: none;
       }
       .page-container.open {
+        display: block;
         transform: rotateY(0deg);
       }
       .page-wrapper {
         display: flex;
+        flex-direction: row;
         transition: transform 1s;
         width: 100%;
-        height: calc(100% - 50px);
+        height: calc(100% - 50px); /* Adjust based on control height */
       }
+
       .page {
         width: 100%;
         height: 100%;
+        overflow: hidden;
+      }
+
+      .page:not(.active) {
         display: none;
       }
-      .page.active {
-        display: block;
-      }
+
       .quill-container {
         height: 100%;
         padding: 20px;
@@ -128,6 +134,9 @@
       .pagination-controls button i {
         font-size: 16px;
       }
+      #page-table {
+        width: 100%;
+      }
     </style>
   </head>
   <body>
@@ -152,11 +161,12 @@
       $(document).ready(function () {
         let pageCount = 0;
         const quillEditors = [];
-        const pageWrapper = $("#page-wrapper");
+        const dataTable = $("#page-table").DataTable({
+          columns: [{ data: "pageNumber" }, { data: "actions" }],
+        });
 
-        function createPage() {
-          const pageNumber = ++pageCount;
-          const pageDiv = $('<div class="page active"></div>'); // New page with 'active' class
+        function createPage(pageNumber) {
+          const pageDiv = $('<div class="page"></div>');
           const quillContainer = $(
             '<div class="quill-container"></div>'
           ).appendTo(pageDiv);
@@ -175,24 +185,42 @@
           });
 
           quillEditors.push(quillEditor);
-          pageWrapper.append(pageDiv);
+          dataTable.row
+            .add({
+              pageNumber: pageNumber,
+              actions: `<button class="edit-page" data-index="${
+                pageNumber - 1
+              }">Edit</button>`,
+            })
+            .draw();
 
-          // Manage active state for pages
-          $(".page").removeClass("active"); // Remove active class from other pages
-          pageDiv.addClass("active"); // Add active class to the new page
+          // Add new page to the wrapper
+          $("#page-wrapper").append(pageDiv);
 
           return pageDiv;
         }
 
         // Initialize the first page
-        createPage();
+        createPage(++pageCount).addClass("active");
 
         // Add Page functionality
         $("#add-page").on("click", function () {
-          createPage();
+          const newPageNumber = ++pageCount;
+          const newPage = createPage(newPageNumber);
+
+          // Remove the active class from all pages and add it to the new page
+          $(".page").removeClass("active");
+          newPage.addClass("active");
+
+          // Update the wrapper to scroll to the new page
+          const pageWidth = $("#page-wrapper .page").outerWidth();
+          $("#page-wrapper").css(
+            "transform",
+            `translateX(-${pageWidth * (pageCount - 1)}px)`
+          );
         });
 
-        // Handle page navigation
+        // Handle previous page navigation
         $("#prev-page").on("click", function () {
           const activePage = $(".page.active");
           const prevPage = activePage.prev(".page");
@@ -200,13 +228,14 @@
             const pageWidth = activePage.outerWidth();
             activePage.removeClass("active");
             prevPage.addClass("active");
-            pageWrapper.css(
+            $("#page-wrapper").css(
               "transform",
               `translateX(-${pageWidth * prevPage.index()}px)`
             );
           }
         });
 
+        // Handle next page navigation
         $("#next-page").on("click", function () {
           const activePage = $(".page.active");
           const nextPage = activePage.next(".page");
@@ -214,7 +243,7 @@
             const pageWidth = activePage.outerWidth();
             activePage.removeClass("active");
             nextPage.addClass("active");
-            pageWrapper.css(
+            $("#page-wrapper").css(
               "transform",
               `translateX(-${pageWidth * nextPage.index()}px)`
             );

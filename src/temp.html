@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Custom Toggle Button</title>
+    <style>
+      .toggle-button {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 30px;
+      }
+
+      .toggle-checkbox {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .toggle-label {
+        cursor: pointer;
+        display: block;
+        width: 100%;
+        height: 100%;
+        background-color: #ccc;
+        border-radius: 30px;
+        position: relative;
+        transition: background-color 0.3s;
+      }
+
+      .toggle-slider {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        border-radius: 50%;
+        background-color: white;
+        top: 2px;
+        left: 2px;
+        transition: transform 0.3s;
+      }
+
+      .toggle-checkbox:checked + .toggle-label {
+        background-color: orangered;
+      }
+
+      .toggle-checkbox:checked + .toggle-label .toggle-slider {
+        transform: translateX(30px);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="toggle-button">
+      <input type="checkbox" id="toggle" class="toggle-checkbox" />
+      <label for="toggle" class="toggle-label">
+        <span class="toggle-slider"></span>
+      </label>
+    </div>
+  </body>
+</html>

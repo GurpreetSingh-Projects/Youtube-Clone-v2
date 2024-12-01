@@ -1,6 +1,11 @@
 {
   "routes": [
     {
+      "src": "/(.*\\.(css|js|png|jpg|jpeg|gif|svg))",
+      "dest": "/$1",
+      "status": 200
+    },
+    {
       "src": "/[^.]+",
       "dest": "/",
       "status": 200

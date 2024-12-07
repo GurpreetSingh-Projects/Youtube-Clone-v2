@@ -13,22 +13,27 @@ import { createContext, useEffect, useState } from "react";
 import { fetchApi } from "./utils/fetchApi";
 import { useDispatch, useSelector } from "react-redux";
 import { setVideos } from "./features/Videos/videoSlice";
+import { setVidIds } from "./features/VidIds/vidIdsSlice";
 export const CreateContext = createContext();
 
 export default function App() {
   const [sidebar, setSidebar] = useState(true);
   const [currVid, setCurrVid] = useState("q4z7zpG9XA");
   const category = useSelector((state) => state.category.selectedCategory);
-  console.log(category);
+  const vidIds = useSelector((state) => state.videos.vidIds);
+  // console.log(category);
   const dispatch = useDispatch();
   useEffect(() => {
     fetchApi(`search?part=snippet&q=${category}`).then((res) => {
       // setVideos(res.items);
       dispatch(setVideos(res.items));
-      console.log(res.items);
+      dispatch(setVidIds(res.items.map((item) => item.id.videoId)));
+      console.log("videos: " + JSON.stringify(res.items));
     });
   }, [category]);
-
+  useEffect(() => {
+    console.log("Video Ids:", vidIds);
+  }, [vidIds]); // log when vidIds change
   return (
     <>
       {/* <Counter /> */}

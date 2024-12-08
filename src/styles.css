@@ -59,10 +59,10 @@ a {
 
 .vidDescription {
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  font-size: 13px;
+  font-size: 14px;
 }
 .vidDetails {
   font-size: 12px !important;

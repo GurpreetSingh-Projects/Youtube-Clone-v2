@@ -22,7 +22,7 @@ import { setCategory } from "../features/Category/categorySlice";
 const Sidebar = () => {
   const { sidebar } = useContext(CreateContext);
   const categories = [
-    { id: 0, name: "Trending", icon: <Whatshot /> },
+    { id: 0, name: "Latest Topics", icon: <Whatshot /> },
     { id: 1, name: "New", icon: <HomeIcon /> },
     { id: 2, name: "Coding", icon: <CodeIcon /> },
     { id: 3, name: "ReactJS", icon: <CodeIcon /> },

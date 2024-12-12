@@ -6,7 +6,7 @@ export const videoSlice = createSlice({
   },
   reducers: {
     setVideos: (state, action) => {
-      state.videos = [...action.payload, ...state.videos];
+      state.videos = action.payload;
     },
   },
 });

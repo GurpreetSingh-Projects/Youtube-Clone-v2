@@ -6,6 +6,7 @@ import { useState, useEffect, createContext, useContext } from "react";
 import { fetchApi } from "../utils/fetchApi";
 import { converter } from "../utils/constants";
 import { CreateContext } from "../App";
+import moment from "moment";
 
 export const VidStats = createContext();
 
@@ -76,18 +77,23 @@ export default function VideoCard({ video, channelDetail }) {
             </Typography>
             <Typography
               variant="subtitle2"
-              className="vidDetails"
+              className="vidDetails pt-1"
               color="#aaa"
               fontWeight="semibold"
               sx={{
                 textOverflow: "ellipsis",
               }}
             >
-              {video?.snippet?.channelTitle.slice(0, 40) || demoChannelUrl}{" "}
+              {video?.snippet?.channelTitle.slice(0, 40) || demoChannelUrl}
               &nbsp;
               {converter(stats?.items[0]?.statistics?.subscriberCount)} &nbsp;
-              {converter(stats?.items[0]?.statistics?.viewCount)}
-              <b />
+              {/* {converter(stats?.items[0]?.statistics?.viewCount)} */}
+              <br />
+              {stats?.items[0]?.snippet?.publishedAt}
+              {moment(
+                stats?.items[0]?.snippet?.publishedAt,
+                "YYYYMMDD"
+              ).fromNow()}
             </Typography>
           </Box>
         </Link>

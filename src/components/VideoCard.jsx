@@ -89,7 +89,7 @@ export default function VideoCard({ video, channelDetail }) {
               {converter(stats?.items[0]?.statistics?.subscriberCount)} &nbsp;
               {/* {converter(stats?.items[0]?.statistics?.viewCount)} */}
               <br />
-              {stats?.items[0]?.snippet?.publishedAt}
+              {/* {stats?.items[0]?.snippet?.publishedAt} */}
               {moment(
                 stats?.items[0]?.snippet?.publishedAt,
                 "YYYYMMDD"

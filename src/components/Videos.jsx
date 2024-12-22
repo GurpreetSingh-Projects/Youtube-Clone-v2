@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 const Videos = ({ suggested }) => {
   const videos = useSelector((state) => state.videos.videos);
+
+  // console.log("Videos= " + JSON.stringify(videos));
   const slideUp = {
     hidden: { opacity: 0.5 },
     visible: {
@@ -34,7 +36,7 @@ const Videos = ({ suggested }) => {
     >
       {videos.map((item, idx) => (
         <Box className="videoCard" key={idx}>
-          {item.id.videoId && <VideoCard video={item} />}
+          {item.id.videoId && <VideoCard video={(item, counter)} />}
         </Box>
       ))}
     </motion.div>
@@ -45,12 +47,14 @@ const Videos = ({ suggested }) => {
       variants={slideUp}
       className="videos"
     >
-      {videos.map((item, idx) => (
-        <motion.div variants={itemVariants} className="videoCard" key={idx}>
-          {item.id.videoId && <VideoCard video={item} />}
-          {item.id.channelId && <ChannelCard channelDetail={item} />}
-        </motion.div>
-      ))}
+      {videos.items
+        ? videos.items.map((item, idx) => (
+            <motion.div variants={itemVariants} className="videoCard" key={idx}>
+              {item.id && <VideoCard video={item} />}
+              {item.id.channelId && <ChannelCard channelDetail={item} />}
+            </motion.div>
+          ))
+        : "Loading..."}
     </motion.div>
   );
 };

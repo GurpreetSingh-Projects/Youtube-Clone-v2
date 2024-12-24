@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export const vidIdsSlice = createSlice({
-  name: "videos",
+  name: "vidIds",
   initialState: {
     vidIds: [],
   },

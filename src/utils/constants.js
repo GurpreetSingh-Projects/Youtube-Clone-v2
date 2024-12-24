@@ -22,7 +22,7 @@ export const demoProfilePicture =
   "http://dergipark.org.tr/assets/app/images/buddy_sample.png";
 
 export function converter(val) {
-  console.log(val);
+  // console.log(val);
   val = parseInt(val);
   if (val >= 1000 && val < 1000000) {
     val /= 1000;

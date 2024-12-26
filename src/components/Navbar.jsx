@@ -21,7 +21,7 @@ const Navbar = () => {
   const { sidebar, setSidebar } = useContext(CreateContext);
 
   function resetState() {
-    dispatch(setCategory("Trending"));
+    dispatch(setCategory(state.category.initialState));
   }
 
   function toggleSidebar() {

@@ -106,13 +106,9 @@ export default function App() {
             <Routes>
               <Route path="/" element={<Feed />} />
               <Route path="/*" element={<Feed />} />
-              <Route exact path="/video/:id" element={<VideoDetail />} />
-              <Route exact path="/channel/:id" element={<ChannelDetail />} />
-              <Route
-                exact
-                path="/search/:searchTerm"
-                element={<SearchFeed />}
-              />
+              <Route path="/video/:id" element={<VideoDetail />} />
+              <Route path="/channel/:id" element={<ChannelDetail />} />
+              <Route path="/search/:searchTerm" element={<SearchFeed />} />
             </Routes>
             <Footer />
           </Box>

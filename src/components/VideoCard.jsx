@@ -19,9 +19,9 @@ export default function VideoCard({ video }) {
     // state.search.search.items.find(
     //   (item) => item.snippet.channelId == currVidId
     // )
-    state.channels.channels.items.find(
-      (item) => item.id == video.snippet.channelId
-    )
+    state.channels.channels.items.find((item) => {
+      return item.id == video.snippet.channelId;
+    })
   );
 
   return (
@@ -85,8 +85,7 @@ export default function VideoCard({ video }) {
               {/* {converter(video?.statistics?.viewCount)} */}
               <br />
               <span className="text-capitalize">
-              {moment(video?.snippet?.publishedAt, "YYYYMMDD").fromNow()}
-
+                {moment(video?.snippet?.publishedAt, "YYYYMMDD").fromNow()}
               </span>
             </Typography>
           </Box>

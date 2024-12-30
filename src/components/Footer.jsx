@@ -10,7 +10,8 @@ const Footer = () => {
       sx={{
         mt: 1.5,
         color: "white",
-        background: "black",
+        background: "rgba(0,0,0,0.5)",
+        backdropFilter: "blur(5px)",
         position: "fixed",
         bottom: 0,
       }}

@@ -762,7 +762,6 @@ a {
 @media screen and (max-width: 900px) {
   .cardImg {
     object-fit: cover;
-    height: 10px;
   }
   .containerNew {
     padding: 0px;

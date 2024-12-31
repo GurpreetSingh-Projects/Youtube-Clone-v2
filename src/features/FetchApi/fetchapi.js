@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 const API_KEY = import.meta.env.VITE_API_KEY;
-const results = 6;
+const results = 1;
 
 export const youtubeApi = createApi({
   reducerPath: "youtubeApi",
@@ -29,7 +29,7 @@ export const youtubeApi = createApi({
     }),
     getChannelDetails: builder.query({
       query: (channelIds) => ({
-        url: `channels?part=snippet&id=${channelIds}&key=${API_KEY}`,
+        url: `channels?part=snippet%2Cstatistics%2CbrandingSettings&id=${channelIds}&key=${API_KEY}`,
         method: "GET",
       }),
     }),

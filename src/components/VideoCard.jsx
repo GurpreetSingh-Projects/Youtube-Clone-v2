@@ -21,7 +21,7 @@ export default function VideoCard({ video }) {
       )
     );
   } catch (error) {
-    console.log("Error in currVidDetails find");
+    console.log("Error in currVidDetails .find logic");
   }
 
   return (

@@ -62,7 +62,7 @@ export default function VideoCard({ video }) {
             sx={{ width: 40, height: 40, marginRight: 2 }}
           />
         </Link>
-        <Link to={`/video/${video?.id?.videoId}`}>
+        <Link to={`/video/${video?.id}`}>
           <Box className="">
             <Typography variant="subtitle1" fontWeight="bold" color="white">
               <div

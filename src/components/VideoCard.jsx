@@ -13,16 +13,19 @@ export const VidStats = createContext();
 export default function VideoCard({ video }) {
   const description = video.snippet.title;
   const navigate = useNavigate();
+  const channelDetails = useSelector((state) => state.channels.channels);
+  // alert(JSON.stringify(channelDetails));
   const { currVid, setCurrVid } = useState([]);
   const currVidId = useSelector((state) => state.channels.channels);
-  const currVidDetails = useSelector((state) =>
-    // state.search.search.items.find(
-    //   (item) => item.snippet.channelId == currVidId
-    // )
-    state.channels.channels.items.find((item) => {
-      return item.id == video.snippet.channelId;
-    })
-  );
+  try {
+    const currVidDetails = useSelector((state) =>
+      state.channels.channels.items.find((item) => {
+        return item.id == video.snippet.channelId || "Not Found";
+      })
+    );
+  } catch (error) {
+    console.error("Issue in .find in VideoCard");
+  }
 
   return (
     <Card
@@ -58,7 +61,7 @@ export default function VideoCard({ video }) {
           }
         >
           <Avatar
-            src={currVidDetails?.snippet?.thumbnails?.default?.url}
+            src={channelDetails?.snippet?.thumbnails?.default?.url}
             sx={{ width: 40, height: 40, marginRight: 2 }}
           />
         </Link>

@@ -1,4 +1,4 @@
-import { Skeleton, Stack } from "@mui/material";
+import { IconButton, Skeleton, Stack } from "@mui/material";
 import { Category, Translate, Whatshot } from "@mui/icons-material";
 import HomeIcon from "@mui/icons-material/Home";
 import MusicNoteIcon from "@mui/icons-material/MusicNote";
@@ -7,6 +7,7 @@ import OndemandVideoIcon from "@mui/icons-material/OndemandVideo";
 import SportsEsportsIcon from "@mui/icons-material/SportsEsports";
 import LiveTvIcon from "@mui/icons-material/LiveTv";
 import SchoolIcon from "@mui/icons-material/School";
+import Facebook from "@mui/icons-material/Facebook";
 import FaceRetouchingNaturalIcon from "@mui/icons-material/FaceRetouchingNatural";
 import CheckroomIcon from "@mui/icons-material/Checkroom";
 import GraphicEqIcon from "@mui/icons-material/GraphicEq";
@@ -45,8 +46,8 @@ const Sidebar = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.05,
-        duration: 0.3,
+        staggerChildren: 0.1,
+        duration: 2,
       },
     },
   };
@@ -99,6 +100,24 @@ const Sidebar = () => {
           </motion.li>
         ))}
       </motion.ul>
+
+      {/* <div className="refer">
+        <IconButton style={{ color: "blue" }}>
+          <Facebook />
+        </IconButton>
+        <IconButton>
+          <DeveloperModeIcon />
+        </IconButton>
+        <IconButton>
+          <DeveloperModeIcon />
+        </IconButton>
+        <IconButton>
+          <DeveloperModeIcon />
+        </IconButton>
+        <IconButton>
+          <DeveloperModeIcon />
+        </IconButton>
+      </div> */}
     </div>
   ) : (
     <></>

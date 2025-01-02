@@ -57,9 +57,9 @@ export default function VideoCard({ video }) {
               : demoChannelUrl
           }
         >
-          <Avatar
+          <img
+            className="avatar"
             src={currVidDetails?.snippet?.thumbnails?.default?.url}
-            sx={{ width: 40, height: 40, marginRight: 2 }}
           />
         </Link>
         <Link to={`/video/${video?.id}`}>

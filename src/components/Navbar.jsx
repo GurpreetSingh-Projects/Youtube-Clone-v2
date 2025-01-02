@@ -67,7 +67,7 @@ const Navbar = () => {
         <Link
           to="/"
           className="d-flex align-items-center justify-between"
-          onClick={resetState}
+          // onClick={resetState}
           style={{ display: "flex", alignItems: "center" }}
         >
           <Grow in={true}>

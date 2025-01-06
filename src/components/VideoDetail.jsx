@@ -1,5 +1,5 @@
 import { Avatar, Box, IconButton, Stack, Typography } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ReactPlayer from "react-player/youtube";
 import { useParams, Link } from "react-router-dom";
 import { converter } from "../utils/constants";
@@ -8,15 +8,19 @@ import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
 import ThumbDownOutlinedIcon from "@mui/icons-material/ThumbDownOutlined";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
 import { ThumbDown, ThumbUp } from "@mui/icons-material";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // import Popover from "@mui/material/Popover";
 // import ChannelDetail from "./ChannelDetail";
 import GroupIcon from "@mui/icons-material/Group";
 import VideoCameraFrontIcon from "@mui/icons-material/VideoCameraFront";
-
+import { useGetCommentsQuery } from "../features/FetchApi/fetchapi";
+import { setComments } from "../features/Comments/commentsSlice";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import moment from "moment";
 function VideoDetail() {
   const { id } = useParams();
   const idStore = id;
+  const dispatch = useDispatch();
   // const [currVidDetails, setCurrVidDetails] = useState(null);
   // const { videos, setVideos } = useContext(CreateContext);
   const [liked, setLiked] = useState(false);
@@ -50,21 +54,7 @@ function VideoDetail() {
 
   // var vidDetails = useSelector((state) => state.videos.videos.items);
   // console.log("details -" + JSON.stringify(vidDetails));
-  console.log("details -" + JSON.stringify(channelDetails));
-
-  // useEffect(() => {
-  //   fetchApi1(
-  //     `videos?part=snippet%2CcontentDetails%2Cstatistics&id=${id}`
-  //   ).then((res) => {
-  //     setCurrVidDetails(res.items[0]);
-  //   });
-  //   // related videos
-  //   fetchApi(`search?part=snippet&q=${id}`).then((res) => {
-  //     setVideos(res.items);
-  //     console.log(res.items);
-  //   });
-  // }, [id]);
-  // console.log("Fetched Current details - " + JSON.stringify(currVidDetails));
+  // console.log("details -" + JSON.stringify(channelDetails));
 
   function extendDescription() {
     var val = document.getElementById("vidDescription").style.webkitLineClamp;
@@ -72,12 +62,28 @@ function VideoDetail() {
       document.getElementById("vidDescription").style.webkitLineClamp = 2;
     else document.getElementById("vidDescription").style.webkitLineClamp = 99;
   }
+
+  const { data } = useGetCommentsQuery(idStore, {
+    keepUnusedDataFor: 24 * 3600,
+  });
+
+  useEffect(() => {
+    if (data) {
+      dispatch(setComments(data));
+    }
+  }, [data, dispatch]);
+
+  const commentsList = useSelector((state) => state.comments.comments);
+  // console.log("Comments list - " + JSON.stringify(commentsList.items));
   return (
     <Box
-      className="vidDetail d-flex flex-wrap flex-column flex-md-row"
-      sx={{ background: "inherit", position: "sticky" }}
+      className="vidDetail flex-column flex-md-row"
+      sx={{ background: "inherit" }}
     >
-      <Stack className="col-md-9" direction={{ xs: "column", md: "row" }}>
+      <Stack
+        className="col-md-9 leftSide"
+        direction={{ xs: "column", md: "row" }}
+      >
         <Box flex={1} className="mb-5">
           <Box sx={{ width: "100%", position: "sticky", top: "80px" }}>
             <ReactPlayer
@@ -250,12 +256,138 @@ function VideoDetail() {
                 </Box>
               </Box>
             </Stack>
+            <Box>
+              <Box className="commentsContainer">
+                <Typography color="#fff" className="commentsHeading">
+                  What&apos;s buzzing about {vidDetails?.snippet?.channelTitle}
+                  &apos;s video
+                </Typography>
+
+                <Typography color="#fff" className="commentsSubHeading">
+                  Top Comments -
+                </Typography>
+
+                <Stack className="commentMain">
+                  {/* <Box className="comments col-6 col-md-12 ">
+                    <div className="commentsWrapper">
+                      <div className="commentAvatarContainer">
+                        <Avatar
+                          className="commentAvatar"
+                          src="https://placehold.co/600x400/"
+                        ></Avatar>
+                      </div>
+                      <div className="commentDetails">
+                        <div className="">
+                          <div className="title">
+                            Channel Name<span className="mx-2"> &middot;</span>
+                            <span className="postedAt">posted at</span>
+                          </div>
+                          <div className="commentText my-2 mb-3">
+                            Lorem ipsum dolor sit, amet consectetur adipisicing
+                            elit. Eveniet, sit?
+                          </div>
+                          <div className="commentActions text-center">
+                            <div className="reply">Reply</div>
+                            <div className="dropdown">
+                              <ArrowDropDownIcon />
+                              &nbsp; 0 Replies
+                            </div>
+                            <IconButton className="like">
+                              <ThumbUpOutlinedIcon fontSize="small" />
+                            </IconButton>
+                            <IconButton className="dislike">
+                              <ThumbDownOutlinedIcon fontSize="small" />
+                            </IconButton>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </Box> */}
+                  {commentsList.items && commentsList.items.length > 0
+                    ? commentsList.items.map((item, idx) => (
+                        <div key={idx}>
+                          {/* {item.id} */}
+                          <Box className="comments">
+                            <div className="commentsWrapper">
+                              <div className="commentAvatarContainer">
+                                <Link
+                                  to={`/channel/${item?.snippet?.topLevelComment?.snippet?.channelId}`}
+                                >
+                                  <Avatar
+                                    className="commentAvatar"
+                                    src={
+                                      item?.snippet?.topLevelComment?.snippet
+                                        ?.authorProfileImageUrl
+                                    }
+                                  ></Avatar>
+                                </Link>
+                              </div>
+                              <div className="commentDetails">
+                                <div className="">
+                                  <div className="title">
+                                    {
+                                      item?.snippet?.topLevelComment?.snippet
+                                        ?.authorDisplayName
+                                    }
+                                    <span className="mx-2"> &middot;</span>
+                                    <span className="postedAt text-capitalize">
+                                      {moment(
+                                        item?.snippet?.topLevelComment?.snippet
+                                          ?.updatedAt,
+                                        "YYYYMMDD"
+                                      ).fromNow()}
+                                    </span>
+                                  </div>
+                                  <div className="commentText my-2 mb-3">
+                                    {
+                                      item?.snippet?.topLevelComment?.snippet
+                                        ?.textOriginal
+                                    }
+                                  </div>
+                                  <div className="commentActions text-center">
+                                    <div className="reply">Reply</div>
+                                    <div className="dropdown">
+                                      <ArrowDropDownIcon />
+                                      {item.snippet.totalReplyCount
+                                        ? item.snippet.totalReplyCount
+                                        : 0}
+                                      &nbsp; Replies
+                                    </div>
+                                    <IconButton className="like pe-0">
+                                      <ThumbUpOutlinedIcon fontSize="small" />{" "}
+                                    </IconButton>
+                                    {
+                                      item?.snippet?.topLevelComment?.snippet
+                                        ?.likeCount
+                                    }
+                                    <IconButton className="dislike">
+                                      <ThumbDownOutlinedIcon fontSize="small" />
+                                    </IconButton>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </Box>
+                        </div>
+                      ))
+                    : "No Comments Found"}
+                </Stack>
+              </Box>
+              {/* <div className="comments my-5">
+                Comments -
+                {commentsList.items && commentsList.items.length > 0
+                  ? commentsList.items.map((item, idx) => (
+                      <div key={idx}>{item.id}</div>
+                    ))
+                  : ""}
+              </div> */}
+            </Box>
           </Box>
         </Box>
       </Stack>
-      {/* <Stack className="col-md-3" direction="column">
+      <Stack className="col-md-3 rightSide" direction="column">
         <Videos suggested="true" />
-      </Stack> */}
+      </Stack>
     </Box>
   );
 }

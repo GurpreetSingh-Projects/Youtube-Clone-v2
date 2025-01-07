@@ -8,6 +8,8 @@ import vidIdReducer from "../features/VidIds/vidIdsSlice";
 import channelIdReducer from "../features/ChannelIds/channelidsSlice";
 import searchReducer from "../features/Search/searchSlice";
 import channelsReducer from "../features/Channels/channelsSlice";
+import suggestedReducer from "../features/Suggested/suggestedSlice";
+import commentsReducer from "../features/Comments/commentsSlice";
 import { youtubeApi } from "../features/FetchApi/fetchapi";
 export const store = configureStore({
   reducer: {
@@ -19,6 +21,8 @@ export const store = configureStore({
     search: searchReducer,
     channelIds: channelIdReducer,
     channels: channelsReducer,
+    suggested: suggestedReducer,
+    comments: commentsReducer,
     [youtubeApi.reducerPath]: youtubeApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>

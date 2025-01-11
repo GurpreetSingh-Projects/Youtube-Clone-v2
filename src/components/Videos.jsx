@@ -34,11 +34,18 @@ const Videos = ({ suggested }) => {
       variants={slideUp}
       className="suggestedvideos"
     >
-      {videos.map((item, idx) => (
-        <Box className="videoCard" key={idx}>
-          {item.id.videoId && <VideoCard video={(item, counter)} />}
-        </Box>
-      ))}
+      {videos.items
+        ? videos.items.map((item, idx) => (
+            <motion.div
+              variants={itemVariants}
+              className="videoCardSuggested"
+              key={idx}
+            >
+              {item.id && <VideoCard video={item} />}
+              {item.id.channelId && <ChannelCard channelDetail={item} />}
+            </motion.div>
+          ))
+        : "Loading..."}
     </motion.div>
   ) : (
     <motion.div

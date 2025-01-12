@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 const API_KEY = import.meta.env.VITE_API_KEY;
-const results = 10;
+const results = 25;
 
 export const youtubeApi = createApi({
   reducerPath: "youtubeApi",

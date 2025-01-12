@@ -17,11 +17,11 @@ export default function VideoCard({ video }) {
   try {
     currVidDetails = useSelector((state) =>
       state.channels.channels.items.find(
-        (item) => item.id === video.snippet.channelId
+        (item) => item.id == video.snippet.channelId
       )
     );
   } catch (error) {
-    console.log("Error in currVidDetails .find logic");
+    console.log("Error in currVidDetails .find() logic");
   }
 
   return (

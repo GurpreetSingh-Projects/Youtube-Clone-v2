@@ -89,7 +89,7 @@ function VideoDetail() {
             <ReactPlayer
               className="react-player mb-3 mb-md-0"
               url={`https://www.youtube.com/watch?v=${id}`}
-              playing={false}
+              playing={true}
               muted
               controls
             />

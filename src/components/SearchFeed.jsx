@@ -1,25 +1,33 @@
 import { Box, Typography } from "@mui/material";
-import { Videos } from "./index";
+import { Sidebar, Videos } from "./index";
 import { fetchApi } from "../utils/fetchApi";
 import { createContext, useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { CreateContext } from "../App";
 import { useDispatch } from "react-redux";
 import { setVideos } from "../features/Videos/videoSlice";
+import { useGetVideosQuery } from "../features/FetchApi/fetchapi";
+import { setCategory } from "../features/Category/categorySlice";
 export const SearchContext = createContext();
 
 const SearchFeed = () => {
   const { searchTerm } = useParams();
   const dispatch = useDispatch();
+  // useEffect(() => {
+  //   fetchApi(`search?part=snippet&q=${searchTerm}`).then((res) => {
+  //     dispatch(setVideos(res.items));
+  //   });
+  // }, [searchTerm]);
   useEffect(() => {
-    fetchApi(`search?part=snippet&q=${searchTerm}`).then((res) => {
-      dispatch(setVideos(res.items));
-    });
+    if (searchTerm) {
+      dispatch(setCategory(searchTerm));
+    }
   }, [searchTerm]);
 
   return (
     <>
       <Box sx={{ display: "flex", flex: "column" }}>
+        <Sidebar />
         <Box p={2} sx={{ overflowY: "auto", height: "90vh", flex: 2 }}>
           <Typography
             variant="h5"

@@ -26,7 +26,7 @@ const SearchFeed = () => {
 
   return (
     <>
-      <Box sx={{ display: "flex", flex: "column" }}>
+      <Box className="searchFeedContainer">
         <Sidebar />
         <Box p={2} sx={{ overflowY: "auto", height: "90vh", flex: 2 }}>
           <Typography

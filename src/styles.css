@@ -645,3 +645,7 @@ a {
     width: 200px;
   } */
 }
+.searchFeedContainer {
+  display: flex;
+  flex-wrap: wrap;
+}

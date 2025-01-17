@@ -520,7 +520,7 @@ a {
 }
 .commentDetails {
   max-width: 90%;
-  text-align: justify;
+  /* text-align: justify; */
   font-weight: normal;
 }
 
@@ -588,6 +588,13 @@ a {
   .channelProfilePic {
     height: 100px !important;
     width: 100px !important;
+  }
+  .vidDetail .leftSide,
+  .vidDetail .rightSide {
+    position: static;
+    top: 0px;
+    height: auto;
+    overflow-y: scroll;
   }
   .sidebar {
     height: fit-content;

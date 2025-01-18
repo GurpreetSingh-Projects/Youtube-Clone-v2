@@ -80,7 +80,7 @@ function VideoDetail() {
       className="vidDetail flex-column flex-md-row"
       sx={{ background: "inherit" }}
     >
-      <Stack
+      <Box
         className="col-md-9 leftSide"
         direction={{ xs: "column", md: "row" }}
       >
@@ -89,7 +89,7 @@ function VideoDetail() {
             <ReactPlayer
               className="react-player mb-3 mb-md-0"
               url={`https://www.youtube.com/watch?v=${id}`}
-              playing={true}
+              playing={false}
               muted
               controls
             />
@@ -113,10 +113,10 @@ function VideoDetail() {
 
             <Stack
               direction="row"
-              className="d-flex align-items-center w-100 justify-content-between px-2 px-md-4 mt-2 mt-md-3"
+              className="d-flex flex-wrap align-items-center w-100 justify-content-between px-2 px-md-4 mt-2 mt-md-3"
             >
               <Link
-                className="d-flex align-items-center gap-1 gap-md-2 mt-2 mt-md-0"
+                className="d-flex align-items-center justify-content-center justify-content-md-start col-12 col-md-6 gap-1 gap-md-2 mt-2 mt-md-0"
                 to={`/channel/${vidDetails?.snippet?.channelId}`}
               >
                 <Avatar
@@ -126,7 +126,7 @@ function VideoDetail() {
                   {vidDetails?.snippet?.channelTitle}
                 </Typography>
               </Link>
-              <Box className="d-flex gap-2">
+              <Box className="d-flex col-12 col-md-6 justify-content-center justify-content-md-end gap-2 mt-3 mt-md-0">
                 <Typography
                   className="d-flex align-items-center"
                   variant="body1"
@@ -384,10 +384,10 @@ function VideoDetail() {
             </Box>
           </Box>
         </Box>
-      </Stack>
-      <Stack className="col-md-3 rightSide" direction="column">
+      </Box>
+      <Box className="col-md-3 rightSide" direction="column">
         <Videos suggested="true" />
-      </Stack>
+      </Box>
     </Box>
   );
 }

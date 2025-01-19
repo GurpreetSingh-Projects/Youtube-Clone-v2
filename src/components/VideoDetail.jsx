@@ -2,7 +2,7 @@ import { Avatar, Box, IconButton, Stack, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import ReactPlayer from "react-player/youtube";
 import { useParams, Link } from "react-router-dom";
-import { converter } from "../utils/constants";
+import { converter, extendDescription } from "../utils/constants";
 import Videos from "./Videos";
 import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
 import ThumbDownOutlinedIcon from "@mui/icons-material/ThumbDownOutlined";
@@ -17,6 +17,7 @@ import { useGetCommentsQuery } from "../features/FetchApi/fetchapi";
 import { setComments } from "../features/Comments/commentsSlice";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import moment from "moment";
+import SubscribeButton from "./SubscribeButton";
 function VideoDetail() {
   const { id } = useParams();
   const idStore = id;
@@ -42,7 +43,7 @@ function VideoDetail() {
   var channelDetails = useSelector((state) => {
     const items = state.channels.channels.items;
 
-    if (!Array.isArray(items) || !vidDetails.snippet.channelId) {
+    if (!Array.isArray(items) || !vidDetails?.snippet?.channelId) {
       return null;
     }
 
@@ -55,13 +56,6 @@ function VideoDetail() {
   // var vidDetails = useSelector((state) => state.videos.videos.items);
   // console.log("details -" + JSON.stringify(vidDetails));
   // console.log("details -" + JSON.stringify(channelDetails));
-
-  function extendDescription() {
-    var val = document.getElementById("vidDescription").style.webkitLineClamp;
-    if (val == 99)
-      document.getElementById("vidDescription").style.webkitLineClamp = 2;
-    else document.getElementById("vidDescription").style.webkitLineClamp = 99;
-  }
 
   const { data } = useGetCommentsQuery(idStore, {
     keepUnusedDataFor: 24 * 3600,
@@ -89,7 +83,7 @@ function VideoDetail() {
             <ReactPlayer
               className="react-player mb-3 mb-md-0"
               url={`https://www.youtube.com/watch?v=${id}`}
-              playing={false}
+              playing={true}
               muted
               controls
             />
@@ -169,9 +163,7 @@ function VideoDetail() {
                   </IconButton>
                 </Typography>
                 <Box className="subScribeBtnContainer">
-                  <button className="subScribeBtn">
-                    <Box className="text">Subscribe</Box>
-                  </button>
+                  <SubscribeButton marginStart="ms-3" />
                   <Link
                     className="d-flex align-items-center gap-1 gap-md-2 mt-2 mt-md-0"
                     to={`/channel/${vidDetails?.snippet?.channelId}`}
@@ -268,41 +260,6 @@ function VideoDetail() {
                 </Typography>
 
                 <Stack className="commentMain">
-                  {/* <Box className="comments col-6 col-md-12 ">
-                    <div className="commentsWrapper">
-                      <div className="commentAvatarContainer">
-                        <Avatar
-                          className="commentAvatar"
-                          src="https://placehold.co/600x400/"
-                        ></Avatar>
-                      </div>
-                      <div className="commentDetails">
-                        <div className="">
-                          <div className="title">
-                            Channel Name<span className="mx-2"> &middot;</span>
-                            <span className="postedAt">posted at</span>
-                          </div>
-                          <div className="commentText my-2 mb-3">
-                            Lorem ipsum dolor sit, amet consectetur adipisicing
-                            elit. Eveniet, sit?
-                          </div>
-                          <div className="commentActions text-center">
-                            <div className="reply">Reply</div>
-                            <div className="dropdown">
-                              <ArrowDropDownIcon />
-                              &nbsp; 0 Replies
-                            </div>
-                            <IconButton className="like">
-                              <ThumbUpOutlinedIcon fontSize="small" />
-                            </IconButton>
-                            <IconButton className="dislike">
-                              <ThumbDownOutlinedIcon fontSize="small" />
-                            </IconButton>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </Box> */}
                   {commentsList.items && commentsList.items.length > 0
                     ? commentsList.items.map((item, idx) => (
                         <div key={idx}>
@@ -373,14 +330,6 @@ function VideoDetail() {
                     : "No Comments Found"}
                 </Stack>
               </Box>
-              {/* <div className="comments my-5">
-                Comments -
-                {commentsList.items && commentsList.items.length > 0
-                  ? commentsList.items.map((item, idx) => (
-                      <div key={idx}>{item.id}</div>
-                    ))
-                  : ""}
-              </div> */}
             </Box>
           </Box>
         </Box>

@@ -1,28 +1,34 @@
-import { IconButton, Skeleton, Stack } from "@mui/material";
-import { Category, Translate, Whatshot } from "@mui/icons-material";
-import HomeIcon from "@mui/icons-material/Home";
-import MusicNoteIcon from "@mui/icons-material/MusicNote";
-import CodeIcon from "@mui/icons-material/Code";
-import OndemandVideoIcon from "@mui/icons-material/OndemandVideo";
-import SportsEsportsIcon from "@mui/icons-material/SportsEsports";
-import LiveTvIcon from "@mui/icons-material/LiveTv";
-import SchoolIcon from "@mui/icons-material/School";
-import Facebook from "@mui/icons-material/Facebook";
-import FaceRetouchingNaturalIcon from "@mui/icons-material/FaceRetouchingNatural";
-import CheckroomIcon from "@mui/icons-material/Checkroom";
-import GraphicEqIcon from "@mui/icons-material/GraphicEq";
-import TheaterComedyIcon from "@mui/icons-material/TheaterComedy";
-import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
-import DeveloperModeIcon from "@mui/icons-material/DeveloperMode";
-import SlideshowIcon from "@mui/icons-material/Slideshow";
+import {
+  IconButton,
+  Skeleton,
+  Stack,
+  Category,
+  Translate,
+  Whatshot,
+  HomeIcon,
+  MusicNoteIcon,
+  CodeIcon,
+  OndemandVideoIcon,
+  SportsEsportsIcon,
+  LiveTvIcon,
+  SchoolIcon,
+  Facebook,
+  FaceRetouchingNaturalIcon,
+  CheckroomIcon,
+  GraphicEqIcon,
+  TheaterComedyIcon,
+  FitnessCenterIcon,
+  DeveloperModeIcon,
+  SlideshowIcon,
+} from "./index";
 import { useContext } from "react";
 import { CreateContext } from "../App";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import { setCategory } from "../features/Category/categorySlice";
-const Sidebar = () => {
+const Sidebar = (props) => {
   const { sidebar } = useContext(CreateContext);
-  const categories = [
+  var categories = [
     { id: 0, name: "Latest Topics", icon: <Whatshot /> },
     { id: 1, name: "New", icon: <HomeIcon /> },
     { id: 2, name: "Coding", icon: <CodeIcon /> },
@@ -41,6 +47,9 @@ const Sidebar = () => {
     { id: 15, name: "Gym", icon: <FitnessCenterIcon /> },
     { id: 16, name: "Crypto", icon: <DeveloperModeIcon /> },
   ];
+  if (props.reverse) {
+    categories = categories.reverse();
+  }
   const containerVariants = {
     hidden: { opacity: 1 },
     visible: {
@@ -69,9 +78,9 @@ const Sidebar = () => {
     (state) => state.category.selectedCategory
   );
   return sidebar ? (
-    <div className="sidebar">
+    <div className={`sidebar ${props.class}`}>
       <motion.ul
-        className="d-flex flex-col flex-md-wrap categoryBar ps-0"
+        className="d-flex flex-col categoryBar ps-0"
         initial="hidden"
         animate="visible"
         variants={containerVariants}

@@ -1,17 +1,3 @@
-import HomeIcon from "@mui/icons-material/Home";
-import MusicNoteIcon from "@mui/icons-material/MusicNote";
-import CodeIcon from "@mui/icons-material/Code";
-import OndemandVideoIcon from "@mui/icons-material/OndemandVideo";
-import SportsEsportsIcon from "@mui/icons-material/SportsEsports";
-import LiveTvIcon from "@mui/icons-material/LiveTv";
-import SchoolIcon from "@mui/icons-material/School";
-import FaceRetouchingNaturalIcon from "@mui/icons-material/FaceRetouchingNatural";
-import CheckroomIcon from "@mui/icons-material/Checkroom";
-import GraphicEqIcon from "@mui/icons-material/GraphicEq";
-import TheaterComedyIcon from "@mui/icons-material/TheaterComedy";
-import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
-import DeveloperModeIcon from "@mui/icons-material/DeveloperMode";
-
 export const demoThumbnailUrl = "https://i.ibb.co/G2L2Gwp/API-Course.png";
 export const demoChannelUrl = "/channel/UCmXmlB4-HJytD7wek0Uo97A";
 export const demoVideoUrl = "/video/GDa8kZLNhJ4";
@@ -34,4 +20,11 @@ export function converter(val) {
     val /= 1000000000;
     return parseInt(val) + "B";
   }
+}
+
+export function extendDescription() {
+  var val = document.getElementById("vidDescription").style.webkitLineClamp;
+  if (val == 99)
+    document.getElementById("vidDescription").style.webkitLineClamp = 2;
+  else document.getElementById("vidDescription").style.webkitLineClamp = 99;
 }

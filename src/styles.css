@@ -54,6 +54,30 @@ a {
   width: 250px;
   position: relative;
 }
+.sidebarTopModification {
+  width: 100%;
+  height: fit-content !important;
+  flex-wrap: nowrap !important;
+  background: transparent;
+  margin-bottom: 5px !important;
+}
+.sidebarTopModification ::-webkit-scrollbar {
+  display: none !important;
+}
+.sidebarTopModification .categoryBar {
+  overflow: scroll;
+  flex-direction: row !important;
+}
+.sidebarTopModification .category-btn,
+.sidebarTopModification .hvr-sweep-to-right:before {
+  position: static;
+  border-radius: 99px !important;
+}
+.sidebarTopModification .category-btn,
+.sidebarTopModification .hvr-sweep-to-right {
+  border-radius: 99px !important;
+}
+
 .sidebar * {
   transition: all 0.6s ease-in-out !important;
 }
@@ -62,15 +86,19 @@ a {
   outline: none;
 } */
 
-.vidDescription {
+.vidDescription,
+#vidDescription {
   display: -webkit-box;
-  -webkit-line-clamp: 1;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   font-size: 14px;
+  cursor: pointer;
+  padding-top: 15px;
 }
 .vidDetails {
   font-size: 12px !important;
+  padding-bottom: 10px;
 }
 .category-btn {
   font-weight: bold !important;
@@ -89,7 +117,29 @@ a {
   border-radius: 0px 99px 99px 0px;
   transition: color 0s;
 }
-
+.sidebarTopModification .category-btn {
+  font-weight: bold !important;
+  text-transform: capitalize;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  cursor: pointer;
+  background: transparent;
+  color: white;
+  font-size: 13px;
+  outline: none;
+  border: none;
+  padding: 4px 8px;
+  margin: 5px;
+  margin-right: 5px;
+  border-radius: 99px;
+  transition: color 0s;
+  background: #000000;
+  outline: 0.5px solid grey;
+}
+.sidebarTopModification .category-btn svg {
+  transform: scale(0.75);
+}
 .category-btn:focus {
   background-color: #fc1503 !important;
   color: white !important;
@@ -121,8 +171,13 @@ a {
   position: sticky;
   top: 70px;
 } */
+
 .videos {
   columns: 300px;
+  gap: 10px;
+}
+.videos .onLoad {
+  columns: none;
   gap: 10px;
 }
 .suggestedvideos {
@@ -159,7 +214,6 @@ a {
 
 /* Sweep To Right */
 .hvr-sweep-to-right {
-  border-radius: 0px 99px 99px 0px;
   display: inline-block;
   vertical-align: middle;
   -webkit-transform: perspective(1px) translateZ(0);
@@ -181,7 +235,7 @@ a {
   right: 0;
   bottom: 0;
   background: #fc1503;
-  border-radius: 0px 99px 99px 0px;
+
   -webkit-transform: scaleX(0);
   transform: scaleX(0);
   -webkit-transform-origin: 0 50%;
@@ -198,7 +252,7 @@ a {
 .hvr-sweep-to-right:focus,
 .hvr-sweep-to-right:active {
   color: white;
-  border-radius: 0px 99px 99px 0px;
+  /* border-radius: 0px 99px 99px 0px; */
   background: #fc1503;
 }
 .hvr-sweep-to-right:hover:before,
@@ -290,7 +344,6 @@ a {
   position: relative;
 }
 .subScribeBtn {
-  margin-left: 30px;
   display: flex;
   flex-wrap: nowrap;
   pointer-events: all;
@@ -543,6 +596,75 @@ a {
   box-shadow: 0px 0px 5px grey;
 }
 
+.searchFeedContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+.bg-skeleton {
+  background: grey;
+}
+.faj {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modalWrapper {
+  position: relative;
+  width: 60% !important;
+}
+.closeButton {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  filter: invert(1);
+  width: fit-content;
+}
+.accordionHeader {
+  background: #313131 !important;
+  color: white !important;
+  font-weight: bolder;
+}
+.accordionPara {
+  background: #1e1e1e !important;
+  color: rgb(168, 168, 168);
+}
+.accordionHeader svg {
+  color: white;
+}
+.notificationItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0px 15px;
+  margin: 5px;
+  border-radius: 10px;
+  background: #313131;
+  color: white !important;
+  gap: 15px;
+  cursor: pointer;
+}
+.notificationItem:first-child img {
+  object-fit: contain !important;
+  padding: 20px;
+}
+.notificationItem:last-child img {
+  height: 120px;
+  width: auto;
+  object-fit: contain;
+  border-radius: 10px !important;
+}
+/* .notificationContainer div::after {
+  content: "dot";
+} */
+.notificationContainer div:first-child {
+  animation: blink 2s ease-in-out infinite;
+}
+@keyframes blink {
+  50% {
+    background: rgb(255, 255, 255, 0.4);
+    transform: scale(1.01);
+  }
+}
 @media screen and (max-width: 900px) {
   .cardImg {
     object-fit: cover;
@@ -597,6 +719,7 @@ a {
     overflow-y: scroll;
   }
   .sidebar {
+    display: none;
     height: fit-content;
     overflow: scroll;
     background: rgba(255, 255, 255, 0.1);
@@ -605,6 +728,14 @@ a {
     padding: 0px 5px;
     font-size: 12px;
     width: auto;
+  }
+  .sidebarTopModification {
+    display: block;
+  }
+  .modalWrapper {
+    position: relative;
+    width: 90% !important;
+    overflow: hidden;
   }
   .searchbarBox {
     position: fixed;
@@ -651,8 +782,4 @@ a {
   /* .search-bar {
     width: 200px;
   } */
-}
-.searchFeedContainer {
-  display: flex;
-  flex-wrap: wrap;
 }

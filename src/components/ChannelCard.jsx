@@ -1,20 +1,20 @@
 import { Box, CardContent, CardMedia, Typography } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
-import { demoProfilePicture } from "../utils/constants";
+import { converter, demoProfilePicture } from "../utils/constants";
 
 const ChannelCard = ({ channelDetail, marginTop }) => {
   const navigate = useNavigate();
   const replaceUrl = (url) => {
     navigate(url, { replace: true });
   };
-  var subs = channelDetail?.statistics?.subscriberCount;
-  if (subs >= 1500 && subs < 100000) {
-    subs = subs / 100000;
-    subs += "k";
-  } else if (subs >= 100000) {
-    subs = subs / 1000000;
-    subs += "M";
-  }
+  // var subs = channelDetail?.statistics?.subscriberCount;
+  // if (subs >= 1500 && subs < 100000) {
+  //   subs = subs / 100000;
+  //   subs += "k";
+  // } else if (subs >= 100000) {
+  //   subs = subs / 1000000;
+  //   subs += "M";
+  // }
 
   return (
     <Box
@@ -52,7 +52,11 @@ const ChannelCard = ({ channelDetail, marginTop }) => {
           }}
         />
         <Typography variant="h6">{channelDetail?.snippet?.title}</Typography>
-        {subs && <Typography>{subs} Subscribers</Typography>}
+        {channelDetail?.statistics?.subscriberCount && (
+          <Typography>
+            {converter(channelDetail?.statistics?.subscriberCount)} Subscribers
+          </Typography>
+        )}
       </CardContent>
     </Box>
   );

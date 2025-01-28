@@ -34,7 +34,7 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const [modalManager, setModalManager] = useState({
     helpModal: false,
-    notifyModal: true,
+    notifyModal: false,
     profileModal: false,
   });
   // const { sidebar, setSidebar } = useContext(CreateContext);
@@ -424,24 +424,26 @@ const Navbar = () => {
             <Typography id="modal-modal-title" variant="h6" component="h2">
               Recent Notifications&nbsp; <NotificationsIcon />
             </Typography>
-            <Typography
+            <Box
               id="modal-modal-description"
               className="notificationContainer"
               sx={{ mt: 2 }}
             >
               <Link to={`/video/Xj0Jtjg3lHQ`}>
                 <Box
-                  className="notificationItem"
+                  className="notificationItem1"
                   onClick={() => {
                     showModal("notifyModal");
                   }}
                 >
-                  <Avatar src="https://yt3.googleusercontent.com/fxGKYucJAVme-Yz4fsdCroCFCrANWqw0ql4GYuvx8Uq4l_euNJHgE-w9MTkLQA805vWCi-kE0g=s160-c-k-c0x00ffffff-no-rj"></Avatar>
-                  <Box>
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                    Labore, doloremque!
+                  <Box className="d-flex align-items-center justify-content-start gap-3 col-9">
+                    <Avatar src="https://yt3.googleusercontent.com/fxGKYucJAVme-Yz4fsdCroCFCrANWqw0ql4GYuvx8Uq4l_euNJHgE-w9MTkLQA805vWCi-kE0g=s160-c-k-c0x00ffffff-no-rj"></Avatar>
+                    <Box>
+                      Don&apos;t miss this exciting new upload from{" "}
+                      <b>Mr Beast </b>
+                    </Box>
                   </Box>
-                  <Box>
+                  <Box className="d-flex justify-content-end col-3 imgContainer">
                     <img
                       src="https://i.ytimg.com/vi/Xj0Jtjg3lHQ/mqdefault.jpg"
                       alt=""
@@ -455,7 +457,108 @@ const Navbar = () => {
                   </Box>
                 </Box>
               </Link>
-            </Typography>
+            </Box>
+            <Box
+              id="modal-modal-description"
+              className="notificationContainer"
+              sx={{ mt: 2 }}
+            >
+              <Link to={`/video/P23iAJTT4HI`}>
+                <Box
+                  className="notificationItem"
+                  onClick={() => {
+                    showModal("notifyModal");
+                  }}
+                >
+                  <Box className="d-flex align-items-center justify-content-start gap-3 col-9">
+                    <Avatar src="https://yt3.googleusercontent.com/rrMcZWXHcMJ-GikSl3uEmB2gwu9uWg4gbgvI4_tFcNEkc5ys2emF0Oz6733mDVdaxz2jQ07xzQ=s160-c-k-c0x00ffffff-no-rj"></Avatar>
+                    <Box>
+                      Don't miss this exciting new upload from{" "}
+                      <b>5-Minute Crafts</b>
+                    </Box>
+                  </Box>
+                  <Box className="d-flex justify-content-end col-3 imgContainer">
+                    <img
+                      src="https://i.ytimg.com/vi/P23iAJTT4HI/mqdefault.jpg"
+                      alt="Video Thumbnail"
+                    />
+                  </Box>
+                  <Box
+                    className="text-white position-absolute"
+                    sx={{ top: "-10px", right: "-15px" }}
+                  >
+                    <NewReleasesIcon />
+                  </Box>
+                </Box>
+              </Link>
+            </Box>
+            <Box
+              id="modal-modal-description"
+              className="notificationContainer"
+              sx={{ mt: 2 }}
+            >
+              <Link to={`/video/71jBX5N3wcM`}>
+                <Box
+                  className="notificationItem"
+                  onClick={() => {
+                    showModal("notifyModal");
+                  }}
+                >
+                  <Box className="d-flex align-items-center justify-content-start gap-3 col-9">
+                    <Avatar src="https://yt3.ggpht.com/Vy6KL7EM_apxPSxF0pPy5w_c87YDTOlBQo3MADDF0Wl51kwxmt9wmRotnt2xQXwlrcyO0Xe56w=s48-c-k-c0x00ffffff-no-rj"></Avatar>
+                    <Box>
+                      Don't miss this exciting new upload from{" "}
+                      <b>Linus Tech Tips</b>
+                    </Box>
+                  </Box>
+                  <Box className="d-flex justify-content-end col-3 imgContainer">
+                    <img
+                      src="https://i.ytimg.com/vi/71jBX5N3wcM/mqdefault.jpg"
+                      alt="Video Thumbnail"
+                    />
+                  </Box>
+                  <Box
+                    className="text-white position-absolute"
+                    sx={{ top: "-10px", right: "-15px" }}
+                  >
+                    <NewReleasesIcon />
+                  </Box>
+                </Box>
+              </Link>
+            </Box>
+            <Box
+              id="modal-modal-description"
+              className="notificationContainer"
+              sx={{ mt: 2 }}
+            >
+              <Link to={`/video/N2JQ3b5sSMM`}>
+                <Box
+                  className="notificationItem"
+                  onClick={() => {
+                    showModal("notifyModal");
+                  }}
+                >
+                  <Box className="d-flex align-items-center justify-content-start gap-3 col-9">
+                    <Avatar src="https://yt3.ggpht.com/jpY2026WmAqmhk4EfjvaVb1yCN5StBl_TZ0hY-nlTP7z4F1bSo3tfvMwTLLMCtJwKhKU6e5hEg=s88-c-k-c0x00ffffff-no-rj"></Avatar>
+                    <Box>
+                      Don't miss this exciting new upload from <b>Pewdipie</b>
+                    </Box>
+                  </Box>
+                  <Box className="d-flex justify-content-end col-3 imgContainer">
+                    <img
+                      src="https://i.ytimg.com/vi/N2JQ3b5sSMM/mqdefault.jpg"
+                      alt="Video Thumbnail"
+                    />
+                  </Box>
+                  <Box
+                    className="text-white position-absolute"
+                    sx={{ top: "-10px", right: "-15px" }}
+                  >
+                    <NewReleasesIcon />
+                  </Box>
+                </Box>
+              </Link>
+            </Box>
           </Box>
         </motion.div>
       </Modal>
@@ -466,7 +569,6 @@ const Navbar = () => {
         }}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
-        className="modalWrapper overflow-scroll"
       >
         <motion.div
           initial="hidden"
@@ -475,9 +577,6 @@ const Navbar = () => {
           transition={{ duration: 0.3 }}
           variants={containerVariants}
           className="position-fixed"
-          onClick={() => {
-            showModal("profileModal");
-          }}
           style={{ inset: 0 }}
         >
           <Box sx={style} className="modalWrapper">

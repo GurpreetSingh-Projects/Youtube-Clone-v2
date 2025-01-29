@@ -581,19 +581,18 @@ a {
   transform: scale(0.95);
   padding: 10px;
   /* border-top: 1px solid grey; */
+  border-radius: 10px;
   border-bottom: 1px solid grey;
-  transition: all 0.5s ease-in-out !important;
+  transition: all 0.3s ease-in-out !important;
 }
 .comments:hover,
 .comments:active,
 .comments:focus,
 .comments:focus-visible {
-  transform: scale(1.2);
-  transform: translate(10px, 5px);
-  padding: 10px;
-  border-radius: 10px;
-  border: 1px solid red;
-  box-shadow: 0px 0px 5px grey;
+  transform: scale(0.98);
+  border: 0.5px solid red;
+  /* box-shadow: 0px 0px 5px grey; */
+  cursor: pointer;
 }
 
 .searchFeedContainer {
@@ -631,24 +630,36 @@ a {
 .accordionHeader svg {
   color: white;
 }
-.notificationItem {
+.notificationItem,
+.notificationItem1 {
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  padding: 0px 15px;
+  padding: 6px 15px;
   margin: 5px;
   border-radius: 10px;
   background: #313131;
   color: white !important;
   gap: 15px;
-  cursor: pointer;
+  cursor: pointer !important;
 }
-.notificationItem:first-child img {
+.notificationItem {
+  transform: scale(0.99);
+  margin: 0px;
+}
+.notificationItem:first-child img,
+.notificationItem1:first-child img {
+  height: 50px !important;
+  width: 50px !important;
   object-fit: contain !important;
-  padding: 20px;
+  border-radius: 9999999px !important;
+  margin: 0 !important;
+  padding: 5px !important;
 }
-.notificationItem:last-child img {
-  height: 120px;
+.notificationItem .imgContainer img,
+.notificationItem1 .imgContainer img {
+  height: 80px !important;
+  width: auto !important;
+  padding: 7px;
   width: auto;
   object-fit: contain;
   border-radius: 10px !important;
@@ -656,8 +667,30 @@ a {
 /* .notificationContainer div::after {
   content: "dot";
 } */
-.notificationContainer div:first-child {
+.notificationItem1 {
   animation: blink 2s ease-in-out infinite;
+  cursor: pointer !important;
+}
+.videoCard {
+  background-color: #1e1e1e;
+  transition: all 0.3s ease-in-out !important;
+  transform: scale(1);
+}
+.videos:hover .videoCard:hover {
+  background: linear-gradient(270deg, #1e1e1e, rgba(0, 0, 0, 0.7));
+  background-size: 400% 400%;
+  transform: scale(1.02);
+  -webkit-animation: cardHoverAnimation 5s ease infinite;
+  -moz-animation: cardHoverAnimation 5s ease infinite;
+  -o-animation: cardHoverAnimation 5s ease infinite;
+  animation: cardHoverAnimation 5s ease infinite;
+}
+.videos:hover .videoCard:not(:hover) {
+  transform: scale(0.98);
+  filter: saturate(0.5);
+}
+.containerNew {
+  padding: 16px;
 }
 @keyframes blink {
   50% {
@@ -670,7 +703,11 @@ a {
     object-fit: cover;
     height: 200px;
   }
+  .containerNew {
+    padding: 0px;
+  }
   .categoryBar {
+    margin-bottom: 0px;
     flex-direction: row !important;
   }
   .category-btn {
@@ -732,10 +769,19 @@ a {
   .sidebarTopModification {
     display: block;
   }
+  .notificationItem .imgContainer img,
+  .notificationItem1 .imgContainer img {
+    height: 50px !important;
+  }
   .modalWrapper {
+    padding: 10px 15px !important;
     position: relative;
-    width: 90% !important;
+    width: 98% !important;
     overflow: hidden;
+  }
+  .notificationItem,
+  .notificationItem1 {
+    font-size: 12px;
   }
   .searchbarBox {
     position: fixed;
@@ -763,6 +809,9 @@ a {
     position: relative;
     height: auto;
   }
+  .videos {
+    padding: 0px 10px;
+  }
 }
 
 @media screen and (max-width: 800px) {
@@ -782,4 +831,48 @@ a {
   /* .search-bar {
     width: 200px;
   } */
+}
+@-webkit-keyframes cardHoverAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+@-moz-keyframes cardHoverAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+@-o-keyframes cardHoverAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+@keyframes cardHoverAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }

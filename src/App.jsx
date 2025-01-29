@@ -10,7 +10,7 @@ import {
 } from "./components";
 
 import Footer from "./components/Footer";
-import { createContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setVidIds } from "./features/VidIds/vidIdsSlice";
 import {
@@ -23,11 +23,9 @@ import { searchResults } from "./features/Search/searchSlice";
 import { setChannelIds } from "./features/ChannelIds/channelidsSlice";
 import { setChannels } from "./features/Channels/channelsSlice";
 
-export const CreateContext = createContext();
-
 export default function App() {
-  const [sidebar, setSidebar] = useState(true);
-  const [currVid, setCurrVid] = useState("default");
+  // const [sidebar, setSidebar] = useState(true);
+  // const [currVid, setCurrVid] = useState("default");
 
   const category = useSelector((state) => state.category.selectedCategory);
   const dispatch = useDispatch();
@@ -93,26 +91,26 @@ export default function App() {
   return (
     <>
       <BrowserRouter>
-        <CreateContext.Provider
+        {/* <CreateContext.Provider
           value={{
             sidebar,
             setSidebar,
             currVid,
             setCurrVid,
           }}
-        >
-          <Box m={0} pb={1} className="backgroundImg">
-            <Navbar />
-            <Routes>
-              <Route path="/" element={<Feed />} />
-              <Route path="/*" element={<Feed />} />
-              <Route path="/video/:id" element={<VideoDetail />} />
-              <Route path="/channel/:id" element={<ChannelDetail />} />
-              <Route path="/search/:searchTerm" element={<SearchFeed />} />
-            </Routes>
-            <Footer />
-          </Box>
-        </CreateContext.Provider>
+        > */}
+        <Box className="backgroundImg">
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Feed />} />
+            <Route path="/*" element={<Feed />} />
+            <Route path="/video/:id" element={<VideoDetail />} />
+            <Route path="/channel/:id" element={<ChannelDetail />} />
+            <Route path="/search/:searchTerm" element={<SearchFeed />} />
+          </Routes>
+          <Footer />
+        </Box>
+        {/* </CreateContext.Provider> */}
       </BrowserRouter>
     </>
   );

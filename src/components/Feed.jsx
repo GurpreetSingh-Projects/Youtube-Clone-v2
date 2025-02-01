@@ -34,7 +34,7 @@ const Feed = () => {
           <Sidebar />
         </Box>
         <Box
-          p={2}
+          className="containerNew"
           sx={{
             overflowY: "auto",
             height: "88vh",

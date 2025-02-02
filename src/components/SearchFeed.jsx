@@ -1,14 +1,14 @@
 import { Box, Typography } from "@mui/material";
 import { Sidebar, Videos } from "./index";
 import { fetchApi } from "../utils/fetchApi";
-import { createContext, useContext, useEffect } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { CreateContext } from "../App";
+// import { CreateContext } from "../App";
 import { useDispatch } from "react-redux";
 import { setVideos } from "../features/Videos/videoSlice";
 import { useGetVideosQuery } from "../features/FetchApi/fetchapi";
 import { setCategory } from "../features/Category/categorySlice";
-export const SearchContext = createContext();
+// export const SearchContext = createContext();
 
 const SearchFeed = () => {
   const { searchTerm } = useParams();

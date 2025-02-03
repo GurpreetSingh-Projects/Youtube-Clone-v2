@@ -22,12 +22,12 @@ import {
   SlideshowIcon,
 } from "./index";
 import { useContext } from "react";
-import { CreateContext } from "../App";
+// import { CreateContext } from "../App";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import { setCategory } from "../features/Category/categorySlice";
 const Sidebar = (props) => {
-  const { sidebar } = useContext(CreateContext);
+  // const { sidebar } = useContext(CreateContext);
   var categories = [
     { id: 0, name: "Latest Topics", icon: <Whatshot /> },
     { id: 1, name: "New", icon: <HomeIcon /> },
@@ -77,7 +77,7 @@ const Sidebar = (props) => {
   const activeCategory = useSelector(
     (state) => state.category.selectedCategory
   );
-  return sidebar ? (
+  return (
     <div className={`sidebar ${props.class}`}>
       <motion.ul
         className="d-flex flex-col categoryBar ps-0"
@@ -128,8 +128,6 @@ const Sidebar = (props) => {
         </IconButton>
       </div> */}
     </div>
-  ) : (
-    <></>
   );
 };
 

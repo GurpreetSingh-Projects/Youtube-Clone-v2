@@ -56,7 +56,7 @@ const Videos = ({ suggested }) => {
     >
       {videos.items
         ? videos.items.map((item, idx) => (
-            <motion.div variants={itemVariants} className="videoCard" key={idx}>
+            <motion.div variants={itemVariants} key={idx}>
               {item.id && <VideoCard video={item} />}
               {item.id.channelId && <ChannelCard channelDetail={item} />}
             </motion.div>

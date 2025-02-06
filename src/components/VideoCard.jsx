@@ -27,9 +27,11 @@ export default function VideoCard({ video }) {
   return (
     <Card
       className="videoCard"
+      id={video?.id}
       sx={{
         boxShadow: "none",
         borderRadius: "3px",
+        backgroundColor: "#1e1e1e",
       }}
     >
       <Link to={`/video/${video?.id}`}>
@@ -44,7 +46,6 @@ export default function VideoCard({ video }) {
       <CardContent
         sx={{
           display: "flex",
-          backgroundColor: "#1e1e1e",
           height: "100px",
           alignItems: "center",
           justifyContent: "start",

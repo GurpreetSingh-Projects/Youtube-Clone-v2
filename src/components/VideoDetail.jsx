@@ -335,7 +335,14 @@ function VideoDetail() {
         </Box>
       </Box>
       <Box className="col-md-3 rightSide" direction="column">
-        <Videos suggested="true" />
+        <Box sx={{ m: 2 }}>
+          <Typography variant="subtitle" sx={{ color: "#fff" }}>
+            Recommended Videos -
+          </Typography>
+        </Box>
+        <Box>
+          <Videos suggested="true" />
+        </Box>
       </Box>
     </Box>
   );

@@ -2,7 +2,7 @@ import { Box, Typography } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Footer from "./Footer";
-import logo from "/assets/images/hq-logo.webp";
+//import logo from "/assets/images/hq-logo.webp";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import App from "../App";

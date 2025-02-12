@@ -7,12 +7,15 @@ import { fetchApi } from "../utils/fetchApi";
 import { converter } from "../utils/constants";
 import moment from "moment";
 import { useSelector } from "react-redux";
+import ReactPlayer from "react-player";
+import VideoPlayer from "./VideoPlayer";
 
 export const VidStats = createContext();
 
 export default function VideoCard({ video }) {
   const description = video.snippet.title;
   const navigate = useNavigate();
+  const [isHovered, setIsHovered] = useState(false);
   var currVidDetails = "";
   try {
     currVidDetails = useSelector((state) =>
@@ -34,14 +37,39 @@ export default function VideoCard({ video }) {
         backgroundColor: "#1e1e1e",
       }}
     >
-      <Link to={`/video/${video?.id}`}>
-        <CardMedia
-          component="img"
-          loading="lazy"
-          className="cardImg"
-          image={video?.snippet?.thumbnails?.medium?.url}
-          alt={video?.snippet?.title}
-        />
+      <Link
+        to={`/video/${video?.id}`}
+        onMouseEnter={() => {
+          setIsHovered(!isHovered);
+        }}
+        onMouseLeave={() => {
+          setIsHovered(!isHovered);
+        }}
+      >
+        {isHovered ? (
+          <>
+            <Box
+              className="videoCardCall"
+              sx={{
+                background: "#00000000",
+                padding: 0,
+                margin: 0,
+                zIndex: 999,
+                position: "fixed",
+                inset: 0,
+              }}
+            ></Box>
+            <VideoPlayer videoId={video?.id} videoCardCall={true} />
+          </>
+        ) : (
+          <CardMedia
+            component="img"
+            loading="lazy"
+            className="cardImg"
+            image={video?.snippet?.thumbnails?.medium?.url}
+            alt={video?.snippet?.title}
+          />
+        )}
       </Link>
       <CardContent
         sx={{

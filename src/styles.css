@@ -44,6 +44,9 @@ a {
   height: 75vh !important;
   width: 100% !important;
 }
+.videoCard .react-player {
+  height: 200px !important;
+}
 .sidebar {
   height: 90vh;
   overflow-y: scroll;
@@ -201,6 +204,9 @@ a {
 .cardImg {
   object-fit: cover;
   height: 180px;
+}
+.videoCard .videoCardCall {
+  height: 200px !important;
 }
 
 .ytp-chrome-controls .ytp-button.ytp-youtube-button,
@@ -611,6 +617,9 @@ a {
   position: relative;
   width: 60% !important;
 }
+.profileModal {
+  width: 30% !important;
+}
 .closeButton {
   position: fixed;
   top: 15px;
@@ -773,7 +782,8 @@ a {
   .notificationItem1 .imgContainer img {
     height: 50px !important;
   }
-  .modalWrapper {
+  .modalWrapper,
+  .profileModal {
     padding: 10px 15px !important;
     position: relative;
     width: 98% !important;

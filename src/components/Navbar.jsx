@@ -579,7 +579,7 @@ const Navbar = () => {
           className="position-fixed"
           style={{ inset: 0 }}
         >
-          <Box sx={style} className="modalWrapper">
+          <Box sx={style} className="modalWrapper profileModal">
             <Box
               className="closeButton"
               onClick={() => {
@@ -591,11 +591,19 @@ const Navbar = () => {
               </IconButton>
             </Box>
             <Typography id="modal-modal-title" variant="h6" component="h2">
-              Profile Modal
+              Profile
             </Typography>
-            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-            </Typography>
+            <Box className="faj flex-column my-3">
+              <Avatar sx={{ height: 120, width: 120 }}>G</Avatar>
+              <Typography
+                id="modal-modal-description"
+                className="text-center"
+                sx={{ mt: 2 }}
+              >
+                Welcome Guest User!! <br />
+                The breeze is cold out there, stay cozy & warm ☕
+              </Typography>
+            </Box>
           </Box>
         </motion.div>
       </Modal>

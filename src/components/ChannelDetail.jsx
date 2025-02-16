@@ -42,7 +42,7 @@ const ChannelDetail = () => {
   }, [id]);
   useEffect(() => {
     fetchApi(`playlistItems?part=snippet&id=${playListId}`).then((data) => {
-      alert(playListId);
+      // alert(playListId);
       console.log(JSON.stringify(data));
     });
   }, [playListId]);

@@ -45,7 +45,7 @@ a {
   width: 100% !important;
 }
 .videoCard .react-player {
-  height: 200px !important;
+  height: 180px !important;
 }
 .sidebar {
   height: 90vh;
@@ -206,7 +206,7 @@ a {
   height: 180px;
 }
 .videoCard .videoCardCall {
-  height: 200px !important;
+  height: 180px !important;
 }
 
 .ytp-chrome-controls .ytp-button.ytp-youtube-button,

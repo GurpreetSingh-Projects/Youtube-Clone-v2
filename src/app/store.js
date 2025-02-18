@@ -29,4 +29,5 @@ export const store = configureStore({
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(youtubeApi.middleware),
+  devtools : false,
 });

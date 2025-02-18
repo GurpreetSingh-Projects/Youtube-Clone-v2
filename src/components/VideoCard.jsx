@@ -1,21 +1,25 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Typography, Card, CardContent, CardMedia, Box } from "@mui/material";
-import Avatar from "@mui/material/Avatar";
 import { demoChannelUrl } from "../utils/constants";
-import { useState, useEffect, createContext, useContext } from "react";
-import { fetchApi } from "../utils/fetchApi";
+import { useState } from "react";
 import { converter } from "../utils/constants";
 import moment from "moment";
 import { useSelector } from "react-redux";
-import ReactPlayer from "react-player";
 import VideoPlayer from "./VideoPlayer";
 
-export const VidStats = createContext();
+// export const VidStats = createContext();
 
 export default function VideoCard({ video }) {
   const description = video.snippet.title;
   const navigate = useNavigate();
   const [isHovered, setIsHovered] = useState(false);
+
+  function cardHovered() {
+    setIsHovered(true);
+  }
+  function cardNotHovered() {
+    setIsHovered(false);
+  }
   var currVidDetails = "";
   try {
     currVidDetails = useSelector((state) =>
@@ -36,16 +40,10 @@ export default function VideoCard({ video }) {
         borderRadius: "3px",
         backgroundColor: "#1e1e1e",
       }}
+      onMouseEnter={cardHovered}
+      onMouseLeave={cardNotHovered}
     >
-      <Link
-        to={`/video/${video?.id}`}
-        onMouseEnter={() => {
-          setIsHovered(!isHovered);
-        }}
-        onMouseLeave={() => {
-          setIsHovered(!isHovered);
-        }}
-      >
+      <Link to={`/video/${video?.id}`}>
         {isHovered ? (
           <>
             <Box

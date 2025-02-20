@@ -12,7 +12,7 @@ const Welcome = () => {
   useEffect(() => {
     setTimeout(() => {
       setWelcome(!welcome);
-    }, 3500);
+    }, 2000);
   }, []);
 
   const AnimatedBox = motion(Box);
@@ -45,7 +45,7 @@ const Welcome = () => {
     },
     transition: {
       staggerChildren: 0.35,
-      duration: 2,
+      duration: 1.5,
     },
   };
   const youtube = ["Y", "O", "U", "T", "U", "B", "E"];

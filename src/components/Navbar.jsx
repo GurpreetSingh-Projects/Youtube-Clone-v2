@@ -105,7 +105,6 @@ const Navbar = () => {
         <Link
           to="/"
           className="d-flex align-items-center justify-between"
-          // onClick={resetState}
           style={{ display: "flex", alignItems: "center" }}
         >
           <Grow in={true}>
@@ -139,7 +138,7 @@ const Navbar = () => {
               cursor
               cursorStyle="|"
               typeSpeed={70}
-              deleteSpeed={50}
+              deleteSpeed={20}
               delaySpeed={1000}
             />
           </span>

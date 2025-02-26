@@ -179,6 +179,18 @@ a {
   columns: 300px;
   gap: 10px;
 }
+.skeletonContainer {
+  columns: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.skeletonContainer div {
+  width: 32.5%;
+}
+.suggested div {
+  width: 95% !important;
+}
 .videos .onLoad {
   columns: none;
   gap: 10px;
@@ -280,7 +292,8 @@ a {
   filter: saturate(0.75);
   transition: all 0.5s;
 }
-#searchBarContainer {
+
+.searchBarContainer {
   position: fixed;
   top: 150px;
   left: 30%;
@@ -701,6 +714,37 @@ a {
 .containerNew {
   padding: 16px;
 }
+.copyright {
+  z-index: 999999999;
+}
+.searchSuggestions {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 20px;
+  margin-top: 30px;
+}
+.searchTermContainer {
+  display: flex;
+  flex: 1 1 0;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 5px;
+}
+.searchItem {
+  display: flex;
+  flex: 1 1 0;
+  align-items: center;
+  justify-content: space-around;
+  text-wrap: nowrap;
+  color: black;
+  padding: 5px 7px;
+  font-size: 13px;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(15px);
+  border-radius: 99px;
+  cursor: pointer;
+  font-weight: 600;
+}
 @keyframes blink {
   50% {
     background: rgb(255, 255, 255, 0.4);
@@ -733,6 +777,9 @@ a {
     border-radius: 99px !important;
     outline: 1px solid grey;
     transition: background-color ease-in-out 0.3s ease-in-out;
+  }
+  .skeletonContainer div {
+    width: 100%;
   }
   .hvr-sweep-to-right,
   .hvr-sweep-to-right:before,

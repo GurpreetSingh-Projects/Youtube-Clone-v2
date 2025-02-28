@@ -1,25 +1,193 @@
-import { Skeleton } from "@mui/material";
-const VidSkeleton = () => {
+import { Box, Skeleton } from "@mui/material";
+const VidSkeleton = (props) => {
   return (
-    <div className="d-flex flex-wrap">
-      <div className="skeletonWrapper bg-skeleton col-12 col-md-4">
-        <Skeleton variant="rectangular" sx={{ height: "180", margin: 1 }} />
-        <div className="d-flex mt-3 ">
+    <div className={`skeletonContainer ${props.suggested}`}>
+      <Box className="bg-skeleton mb-2">
+        <Skeleton variant="rectangular" height={180} />
+        <Box className="w-100 faj justify-content-start">
           <Skeleton
-            className="me-3"
             variant="circular"
-            sx={{ width: 50, height: 50 }}
+            className="mt-2"
+            width={40}
+            height={40}
           />
-          <div className="">
+          <Box className="d-flex flex-column ms-2">
             <Skeleton
-              className="mb-2"
               variant="rectangular"
-              sx={{ height: 25 }}
+              className="mt-2"
+              height={15}
+              width={290}
             />
-            <Skeleton variant="rectangular" sx={{ width: 270, height: 15 }} />
-          </div>
-        </div>
-      </div>
+            <Skeleton
+              variant="rectangular"
+              className="mt-2"
+              height={15}
+              width={290}
+            />
+            <Skeleton
+              variant="rectangular"
+              className="mt-2"
+              height={10}
+              width={290}
+            />
+          </Box>
+        </Box>
+      </Box>
+      <Box className="bg-skeleton mb-2">
+        <Skeleton variant="rectangular" height={180} />
+        <Box className="w-100 faj justify-content-start">
+          <Skeleton
+            variant="circular"
+            className="mt-2"
+            width={40}
+            height={40}
+          />
+          <Box className="d-flex flex-column ms-2">
+            <Skeleton
+              variant="rectangular"
+              className="mt-2"
+              height={15}
+              width={290}
+            />
+            <Skeleton
+              variant="rectangular"
+              className="mt-2"
+              height={15}
+              width={290}
+            />
+            <Skeleton
+              variant="rectangular"
+              className="mt-2"
+              height={10}
+              width={290}
+            />
+          </Box>
+        </Box>
+      </Box>
+      <Box className="bg-skeleton mb-2">
+        <Skeleton variant="rectangular" height={180} />
+        <Box className="w-100 faj justify-content-start">
+          <Skeleton
+            variant="circular"
+            className="mt-2"
+            width={40}
+            height={40}
+          />
+          <Box className="d-flex flex-column ms-2">
+            <Skeleton
+              variant="rectangular"
+              className="mt-2"
+              height={15}
+              width={290}
+            />
+            <Skeleton
+              variant="rectangular"
+              className="mt-2"
+              height={15}
+              width={290}
+            />
+            <Skeleton
+              variant="rectangular"
+              className="mt-2"
+              height={10}
+              width={290}
+            />
+          </Box>
+        </Box>
+      </Box>
+      <Box className="bg-skeleton mb-2">
+        <Skeleton variant="rectangular" height={180} />
+        <Box className="w-100 faj justify-content-start">
+          <Skeleton
+            variant="circular"
+            className="mt-2"
+            width={40}
+            height={40}
+          />
+          <Box className="d-flex flex-column ms-2">
+            <Skeleton
+              variant="rectangular"
+              className="mt-2"
+              height={15}
+              width={290}
+            />
+            <Skeleton
+              variant="rectangular"
+              className="mt-2"
+              height={15}
+              width={290}
+            />
+            <Skeleton
+              variant="rectangular"
+              className="mt-2"
+              height={10}
+              width={290}
+            />
+          </Box>
+        </Box>
+      </Box>
+      <Box className="bg-skeleton mb-2">
+        <Skeleton variant="rectangular" height={180} />
+        <Box className="w-100 faj justify-content-start">
+          <Skeleton
+            variant="circular"
+            className="mt-2"
+            width={40}
+            height={40}
+          />
+          <Box className="d-flex flex-column ms-2">
+            <Skeleton
+              variant="rectangular"
+              className="mt-2"
+              height={15}
+              width={290}
+            />
+            <Skeleton
+              variant="rectangular"
+              className="mt-2"
+              height={15}
+              width={290}
+            />
+            <Skeleton
+              variant="rectangular"
+              className="mt-2"
+              height={10}
+              width={290}
+            />
+          </Box>
+        </Box>
+      </Box>
+      <Box className="bg-skeleton mb-2">
+        <Skeleton variant="rectangular" height={180} />
+        <Box className="w-100 faj justify-content-start">
+          <Skeleton
+            variant="circular"
+            className="mt-2"
+            width={40}
+            height={40}
+          />
+          <Box className="d-flex flex-column ms-2">
+            <Skeleton
+              variant="rectangular"
+              className="mt-2"
+              height={15}
+              width={290}
+            />
+            <Skeleton
+              variant="rectangular"
+              className="mt-2"
+              height={15}
+              width={290}
+            />
+            <Skeleton
+              variant="rectangular"
+              className="mt-2"
+              height={10}
+              width={290}
+            />
+          </Box>
+        </Box>
+      </Box>
     </div>
   );
 };

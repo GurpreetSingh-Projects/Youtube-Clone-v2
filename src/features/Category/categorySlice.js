@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const categorySlice = createSlice({
   name: "category",
   initialState: {
-    selectedCategory: "Latest Topics",
+    selectedCategory: "What's Trending",
   },
   reducers: {
     setCategory: (state, action) => {

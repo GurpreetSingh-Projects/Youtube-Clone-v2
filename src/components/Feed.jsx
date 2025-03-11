@@ -1,20 +1,7 @@
 import { Box, Stack, Typography } from "@mui/material";
-import { SearchFeed, Searchbar, Sidebar, VideoDetail, Videos } from "./index";
-import { fetchApi } from "../utils/fetchApi";
-import React, {
-  Suspense,
-  lazy,
-  useEffect,
-  useState,
-  createContext,
-  useContext,
-} from "react";
-// import VidSkeleton from "./VidSkeleton";
+import { Sidebar, Videos } from "./index";
 import { useSelector } from "react-redux";
-// const VidComponent = lazy(() => import("../components/Videos"));
-
 const Feed = () => {
-  // var { selectedCategory, setSelectedCategory } = useContext(CreateContext);
   const category = useSelector((state) => state.category.selectedCategory);
   return (
     <>
@@ -24,7 +11,6 @@ const Feed = () => {
         <Box
           sx={{
             height: { sx: "auto", md: "100%", overflow: "hidden" },
-            // borderRight: "1px solid #3d3d3d",
             px: {
               sx: 0,
               md: 2,
@@ -55,12 +41,7 @@ const Feed = () => {
           </Typography>
           <Sidebar class="sidebarTopModification" reverse />
 
-          {/* <Suspense fallback={<VidSkeleton />}> */}
-          {/* <VidComponent /> */}
-          {/* </Suspense> */}
           <Videos />
-
-          {/* Loader */}
 
           {/* <Box className="w-100 d-flex justify-content-center">
             <div className="lds-ellipsis">

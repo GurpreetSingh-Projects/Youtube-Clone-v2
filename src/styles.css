@@ -46,6 +46,8 @@ a {
 }
 .videoCard .react-player {
   height: 180px !important;
+  position: fixed;
+  inset: 0;
 }
 .sidebar {
   height: 90vh;
@@ -216,6 +218,12 @@ a {
 .cardImg {
   object-fit: cover;
   height: 180px;
+  opacity: 1;
+  transition: opacity 1.5s linear, transform 0.5s linear !important;
+}
+.cardImg:hover {
+  opacity: 0;
+  transform: scale(1.15) translate(0px, -10px);
 }
 .videoCard .videoCardCall {
   height: 180px !important;
@@ -754,7 +762,7 @@ a {
 @media screen and (max-width: 900px) {
   .cardImg {
     object-fit: cover;
-    height: 200px;
+    height: 10px;
   }
   .containerNew {
     padding: 0px;

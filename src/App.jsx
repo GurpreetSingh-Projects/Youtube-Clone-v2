@@ -24,22 +24,17 @@ import { setChannelIds } from "./features/ChannelIds/channelidsSlice";
 import { setChannels } from "./features/Channels/channelsSlice";
 
 export default function App() {
-  // const [sidebar, setSidebar] = useState(true);
-  // const [currVid, setCurrVid] = useState("default");
-
   const category = useSelector((state) => state.category.selectedCategory);
   const dispatch = useDispatch();
 
-  const { data: getVideos } = useGetVideosQuery(category, {
+  const { data: getVideos } = useGetVideosQuery(category || null, {
+    skip: !category,
     keepUnusedDataFor: 3600 * 24,
   });
-
   useEffect(() => {
-    if (getVideos) {
+    if (getVideos != null) {
       dispatch(searchResults(getVideos));
-
       var videoIdsString = "";
-
       getVideos.items.map((items) => {
         videoIdsString += items.id.videoId + ",";
       });
@@ -49,13 +44,12 @@ export default function App() {
   }, [getVideos]);
 
   var vidIds = useSelector((state) => state.vidIds);
-
-  const { data: getVidDetails } = useGetVidDetailsQuery(vidIds.vidIds, {
+  const { data: getVidDetails } = useGetVidDetailsQuery(vidIds.vidIds || null, {
+    skip: vidIds.vidIds.length == 0,
     keepUnusedDataFor: 3600 * 24,
   });
   useEffect(() => {
     if (vidIds.vidIds.length > 0 && getVidDetails) {
-      // console.log("Video details -" + getVidDetails);
       dispatch(setVideos(getVidDetails));
     }
   }, [getVidDetails]);
@@ -76,11 +70,12 @@ export default function App() {
   }, [getVideos]);
 
   var channelIdsString = useSelector((state) => state.channelIds.channelIds);
-  // channelIdsString = JSON.stringify(channelIdsString);
-
   const { data: getChannelDetails } = useGetChannelDetailsQuery(
     channelIdsString || null,
-    { keepUnusedDataFor: 24 * 3600 }
+    {
+      skip: !channelIdsString,
+      keepUnusedDataFor: 24 * 3600,
+    }
   );
   useEffect(() => {
     if (getChannelDetails) {

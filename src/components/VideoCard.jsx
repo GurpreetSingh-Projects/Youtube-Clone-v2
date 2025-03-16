@@ -6,9 +6,6 @@ import { converter } from "../utils/constants";
 import moment from "moment";
 import { useSelector } from "react-redux";
 import VideoPlayer from "./VideoPlayer";
-
-// export const VidStats = createContext();
-
 export default function VideoCard({ video }) {
   const description = video.snippet.title;
   const navigate = useNavigate();
@@ -17,9 +14,11 @@ export default function VideoCard({ video }) {
   function cardHovered() {
     setIsHovered(true);
   }
+
   function cardNotHovered() {
     setIsHovered(false);
   }
+
   var currVidDetails = "";
   try {
     currVidDetails = useSelector((state) =>
@@ -44,30 +43,30 @@ export default function VideoCard({ video }) {
       onMouseLeave={cardNotHovered}
     >
       <Link to={`/video/${video?.id}`}>
-        {isHovered ? (
-          <>
-            <Box
-              className="videoCardCall"
-              sx={{
-                background: "#00000000",
-                padding: 0,
-                margin: 0,
-                zIndex: 999,
-                position: "fixed",
-                inset: 0,
-              }}
-            ></Box>
-            <VideoPlayer videoId={video?.id} videoCardCall={true} />
-          </>
-        ) : (
-          <CardMedia
-            component="img"
-            loading="lazy"
-            className="cardImg"
-            image={video?.snippet?.thumbnails?.medium?.url}
-            alt={video?.snippet?.title}
-          />
-        )}
+        {/* <Box
+          className="videoCardCall"
+          sx={{
+            background: "#00000000",
+            padding: 0,
+            margin: 0,
+            zIndex: 999,
+            position: "fixed",
+            inset: 0,
+          }}
+        ></Box> */}
+
+        <CardMedia
+          component="img"
+          loading="lazy"
+          className="cardImg"
+          image={video?.snippet?.thumbnails?.medium?.url}
+          alt={video?.snippet?.title}
+        />
+        <VideoPlayer
+          isPlaying={isHovered}
+          videoId={video?.id}
+          videoCardCall={true}
+        />
       </Link>
       <CardContent
         sx={{

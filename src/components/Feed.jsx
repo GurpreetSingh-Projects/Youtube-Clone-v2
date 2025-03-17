@@ -37,7 +37,7 @@ const Feed = () => {
             sx={{ color: "white" }}
           >
             {category}&nbsp;
-            <span style={{ color: "#f31503" }}>videos</span>
+            <span style={{ color: "#f31503" }}>Category</span>
           </Typography>
           <Sidebar class="sidebarTopModification" reverse />
 

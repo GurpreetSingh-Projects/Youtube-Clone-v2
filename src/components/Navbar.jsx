@@ -8,7 +8,6 @@ import {
   AccountCircleIcon,
   MenuIcon,
   CloseIcon,
-  ExpandMoreIcon,
 } from "./index";
 import {
   IconButton,
@@ -17,14 +16,10 @@ import {
   Grow,
   Typography,
   Modal,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
   Avatar,
 } from "@mui/material";
 import { Search } from "@mui/icons-material";
 import { AnimatePresence, motion } from "framer-motion";
-import { Typewriter } from "react-simple-typewriter";
 import { useDispatch, useSelector } from "react-redux";
 import { searchbarToggle } from "../features/Searchbar/searchbarSlice";
 import { setCategory } from "../features/Category/categorySlice";
@@ -40,7 +35,6 @@ const Navbar = () => {
     notifyModal: false,
     profileModal: false,
   });
-  // const { sidebar, setSidebar } = useContext(CreateContext);
 
   function showModal(modalName) {
     setModalManager((prev) => ({
@@ -48,13 +42,6 @@ const Navbar = () => {
     }));
   }
 
-  function resetState() {
-    dispatch(setCategory(state.category.initialState));
-  }
-
-  // function toggleSidebar() {
-  //   setSidebar(!sidebar);
-  // }
   const style = {
     position: "fixed",
     top: "50%",
@@ -91,6 +78,7 @@ const Navbar = () => {
     Navigate(url, { replace: true });
   };
   const searchbar = useSelector((state) => state.searchbar);
+
   return (
     <Stack
       className="px-1 py-2 px-md-3 py-md-2"
@@ -104,7 +92,12 @@ const Navbar = () => {
         background: "inherit",
       }}
     >
-      <Box className="col-3">
+      <Box
+        className="col-3"
+        onClick={() => {
+          dispatch(setCategory("What's Trending"));
+        }}
+      >
         <Link
           to="/"
           className="d-flex align-items-center justify-between"

@@ -17,20 +17,30 @@ const VideoPlayer = (props) => {
       animate="visible"
       variants={slideUp}
       exit="exit"
+      sx={{
+        background: "#00000000",
+        padding: 0,
+        margin: 0,
+        zIndex: 999,
+        position: "fixed",
+        inset: 0,
+      }}
     >
       <ReactPlayer
         className={`react-player mb-3 mb-md-0 ${props?.videoCardCall}`}
         url={`https://www.youtube.com/watch?v=${props?.videoId}`}
-        playing={true}
+        playing={props?.isPlaying}
         muted
         controls={!props?.videoCardCall}
         style={{ zIndex: -1 }}
         config={{
           youtube: {
             playerVars: {
+              modestBranding: true,
               cc_load_policy: 1,
               cc: "en",
               rel: 0,
+              quality: "hd360",
             },
           },
         }}

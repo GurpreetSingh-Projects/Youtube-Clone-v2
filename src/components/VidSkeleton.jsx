@@ -16,19 +16,19 @@ const VidSkeleton = (props) => {
               variant="rectangular"
               className="mt-2"
               height={15}
-              width={290}
+              width={270}
             />
             <Skeleton
               variant="rectangular"
               className="mt-2"
               height={15}
-              width={290}
+              width={270}
             />
             <Skeleton
               variant="rectangular"
               className="mt-2"
               height={10}
-              width={290}
+              width={270}
             />
           </Box>
         </Box>
@@ -47,19 +47,19 @@ const VidSkeleton = (props) => {
               variant="rectangular"
               className="mt-2"
               height={15}
-              width={290}
+              width={270}
             />
             <Skeleton
               variant="rectangular"
               className="mt-2"
               height={15}
-              width={290}
+              width={270}
             />
             <Skeleton
               variant="rectangular"
               className="mt-2"
               height={10}
-              width={290}
+              width={270}
             />
           </Box>
         </Box>
@@ -78,19 +78,19 @@ const VidSkeleton = (props) => {
               variant="rectangular"
               className="mt-2"
               height={15}
-              width={290}
+              width={270}
             />
             <Skeleton
               variant="rectangular"
               className="mt-2"
               height={15}
-              width={290}
+              width={270}
             />
             <Skeleton
               variant="rectangular"
               className="mt-2"
               height={10}
-              width={290}
+              width={270}
             />
           </Box>
         </Box>
@@ -109,19 +109,19 @@ const VidSkeleton = (props) => {
               variant="rectangular"
               className="mt-2"
               height={15}
-              width={290}
+              width={270}
             />
             <Skeleton
               variant="rectangular"
               className="mt-2"
               height={15}
-              width={290}
+              width={270}
             />
             <Skeleton
               variant="rectangular"
               className="mt-2"
               height={10}
-              width={290}
+              width={270}
             />
           </Box>
         </Box>
@@ -140,19 +140,19 @@ const VidSkeleton = (props) => {
               variant="rectangular"
               className="mt-2"
               height={15}
-              width={290}
+              width={270}
             />
             <Skeleton
               variant="rectangular"
               className="mt-2"
               height={15}
-              width={290}
+              width={270}
             />
             <Skeleton
               variant="rectangular"
               className="mt-2"
               height={10}
-              width={290}
+              width={270}
             />
           </Box>
         </Box>
@@ -171,19 +171,19 @@ const VidSkeleton = (props) => {
               variant="rectangular"
               className="mt-2"
               height={15}
-              width={290}
+              width={270}
             />
             <Skeleton
               variant="rectangular"
               className="mt-2"
               height={15}
-              width={290}
+              width={270}
             />
             <Skeleton
               variant="rectangular"
               className="mt-2"
               height={10}
-              width={290}
+              width={270}
             />
           </Box>
         </Box>

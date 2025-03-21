@@ -628,6 +628,7 @@ a {
 }
 .bg-skeleton {
   background: grey;
+  overflow: hidden;
 }
 .faj {
   display: flex;

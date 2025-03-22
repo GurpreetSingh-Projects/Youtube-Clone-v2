@@ -552,7 +552,7 @@ a {
 }
 .commentsHeading,
 .commentsSubHeading {
-  font-size: 18px !important;
+  font-size: 15px !important;
   font-weight: 800;
 }
 .commentsSubHeading {
@@ -563,9 +563,13 @@ a {
   width: 35px !important;
 }
 .comments .title {
-  font-size: 16px;
+  font-size: 13px;
   font-weight: 700;
   color: grey;
+}
+.commentText {
+  font-size: 14px;
+  color: rgb(206, 206, 206);
 }
 .commentActions {
   display: flex;
@@ -610,15 +614,14 @@ a {
   /* border-top: 1px solid grey; */
   border-radius: 10px;
   border-bottom: 1px solid grey;
-  transition: all 0.3s ease-in-out !important;
+  transition: all 0.75s ease-in-out !important;
 }
 .comments:hover,
 .comments:active,
 .comments:focus,
 .comments:focus-visible {
-  transform: scale(0.98);
-  border: 0.5px solid red;
-  /* box-shadow: 0px 0px 5px grey; */
+  transform: scale(1);
+  color: white;
   cursor: pointer;
 }
 

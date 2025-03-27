@@ -1,5 +1,5 @@
 // src/App.js
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { Box } from "@mui/material";
 import {
   Navbar,
@@ -22,12 +22,14 @@ import { setVideos } from "./features/Videos/videoSlice";
 import { searchResults } from "./features/Search/searchSlice";
 import { setChannelIds } from "./features/ChannelIds/channelidsSlice";
 import { setChannels } from "./features/Channels/channelsSlice";
-
+import ReactGA from "react-ga4";
 export default function App() {
+  // const location = useLocation();
+  const TRACKING_ID = "G-XPVYS3W9Z2";
   const category = useSelector((state) => state.category.selectedCategory);
   const dispatch = useDispatch();
-
-  const { data: getVideos } = useGetVideosQuery(category || null, {
+  // const [token, setToken] = useState(0);
+  const { data: getVideos } = useGetVideosQuery(category, {
     skip: !category,
     keepUnusedDataFor: 3600 * 24,
   });
@@ -40,6 +42,10 @@ export default function App() {
       });
       videoIdsString = videoIdsString.substring(0, videoIdsString.length - 1);
       dispatch(setVidIds(videoIdsString));
+
+      // setTimeout(() => {
+      //   setToken(2);
+      // }, 5000);
     }
   }, [getVideos]);
 
@@ -82,7 +88,16 @@ export default function App() {
       dispatch(setChannels(getChannelDetails));
     }
   }, [getChannelDetails, dispatch]);
-
+  useEffect(() => {
+    ReactGA.initialize(TRACKING_ID);
+  }, []);
+  useEffect(() => {
+    window.gtag("event", "page_view", {
+      page_location: window.location.href,
+      page_path: location.pathname,
+      page_title: document.title,
+    });
+  }, [location]);
   return (
     <>
       <BrowserRouter>

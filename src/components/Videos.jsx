@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import { ChannelCard, VideoCard } from "./index";
-import { motion } from "framer-motion";
+import { motion, transform } from "framer-motion";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import TimedOut from "./TimedOut";
@@ -18,19 +18,33 @@ const Videos = ({ suggested }) => {
     timeout();
   }, []);
 
-  // console.log("Videos= " + JSON.stringify(videos));
-  const slideUp = {
-    hidden: { opacity: 0.5 },
+  const outerVariant = {
+    hidden: {
+      scale: 0.95,
+      y: 10,
+      opacity: 0.5,
+    },
     visible: {
       scale: 1,
+      y: 0,
       opacity: 1,
       transition: {
-        staggerChildren: 0.15,
+        duration: 1,
+        staggerChildren: 0.05,
       },
     },
+    exit: {
+      opacity: 0.5,
+      scale: 0,
+    },
   };
-  const itemVariants = {
-    hidden: { opacity: 0, scale: 0.8, y: 100 },
+
+  const innerVariant = {
+    hidden: {
+      opacity: 0.8,
+      scale: 0.9,
+      y: 0,
+    },
     visible: {
       scale: 1,
       opacity: 1,
@@ -40,17 +54,16 @@ const Videos = ({ suggested }) => {
       },
     },
   };
+
   return suggested ? (
-    <motion.div
-      initial="hidden"
-      animate="visible"
-      variants={slideUp}
-      className="suggestedvideos"
-    >
+    <div className="suggestedvideos">
       {videos.items ? (
         videos.items.map((item, idx) => (
           <motion.div
-            variants={itemVariants}
+            // variants={innerVariant}
+            initial="hidden"
+            animate="visible"
+            variants={outerVariant}
             className="videoCardSuggested"
             key={idx}
           >
@@ -63,27 +76,34 @@ const Videos = ({ suggested }) => {
           {timedOut ? <TimedOut /> : <VidSkeleton suggested={"suggested"} />}
         </div>
       )}
-    </motion.div>
+    </div>
   ) : (
     <div>
       {videos.items ? (
         <motion.div
+          variants={outerVariant}
+          className="videos"
           initial="hidden"
           animate="visible"
-          variants={slideUp}
-          className="videos"
+          exit="exit"
         >
           {videos.items.map((item, idx) => (
-            <motion.div variants={itemVariants} key={idx}>
+            <motion.div variants={innerVariant} key={idx}>
               {item.id && <VideoCard video={item} />}
               {item.id.channelId && <ChannelCard channelDetail={item} />}
             </motion.div>
           ))}
         </motion.div>
       ) : (
-        <div className="text-white">
+        <motion.div
+          variants={outerVariant}
+          className="timedOut"
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+        >
           {timedOut ? <TimedOut /> : <VidSkeleton />}
-        </div>
+        </motion.div>
       )}
     </div>
   );

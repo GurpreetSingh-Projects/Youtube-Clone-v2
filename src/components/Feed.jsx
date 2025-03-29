@@ -34,6 +34,7 @@ const Feed = () => {
             variant="h5"
             fontWeight="bold"
             mb={2}
+            className="categoryName"
             sx={{ color: "white" }}
           >
             {category}&nbsp;

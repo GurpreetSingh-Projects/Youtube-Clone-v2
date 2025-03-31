@@ -26,11 +26,6 @@ export default function Searchbar() {
     "News",
     "Photos App",
     "Portfolio",
-    "sound design plugins",
-    "music streaming platforms",
-    "Trending",
-    "Apple Music exclusive artists",
-    "VR music performance",
   ];
   useMemo(() => {
     for (let i = 0; i < searchTerms.length; i++) {

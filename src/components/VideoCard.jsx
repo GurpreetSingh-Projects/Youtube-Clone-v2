@@ -43,18 +43,6 @@ export default function VideoCard({ video }) {
       onMouseLeave={cardNotHovered}
     >
       <Link to={`/video/${video?.id}`}>
-        {/* <Box
-          className="videoCardCall"
-          sx={{
-            background: "#00000000",
-            padding: 0,
-            margin: 0,
-            zIndex: 999,
-            position: "fixed",
-            inset: 0,
-          }}
-        ></Box> */}
-
         <CardMedia
           component="img"
           loading="lazy"
@@ -62,11 +50,15 @@ export default function VideoCard({ video }) {
           image={video?.snippet?.thumbnails?.medium?.url}
           alt={video?.snippet?.title}
         />
-        <VideoPlayer
-          isPlaying={isHovered}
-          videoId={video?.id}
-          videoCardCall={true}
-        />
+        {isHovered ? (
+          <VideoPlayer
+            isPlaying={isHovered}
+            videoId={video?.id}
+            videoCardCall={true}
+          />
+        ) : (
+          <></>
+        )}
       </Link>
       <CardContent
         sx={{

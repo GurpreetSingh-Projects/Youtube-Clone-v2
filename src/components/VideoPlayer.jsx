@@ -1,4 +1,4 @@
-import ReactPlayer from "react-player";
+import ReactPlayer from "react-player/lazy";
 import { motion } from "framer-motion";
 const VideoPlayer = (props) => {
   const slideUp = {
@@ -27,6 +27,7 @@ const VideoPlayer = (props) => {
       }}
     >
       <ReactPlayer
+        loading
         className={`react-player mb-3 mb-md-0 ${props?.videoCardCall}`}
         url={`https://www.youtube.com/watch?v=${props?.videoId}`}
         playing={props?.isPlaying}

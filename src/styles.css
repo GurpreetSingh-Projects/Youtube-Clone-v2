@@ -767,6 +767,7 @@ a {
   .cardImg {
     object-fit: cover;
   }
+
   .containerNew {
     padding: 0px;
   }
@@ -880,6 +881,23 @@ a {
   .videos {
     padding: 0px 10px;
   }
+  .categoryName {
+    margin-top: 20px !important;
+    font-size: 16px !important;
+  }
+  .searchBarContainer {
+    position: fixed;
+    top: 180px;
+    left: 5px;
+    right: 5px;
+  }
+  .searchSuggestions {
+    padding: 10px;
+    margin-top: 15px;
+  }
+  .searchItem {
+    padding: 5px;
+  }
 }
 
 @media screen and (max-width: 800px) {
@@ -942,5 +960,27 @@ a {
   }
   100% {
     background-position: 0% 50%;
+  }
+}
+.timedOut {
+  height: 70vh;
+  width: 100%;
+}
+.errorBox {
+  animation: upDown 2.5s linear infinite;
+  padding: 30px 50px;
+  border-radius: 20px;
+}
+@keyframes upDown {
+  0%,
+  100% {
+    translate: 0px;
+    box-shadow: 0px 0px 50px rgb(49, 49, 49);
+    border: 1px solid white;
+  }
+  50% {
+    translate: 0px -10px;
+    box-shadow: 0px 0px 25px rgb(49, 49, 49);
+    border: 1px solid white;
   }
 }

@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 const API_KEY = import.meta.env.VITE_API_KEY;
-const results = 20;
+const results = 1;
 
 export const youtubeApi = createApi({
   reducerPath: "youtubeApi",
@@ -23,7 +23,7 @@ export const youtubeApi = createApi({
     }),
     getVidDetails: builder.query({
       query: (vidIds) => ({
-        url: `videos?part=snippet,contentDetails,statistics&id=${vidIds}&key=${API_KEY}&type=video`,
+        url: `videos?part=snippet,contentDetails,statistics&id=${vidIds}&key=${API_KEY}`,
         method: "GET",
       }),
     }),
@@ -39,6 +39,18 @@ export const youtubeApi = createApi({
         method: "GET",
       }),
     }),
+    getChannelPlaylistId: builder.query({
+      query: (channelId) => ({
+        url: `channels?part=snippet%2Cstatistics%2CbrandingSettings%2CcontentDetails&id=${channelId}&key=${API_KEY}`,
+        method: "GET",
+      }),
+    }),
+    getChannelPlaylistItems: builder.query({
+      query: (channelPlaylistId) => ({
+        url: `playlistItems?part=snippet&playlistId=${channelPlaylistId}&key=${API_KEY}&maxResults=50`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -47,4 +59,6 @@ export const {
   useGetVidDetailsQuery,
   useGetChannelDetailsQuery,
   useGetCommentsQuery,
+  useGetChannelPlaylistIdQuery,
+  useGetChannelPlaylistItemsQuery,
 } = youtubeApi;

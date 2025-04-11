@@ -5,8 +5,11 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import TimedOut from "./TimedOut";
 import VidSkeleton from "./VidSkeleton";
-const Videos = ({ suggested }) => {
+import VidMapper from "./VidMapper";
+
+const Videos = ({ suggested, channelView }) => {
   const videos = useSelector((state) => state.videos.videos);
+  const recVideos = useSelector((state) => state.videos.recommendedVideos);
   const [timedOut, setTimedOut] = useState(false);
 
   function timeout() {
@@ -14,6 +17,7 @@ const Videos = ({ suggested }) => {
       setTimedOut(true);
     }, 10000);
   }
+
   useEffect(() => {
     timeout();
   }, []);
@@ -39,73 +43,65 @@ const Videos = ({ suggested }) => {
     },
   };
 
-  const innerVariant = {
-    hidden: {
-      opacity: 0.8,
-      scale: 0.9,
-      y: 0,
-    },
-    visible: {
-      scale: 1,
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-      },
-    },
-  };
-
-  return suggested ? (
-    <div className="suggestedvideos">
-      {videos.items ? (
-        videos.items.map((item, idx) => (
+  return (
+    <>
+      {/* All Videos */}
+      {!suggested &&
+        !channelView &&
+        (videos.items ? (
+          <>
+            <VidMapper videos={videos} class="videos" />
+          </>
+        ) : (
           <motion.div
-            // variants={innerVariant}
+            variants={outerVariant}
+            className="timedOut"
             initial="hidden"
             animate="visible"
-            variants={outerVariant}
-            className="videoCardSuggested"
-            key={idx}
+            exit="exit"
           >
-            {item.id && <VideoCard video={item} />}
-            {item.id.channelId && <ChannelCard channelDetail={item} />}
+            {timedOut ? <TimedOut /> : <VidSkeleton />}
           </motion.div>
-        ))
-      ) : (
-        <div className="text-white">
-          {timedOut ? <TimedOut /> : <VidSkeleton suggested={"suggested"} />}
+        ))}
+      {/* Suggested Videos */}
+      {suggested && (
+        <div className="suggestedvideos">
+          {recVideos.items ? (
+            <VidMapper videos={recVideos} class="videoCardSuggested" />
+          ) : (
+            <div className="text-white">
+              {timedOut ? (
+                <TimedOut />
+              ) : (
+                <VidSkeleton suggested={"suggested"} />
+              )}
+            </div>
+          )}
         </div>
       )}
-    </div>
-  ) : (
-    <div>
-      {videos.items ? (
-        <motion.div
-          variants={outerVariant}
-          className="videos"
-          initial="hidden"
-          animate="visible"
-          exit="exit"
-        >
-          {videos.items.map((item, idx) => (
-            <motion.div variants={innerVariant} key={idx}>
-              {item.id && <VideoCard video={item} />}
-              {item.id.channelId && <ChannelCard channelDetail={item} />}
-            </motion.div>
-          ))}
-        </motion.div>
-      ) : (
-        <motion.div
-          variants={outerVariant}
-          className="timedOut"
-          initial="hidden"
-          animate="visible"
-          exit="exit"
-        >
-          {timedOut ? <TimedOut /> : <VidSkeleton />}
-        </motion.div>
+      {/* Channel Videos */}
+      {channelView && (
+        <div>
+          {recVideos?.items ? (
+            <Box className="videos">
+              <VidMapper
+                videos={recVideos}
+                channelView={true}
+                class="videoCardSuggested"
+              />
+            </Box>
+          ) : (
+            <Box className="text-white" sx={{ minHeight: "500px" }}>
+              {timedOut ? (
+                <TimedOut />
+              ) : (
+                <VidSkeleton suggested={"suggested"} />
+              )}
+            </Box>
+          )}
+        </div>
       )}
-    </div>
+    </>
   );
 };
 

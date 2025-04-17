@@ -4,9 +4,11 @@ import { demoChannelUrl } from "../utils/constants";
 import { useState } from "react";
 import { converter } from "../utils/constants";
 import moment from "moment";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import VideoPlayer from "./VideoPlayer";
-export default function VideoCard({ video }) {
+import { setCurrVidId } from "../features/VidIds/vidIdsSlice";
+import { setChannelId } from "../features/CurrChannel/currChannelSlice";
+export default function VideoCard({ video, channelView }) {
   const description = video.snippet.title;
   const navigate = useNavigate();
   const [isHovered, setIsHovered] = useState(false);
@@ -19,15 +21,22 @@ export default function VideoCard({ video }) {
     setIsHovered(false);
   }
 
-  var currVidDetails = "";
+  var currVidDetails = "",
+    currChannels = "";
+  currChannels = useSelector((state) => state.channels.channels.items);
   try {
-    currVidDetails = useSelector((state) =>
-      state.channels.channels.items.find(
-        (item) => item.id == video.snippet.channelId
-      )
+    currVidDetails = currChannels?.find(
+      (item) => item?.id == video?.snippet?.channelId
     );
-  } catch (error) {
-    console.log("Error in currVidDetails .find() logic");
+  } catch {
+    console.log("Check VideoCard Component for details");
+  }
+  const dispatch = useDispatch();
+  function currVidSetter(id) {
+    dispatch(setCurrVidId(id));
+  }
+  function setChannelUrl(channelId) {
+    dispatch(setChannelId(channelId));
   }
 
   return (
@@ -42,22 +51,30 @@ export default function VideoCard({ video }) {
       onMouseEnter={cardHovered}
       onMouseLeave={cardNotHovered}
     >
-      <Link to={`/video/${video?.id}`}>
+      <Link
+        to={`/video/${video?.id}`}
+        onClick={() => {
+          currVidSetter(video?.id);
+        }}
+      >
+        {/* This Is Thumbnail */}
         <CardMedia
           component="img"
           loading="lazy"
           className="cardImg"
           image={video?.snippet?.thumbnails?.medium?.url}
           alt={video?.snippet?.title}
+          sx={{ cursor: "pointer" }}
         />
-        {isHovered ? (
+        {/* <div className="text-white">
+          {moment.duration(video?.contentDetails?.duration).humanize()}
+        </div> */}
+        {isHovered && (
           <VideoPlayer
             isPlaying={isHovered}
             videoId={video?.id}
             videoCardCall={true}
           />
-        ) : (
-          <></>
         )}
       </Link>
       <CardContent
@@ -68,18 +85,20 @@ export default function VideoCard({ video }) {
           justifyContent: "start",
         }}
       >
-        <Link
-          to={
-            video?.snippet?.channelId
-              ? `/channel/${video?.snippet?.channelId}`
-              : demoChannelUrl
-          }
-        >
-          <img
-            className="avatar"
-            src={currVidDetails?.snippet?.thumbnails?.default?.url}
-          />
-        </Link>
+        {channelView || (
+          <Link
+            to={`/channel/${video?.snippet?.channelId}`}
+            onClick={() => {
+              setChannelUrl(video?.snippet?.channelId);
+            }}
+          >
+            <img
+              className="avatar"
+              src={currVidDetails?.snippet?.thumbnails?.default?.url}
+            />
+          </Link>
+        )}
+
         <Link to={`/video/${video?.id}`}>
           <Box className="">
             <Typography variant="subtitle1" fontWeight="bold" color="white">
@@ -98,10 +117,10 @@ export default function VideoCard({ video }) {
               }}
             >
               {video?.snippet?.channelTitle.slice(0, 40) || demoChannelUrl}
-              &nbsp;
-              {converter(video?.statistics?.subscriberCount)} &nbsp;
+              {converter(video?.statistics?.subscriberCount)}
               {/* {converter(video?.statistics?.viewCount)} */}
-              <br />
+              {/* <br /> */}
+              &nbsp;&#124;&nbsp;
               <span className="text-capitalize">
                 {moment(video?.snippet?.publishedAt, "YYYYMMDD").fromNow()}
               </span>

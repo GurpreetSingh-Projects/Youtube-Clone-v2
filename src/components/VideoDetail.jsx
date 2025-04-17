@@ -18,9 +18,12 @@ import { setComments } from "../features/Comments/commentsSlice";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import moment from "moment";
 import SubscribeButton from "./SubscribeButton";
-function VideoDetail() {
-  const { id } = useParams();
-  const idStore = id;
+import { setChannelId } from "../features/CurrChannel/currChannelSlice";
+import { setCurrVidId } from "../features/VidIds/vidIdsSlice";
+import TimedOut from "./TimedOut";
+const VideoDetail = () => {
+  // const { id } = useParams();
+  const id = useSelector((state) => state.vidIds.currVidId);
   const dispatch = useDispatch();
   // const [currVidDetails, setCurrVidDetails] = useState(null);
   // const { videos, setVideos } = useContext(CreateContext);
@@ -31,12 +34,12 @@ function VideoDetail() {
   var vidDetails = useSelector((state) => {
     const items = state.videos.videos.items;
 
-    if (!Array.isArray(items) || !idStore) {
+    if (!Array.isArray(items) || !id) {
       return null;
     }
     return items.find((item) => {
-      // console.log(item.id + " " + idStore);
-      return item.id == idStore;
+      // console.log(item.id + " " + id);
+      return item.id == id;
     });
   });
 
@@ -52,12 +55,15 @@ function VideoDetail() {
       return item.id == vidDetails.snippet.channelId;
     });
   });
+  useEffect(() => {
+    dispatch(setChannelId(vidDetails?.snippet?.channelId));
+  }, []);
 
   // var vidDetails = useSelector((state) => state.videos.videos.items);
   // console.log("details -" + JSON.stringify(vidDetails));
   // console.log("details -" + JSON.stringify(channelDetails));
 
-  const { data } = useGetCommentsQuery(idStore, {
+  const { data } = useGetCommentsQuery(id, {
     keepUnusedDataFor: 24 * 3600,
   });
 
@@ -199,10 +205,10 @@ function VideoDetail() {
                         ></Avatar>
                         <Typography className="title" color="#fff">
                           {vidDetails?.snippet?.channelTitle}
-                          <Box className="customUrl">
-                            {channelDetails?.snippet?.customUrl}
-                          </Box>
                         </Typography>
+                        <Box className="customUrl">
+                          {channelDetails?.snippet?.customUrl}hehe
+                        </Box>
 
                         <Typography className="subCount" variant="subtitle2">
                           <div
@@ -260,74 +266,76 @@ function VideoDetail() {
                 </Typography>
 
                 <Stack className="commentMain">
-                  {commentsList.items && commentsList.items.length > 0
-                    ? commentsList.items.map((item, idx) => (
-                        <div key={idx}>
-                          {/* {item.id} */}
-                          <Box className="comments">
-                            <div className="commentsWrapper">
-                              <div className="commentAvatarContainer">
-                                <Link
-                                  to={`/channel/${item?.snippet?.topLevelComment?.snippet?.channelId}`}
-                                >
-                                  <Avatar
-                                    className="commentAvatar"
-                                    src={
+                  {commentsList.items && commentsList.items.length > 0 ? (
+                    commentsList.items.map((item, idx) => (
+                      <div key={idx}>
+                        {/* {item.id} */}
+                        <Box className="comments">
+                          <div className="commentsWrapper">
+                            <div className="commentAvatarContainer">
+                              <Link
+                                to={`/channel/${item?.snippet?.topLevelComment?.snippet?.channelId}`}
+                              >
+                                <Avatar
+                                  className="commentAvatar"
+                                  src={
+                                    item?.snippet?.topLevelComment?.snippet
+                                      ?.authorProfileImageUrl
+                                  }
+                                ></Avatar>
+                              </Link>
+                            </div>
+                            <div className="commentDetails">
+                              <div className="">
+                                <div className="title">
+                                  {
+                                    item?.snippet?.topLevelComment?.snippet
+                                      ?.authorDisplayName
+                                  }
+                                  <span className="mx-2"> &middot;</span>
+                                  <span className="postedAt text-capitalize">
+                                    {moment(
                                       item?.snippet?.topLevelComment?.snippet
-                                        ?.authorProfileImageUrl
-                                    }
-                                  ></Avatar>
-                                </Link>
-                              </div>
-                              <div className="commentDetails">
-                                <div className="">
-                                  <div className="title">
-                                    {
-                                      item?.snippet?.topLevelComment?.snippet
-                                        ?.authorDisplayName
-                                    }
-                                    <span className="mx-2"> &middot;</span>
-                                    <span className="postedAt text-capitalize">
-                                      {moment(
-                                        item?.snippet?.topLevelComment?.snippet
-                                          ?.updatedAt,
-                                        "YYYYMMDD"
-                                      ).fromNow()}
-                                    </span>
+                                        ?.updatedAt,
+                                      "YYYYMMDD"
+                                    ).fromNow()}
+                                  </span>
+                                </div>
+                                <div className="commentText my-2 mb-3">
+                                  {
+                                    item?.snippet?.topLevelComment?.snippet
+                                      ?.textOriginal
+                                  }
+                                </div>
+                                <div className="commentActions text-center">
+                                  <div className="reply">Reply</div>
+                                  <div className="dropdown">
+                                    <ArrowDropDownIcon />
+                                    {item.snippet.totalReplyCount
+                                      ? item.snippet.totalReplyCount
+                                      : 0}
+                                    &nbsp; Replies
                                   </div>
-                                  <div className="commentText my-2 mb-3">
-                                    {
-                                      item?.snippet?.topLevelComment?.snippet
-                                        ?.textOriginal
-                                    }
-                                  </div>
-                                  <div className="commentActions text-center">
-                                    <div className="reply">Reply</div>
-                                    <div className="dropdown">
-                                      <ArrowDropDownIcon />
-                                      {item.snippet.totalReplyCount
-                                        ? item.snippet.totalReplyCount
-                                        : 0}
-                                      &nbsp; Replies
-                                    </div>
-                                    <IconButton className="like pe-0">
-                                      <ThumbUpOutlinedIcon fontSize="small" />{" "}
-                                    </IconButton>
-                                    {
-                                      item?.snippet?.topLevelComment?.snippet
-                                        ?.likeCount
-                                    }
-                                    <IconButton className="dislike">
-                                      <ThumbDownOutlinedIcon fontSize="small" />
-                                    </IconButton>
-                                  </div>
+                                  <IconButton className="like pe-0">
+                                    <ThumbUpOutlinedIcon fontSize="small" />{" "}
+                                  </IconButton>
+                                  {
+                                    item?.snippet?.topLevelComment?.snippet
+                                      ?.likeCount
+                                  }
+                                  <IconButton className="dislike">
+                                    <ThumbDownOutlinedIcon fontSize="small" />
+                                  </IconButton>
                                 </div>
                               </div>
                             </div>
-                          </Box>
-                        </div>
-                      ))
-                    : "No Comments Found"}
+                          </div>
+                        </Box>
+                      </div>
+                    ))
+                  ) : (
+                    <TimedOut comments={true} />
+                  )}
                 </Stack>
               </Box>
             </Box>
@@ -346,6 +354,6 @@ function VideoDetail() {
       </Box>
     </Box>
   );
-}
+};
 
 export default VideoDetail;

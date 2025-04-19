@@ -4,81 +4,90 @@ import { useParams } from "react-router-dom";
 import { Box, Card, Hidden, Typography } from "@mui/material";
 import { ChannelCard, Videos } from "./index";
 // import { CreateContext } from "../App";
-import { useGetVidDetailsQuery } from "../features/FetchApi/fetchapi";
+import {
+  useGetChannelPlaylistIdQuery,
+  useGetChannelPlaylistItemsQuery,
+  useGetVidDetailsQuery,
+} from "../features/FetchApi/fetchapi";
 import { useEffect, useState } from "react";
 import { fetchApi } from "../utils/fetchApi";
-import { useDispatch } from "react-redux";
-import { setVideos } from "../features/Videos/videoSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { setRecommendedVideos, setVideos } from "../features/Videos/videoSlice";
 import { setChannelIds } from "../features/ChannelIds/channelidsSlice";
 import SubscribeButton from "./SubscribeButton";
 import { extendDescription } from "../utils/constants";
+import {
+  setChannelId,
+  setPlaylist,
+  setPlaylistId,
+} from "../features/CurrChannel/currChannelSlice";
 
 const ChannelDetail = () => {
-  const [channelDetail, setChannelDetail] = useState(null);
+  const [channelDetails, setChannelDetails] = useState("");
   const [channelPlaylistId, setChannelPlaylistId] = useState("");
-  var playListId = "";
-  // const { setVideos } = useContext(CreateContext);
+  const [renderVid, setRenderVid] = useState(false);
+  const dispatch = useDispatch();
 
-  const { id } = useParams();
-  const dispatch = useDispatch;
+  const id = useSelector((state) => state.currChannel.channelId);
+  const { data: getChannelPlaylistId } = useGetChannelPlaylistIdQuery(id, {
+    skip: !id,
+    keepUnusedDataFor: 3600 * 24,
+  });
   useEffect(() => {
-    fetchApi(
-      `channels?part=snippet%2Cstatistics%2CbrandingSettings&id=${id}`
-    ).then((data) => {
-      setChannelDetail(data?.items[0]);
-    });
-
-    fetchApi(`channels?part=contentDetails&id=${id}`).then((data) => {
+    if (getChannelPlaylistId != "") {
+      dispatch(setPlaylistId(getChannelPlaylistId?.items[0]));
+      setChannelDetails(getChannelPlaylistId?.items[0]);
       setChannelPlaylistId(
-        data?.items[0]?.contentDetails?.relatedPlaylists?.uploads
+        getChannelPlaylistId?.items[0]?.contentDetails?.relatedPlaylists
+          ?.uploads
       );
-      playListId = data?.items[0]?.contentDetails?.relatedPlaylists?.uploads;
-    });
-
-    // fetchApi(`search?part=snippet&channelId?=${id}&type=video`).then((data) => {
-    //   // alert("videos-" + JSON.stringify(data));
-    //   dispatch(setChannelIds(data));
-    // });
-  }, [id]);
+    }
+  }, [getChannelPlaylistId]);
+  const { data: getChannelPlaylistItems } = useGetChannelPlaylistItemsQuery(
+    channelPlaylistId || null,
+    {
+      skip: !channelPlaylistId,
+      keepUnusedDataFor: 3600 * 24,
+    }
+  );
   useEffect(() => {
-    fetchApi(`playlistItems?part=snippet&id=${playListId}`).then((data) => {
-      // alert(playListId);
-      console.log(JSON.stringify(data));
-    });
-  }, [playListId]);
-
-  // const { data: getChannelDetails } = useGetVidDetailsQuery(id);
-  // console.log(JSON.stringify(getChannelDetails));
+    if (getChannelPlaylistItems != "") {
+      dispatch(setPlaylist(getChannelPlaylistItems));
+      dispatch(setRecommendedVideos(getChannelPlaylistItems));
+      setRenderVid(true);
+    } else {
+      dispatch(setRecommendedVideos([]));
+    }
+  }, [getChannelPlaylistItems]);
 
   return (
     <>
-      <Box>
-        <Box
-          className="channelBanner"
-          sx={{
-            zIndex: "100",
-            objectFit: "cover",
-            objectPosition: "center center",
-            width: "100%",
-            overflow: "hidden",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <img
-            src={channelDetail?.brandingSettings?.image?.bannerExternalUrl}
-            style={{ width: "100%" }}
-            alt=""
-          />
-        </Box>
-
-        <ChannelCard
-          channelDetail={channelDetail}
-          marginTop="-100px"
-        ></ChannelCard>
+      <Box
+        className="channelBanner"
+        sx={{
+          zIndex: "100",
+          objectFit: "cover",
+          objectPosition: "center center",
+          width: "100%",
+          overflow: "hidden",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <img
+          src={channelDetails?.brandingSettings?.image?.bannerExternalUrl}
+          style={{ width: "100%" }}
+          alt=""
+        />
       </Box>
-      <Box className="faj flex-column">
+
+      <ChannelCard
+        channelDetail={channelDetails}
+        marginTop="-100px"
+      ></ChannelCard>
+
+      <Box className="faj flex-column mt-0">
         <Typography
           id="vidDescription"
           onClick={extendDescription}
@@ -87,22 +96,23 @@ const ChannelDetail = () => {
             color: "white",
             textAlign: "center",
             margin: "20px",
-            marginTop: { lg: "-20px", sm: "-50px" },
+            marginTop: { lg: "-50px", sm: "-50px" },
             maxWidth: "75vw",
             textWrap: "wrap",
             textOverflow: "ellipsis",
           }}
         >
-          {channelDetail?.brandingSettings?.channel?.description}
+          {channelDetails?.brandingSettings?.channel?.description}
         </Typography>
         <Box className="faj">
           <SubscribeButton marginStart="ms-0" />
         </Box>
       </Box>
-
-      <Box className="d-flex align-items-center justify-content-center p-3">
-        <Videos />
-      </Box>
+      {renderVid && (
+        <Box className="justify-content-center p-3">
+          <Videos channelView={true} />
+        </Box>
+      )}
     </>
   );
 };

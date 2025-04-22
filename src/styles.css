@@ -23,6 +23,7 @@ body {
 a {
   text-decoration: none;
   color: black;
+  cursor: pointer;
 }
 
 ::-webkit-scrollbar {
@@ -97,6 +98,7 @@ a {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  line-height: 18px;
   font-size: 14px;
   cursor: pointer;
   padding-top: 15px;
@@ -219,6 +221,8 @@ a {
   object-fit: cover;
   height: 180px;
   opacity: 1;
+  z-index: 1000 !important;
+  cursor: pointer;
   transition: opacity 1.5s linear, transform 0.5s linear !important;
 }
 .cardImg:hover {
@@ -554,6 +558,7 @@ a {
 .commentsSubHeading {
   font-size: 15px !important;
   font-weight: 800;
+  margin: 10px 0px !important;
 }
 .commentsSubHeading {
   font-size: 14px;

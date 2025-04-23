@@ -45,7 +45,7 @@ const HelpModal = () => {
           aria-controls="panel2-content"
           id="panel2-header"
         >
-          <Typography>What is this YouTube clone </Typography>
+          <Typography>What is YouTube clone ? </Typography>
         </AccordionSummary>
         <AccordionDetails className="accordionPara">
           <Typography>
@@ -89,7 +89,7 @@ const HelpModal = () => {
           aria-controls="panel2-content"
           id="panel2-header"
         >
-          <Typography>Does the app have a mobile-friendly design?</Typography>
+          <Typography>Does the website has mobile-friendly design?</Typography>
         </AccordionSummary>
         <AccordionDetails className="accordionPara">
           <Typography>
@@ -126,7 +126,7 @@ const HelpModal = () => {
           </Typography>
         </AccordionSummary>
         <AccordionDetails className="accordionPara">
-          <Typography>
+          <Box>
             You can reach out to me via multiple platforms -
             <br />
             <Box>
@@ -160,7 +160,7 @@ const HelpModal = () => {
                 https://github.com/GurpreetSingh-Projects
               </a>
             </Box>
-          </Typography>
+          </Box>
         </AccordionDetails>
       </Accordion>
     </>

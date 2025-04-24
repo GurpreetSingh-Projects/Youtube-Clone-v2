@@ -31,7 +31,7 @@ const ChannelCard = ({ channelDetail, marginTop }) => {
         }}
       >
         <CardMedia
-          className="channelProfilePic"
+          className="channelProfilePic pb-0"
           image={
             channelDetail?.snippet?.thumbnails?.high?.url || demoProfilePicture
           }

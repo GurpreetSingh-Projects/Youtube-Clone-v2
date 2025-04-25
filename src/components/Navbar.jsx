@@ -95,7 +95,7 @@ const Navbar = () => {
       <Box
         className="col-3"
         onClick={() => {
-          dispatch(setCategory("What's Trending"));
+          dispatch(setCategory("New"));
         }}
       >
         <Link

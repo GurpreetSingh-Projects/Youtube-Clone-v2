@@ -24,30 +24,34 @@ import { setChannelIds } from "./features/ChannelIds/channelidsSlice";
 import { setChannels } from "./features/Channels/channelsSlice";
 import ReactGA from "react-ga4";
 export default function App() {
-  // const location = useLocation();
   const TRACKING_ID = "G-XPVYS3W9Z2";
   const category = useSelector((state) => state.category.selectedCategory);
   const dispatch = useDispatch();
-  // const [token, setToken] = useState(0);
+
   const { data: getVideos } = useGetVideosQuery(category, {
     skip: !category,
     keepUnusedDataFor: 3600 * 24,
   });
+  let getRecVids = useSelector((state) => state?.videos?.recommendVideos);
+  console.log(getRecVids);
+  // let getChannelVids = useSelector((state) => state.videos.recommendedVideos);
   useEffect(() => {
     if (getVideos != null) {
       dispatch(searchResults(getVideos));
       var videoIdsString = "";
-      getVideos.items.map((items) => {
-        videoIdsString += items.id.videoId + ",";
+      getVideos?.items.map((items) => {
+        videoIdsString += items?.id?.videoId + ",";
       });
+      if (!getRecVids) {
+        getRecVids?.items.map((items) => {
+          videoIdsString += items?.id?.videoId + ",";
+        });
+      }
+
       videoIdsString = videoIdsString.substring(0, videoIdsString.length - 1);
       dispatch(setVidIds(videoIdsString));
-
-      // setTimeout(() => {
-      //   setToken(2);
-      // }, 5000);
     }
-  }, [getVideos]);
+  }, [getVideos, getRecVids]);
 
   var vidIds = useSelector((state) => state.vidIds);
   const { data: getVidDetails } = useGetVidDetailsQuery(vidIds.vidIds || null, {

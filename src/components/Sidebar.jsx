@@ -21,15 +21,12 @@ import {
   DeveloperModeIcon,
   SlideshowIcon,
 } from "./index";
-import { useContext } from "react";
-// import { CreateContext } from "../App";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import { setCategory } from "../features/Category/categorySlice";
 const Sidebar = (props) => {
-  // const { sidebar } = useContext(CreateContext);
   var categories = [
-    { id: 0, name: "What's Trending", icon: <Whatshot /> },
+    // { id: 0, name: "What's Trending", icon: <Whatshot /> },
     { id: 1, name: "New", icon: <HomeIcon /> },
     { id: 2, name: "Coding", icon: <CodeIcon /> },
     { id: 3, name: "ReactJS", icon: <CodeIcon /> },

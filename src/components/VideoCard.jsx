@@ -1,18 +1,23 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Typography, Card, CardContent, CardMedia, Box } from "@mui/material";
 import { demoChannelUrl } from "../utils/constants";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { converter } from "../utils/constants";
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import VideoPlayer from "./VideoPlayer";
 import { setCurrVidId } from "../features/VidIds/vidIdsSlice";
 import { setChannelId } from "../features/CurrChannel/currChannelSlice";
-export default function VideoCard({ video, channelView }) {
+export default function VideoCard({ video, channelView, recommendedVideos }) {
   const description = video.snippet.title;
   const navigate = useNavigate();
+  const replaceUrl = (url) => {
+    navigate(url, { replace: true });
+  };
   const [isHovered, setIsHovered] = useState(false);
-
+  const [link, setLink] = useState("");
+  const [channel, setChannel] = useState("");
+  // console.log(video?.id?.videoId);
   function cardHovered() {
     setIsHovered(true);
   }
@@ -38,6 +43,15 @@ export default function VideoCard({ video, channelView }) {
   function setChannelUrl(channelId) {
     dispatch(setChannelId(channelId));
   }
+  useEffect(() => {
+    if (recommendedVideos) {
+      setLink(video?.id?.videoId);
+    } else if (channelView) {
+      setLink(video?.snippet?.resourceId?.videoId);
+    } else {
+      setLink(video?.id);
+    }
+  }, []);
 
   return (
     <Card
@@ -52,9 +66,10 @@ export default function VideoCard({ video, channelView }) {
       onMouseLeave={cardNotHovered}
     >
       <Link
-        to={`/video/${video?.id}`}
+        to={`/video/${link}`}
         onClick={() => {
-          currVidSetter(video?.id);
+          currVidSetter(link);
+          setChannelUrl(video?.snippet?.channelId);
         }}
       >
         {/* This Is Thumbnail */}
@@ -66,9 +81,7 @@ export default function VideoCard({ video, channelView }) {
           alt={video?.snippet?.title}
           sx={{ cursor: "pointer" }}
         />
-        {/* <div className="text-white">
-          {moment.duration(video?.contentDetails?.duration).humanize()}
-        </div> */}
+
         {isHovered && (
           <VideoPlayer
             isPlaying={isHovered}
@@ -76,6 +89,14 @@ export default function VideoCard({ video, channelView }) {
             videoCardCall={true}
           />
         )}
+        <div className="text-white vidDuration">
+          {moment.duration(video?.contentDetails?.duration).minutes()}:
+          {moment
+            .duration(video?.contentDetails?.duration)
+            .seconds()
+            .toString()
+            .padStart(2, "0")}
+        </div>
       </Link>
       <CardContent
         sx={{
@@ -99,7 +120,13 @@ export default function VideoCard({ video, channelView }) {
           </Link>
         )}
 
-        <Link to={`/video/${video?.id}`}>
+        <Link
+          to={`/video/${link}`}
+          onClick={() => {
+            currVidSetter(link);
+            setChannelUrl(video?.snippet?.channelId);
+          }}
+        >
           <Box className="">
             <Typography variant="subtitle1" fontWeight="bold" color="white">
               <div

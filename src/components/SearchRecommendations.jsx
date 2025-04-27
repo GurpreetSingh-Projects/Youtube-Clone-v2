@@ -1,20 +1,10 @@
 import React from "react";
 import { Typewriter } from "react-simple-typewriter";
 
-const SearchRecommendations = () => {
+const SearchRecommendations = (props) => {
   return (
     <Typewriter
-      words={[
-        "How to code a responsive website",
-        "Top web development trends",
-        "CSS animations tutorial for beginners",
-        "JavaScript vs TypeScript: Which is better?",
-        "Best practices for SEO in web design",
-        "How to optimize website performance",
-        "What's!",
-        "Welcome to React!",
-        "Enjoy coding!",
-      ]}
+      words={props?.words}
       loop={true}
       cursor
       cursorStyle="|"

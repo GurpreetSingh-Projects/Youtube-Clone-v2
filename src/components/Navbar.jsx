@@ -78,7 +78,17 @@ const Navbar = () => {
     Navigate(url, { replace: true });
   };
   const searchbar = useSelector((state) => state.searchbar);
-
+  let words = [
+    "How to code a responsive website",
+    "Top web development trends",
+    "CSS animations tutorial for beginners",
+    "JavaScript vs TypeScript: Which is better?",
+    "Best practices for SEO in web design",
+    "How to optimize website performance",
+    "What's!",
+    "Welcome to React!",
+    "Enjoy coding!",
+  ];
   return (
     <Stack
       className="px-1 py-2 px-md-3 py-md-2"
@@ -118,7 +128,7 @@ const Navbar = () => {
         <div className="col-7 text-white fs-6 fst-italic d-none d-md-block">
           &quot;
           <span>
-            <SearchRecommendations />
+            <SearchRecommendations words={words} />
           </span>
           &quot;
         </div>

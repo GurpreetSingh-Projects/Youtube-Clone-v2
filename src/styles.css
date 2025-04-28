@@ -205,9 +205,9 @@ a {
   gap: 10px;
   margin-left: 10px;
 }
-.suggestedvideos .videoCardSuggested {
+/* .suggestedvideos .videoCardSuggested {
   background: green !important;
-}
+} */
 .videoCard {
   width: 100%;
   height: 100%;
@@ -406,8 +406,8 @@ a {
   align-items: center;
   justify-content: center;
   position: absolute;
-  top: -355px;
-  left: -125px;
+  top: -370px;
+  left: -155px;
   font-weight: 600;
   font-size: 13px;
   visibility: hidden;
@@ -646,6 +646,8 @@ a {
 .modalWrapper {
   position: relative;
   width: 60% !important;
+  max-height: 80vh;
+  overflow: scroll;
 }
 .profileModal {
   width: 30% !important;
@@ -988,4 +990,17 @@ a {
     box-shadow: 0px 0px 25px rgb(49, 49, 49);
     border: 1px solid white;
   }
+}
+.vidDuration {
+  font-size: 14px;
+  font-weight: 500;
+  padding: 0px 8px;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  border: 1px solid white;
+  width: fit-content;
+  border-radius: 99px;
+  position: absolute;
+  top: 5px;
+  right: 5px;
 }

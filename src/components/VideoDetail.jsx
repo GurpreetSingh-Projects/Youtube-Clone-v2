@@ -1,7 +1,7 @@
 import { Avatar, Box, IconButton, Stack, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import ReactPlayer from "react-player/youtube";
-import { useParams, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { converter, extendDescription } from "../utils/constants";
 import Videos from "./Videos";
 import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
@@ -13,7 +13,10 @@ import { useDispatch, useSelector } from "react-redux";
 // import ChannelDetail from "./ChannelDetail";
 import GroupIcon from "@mui/icons-material/Group";
 import VideoCameraFrontIcon from "@mui/icons-material/VideoCameraFront";
-import { useGetCommentsQuery } from "../features/FetchApi/fetchapi";
+import {
+  useGetCommentsQuery,
+  useGetVideosQuery,
+} from "../features/FetchApi/fetchapi";
 import { setComments } from "../features/Comments/commentsSlice";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import moment from "moment";
@@ -21,24 +24,23 @@ import SubscribeButton from "./SubscribeButton";
 import { setChannelId } from "../features/CurrChannel/currChannelSlice";
 import { setCurrVidId } from "../features/VidIds/vidIdsSlice";
 import TimedOut from "./TimedOut";
+import { setRecommended, setVideos } from "../features/Videos/videoSlice";
+import axios from "axios";
+import SearchRecommendations from "./SearchRecommendations";
+import { Typewriter } from "react-simple-typewriter";
 const VideoDetail = () => {
-  // const { id } = useParams();
   const id = useSelector((state) => state.vidIds.currVidId);
   const dispatch = useDispatch();
-  // const [currVidDetails, setCurrVidDetails] = useState(null);
-  // const { videos, setVideos } = useContext(CreateContext);
   const [liked, setLiked] = useState(false);
   const [disliked, setDisliked] = useState(false);
-  // console.log("Searched for keyword - " + id);
-
+  const [summary, setSummary] = useState("");
   var vidDetails = useSelector((state) => {
     const items = state.videos.videos.items;
 
     if (!Array.isArray(items) || !id) {
-      return null;
+      return console.log("Video Id Not found!!");
     }
     return items.find((item) => {
-      // console.log(item.id + " " + id);
       return item.id == id;
     });
   });
@@ -47,17 +49,20 @@ const VideoDetail = () => {
     const items = state.channels.channels.items;
 
     if (!Array.isArray(items) || !vidDetails?.snippet?.channelId) {
-      return null;
+      return console.log("Channel Id Not found!!");
     }
 
     return items.find((item) => {
-      // console.log(item.id + " " + vidDetails.snippet.channelId);
       return item.id == vidDetails.snippet.channelId;
     });
   });
   useEffect(() => {
-    dispatch(setChannelId(vidDetails?.snippet?.channelId));
-  }, []);
+    if (vidDetails?.snippet?.channelId != "") {
+      dispatch(setChannelId(vidDetails?.snippet?.channelId));
+    } else {
+      dispatch(setChannelId(""));
+    }
+  }, [vidDetails]);
 
   // var vidDetails = useSelector((state) => state.videos.videos.items);
   // console.log("details -" + JSON.stringify(vidDetails));
@@ -74,6 +79,52 @@ const VideoDetail = () => {
   }, [data, dispatch]);
 
   const commentsList = useSelector((state) => state.comments.comments);
+
+  const { data: getVideos } = useGetVideosQuery(id, {
+    skip: !id,
+    keepUnusedDataFor: 24 * 3600,
+  });
+  // let homeVids = useSelector((state) => state?.videos?.videos);
+  // console.log("homevides: " + homeVids);
+  // let mergedVideos = [...homeVids, ...getVideos];
+  // console.log(mergedVideos);
+  useEffect(() => {
+    if (getVideos) {
+      dispatch(setRecommended(getVideos));
+      // dispatch(setVideos(...getVideos));
+    }
+  }, [getVideos]);
+  useEffect(() => {
+    const gemini = async () => {
+      const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+      const url =
+        "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent";
+
+      const payload = {
+        contents: [
+          {
+            parts: [
+              {
+                text: `Summarize this youtube video in atleast 100 words and in a single para with no formatting - ${
+                  vidDetails?.snippet?.title
+                } with description set as - ${
+                  vidDetails?.snippet?.localized?.description
+                } and has user comments - ${JSON.stringify(commentsList)} `,
+              },
+            ],
+          },
+        ],
+      };
+      const response = await axios.post(url, payload, {
+        headers: { "Content-Type": "application/json" },
+        params: { key: apiKey },
+      });
+      setSummary(response);
+      console.log(response);
+    };
+    gemini();
+  }, []);
+  let words = [`${summary?.data?.candidates[0]?.content?.parts[0]?.text}`];
   // console.log("Comments list - " + JSON.stringify(commentsList.items));
   return (
     <Box
@@ -101,19 +152,52 @@ const VideoDetail = () => {
             >
               {vidDetails?.snippet?.title}
             </Typography>
+
+            <Box className="commentsContainer mb-0">
+              <Typography
+                color="#fff"
+                className="commentsHeading"
+                sx={{ fontWeight: 700, fontSize: "18px" }}
+              >
+                A.I. Generated Quick Video Summary -
+              </Typography>
+
+              <Typography
+                variant="subtitle2"
+                sx={{ fontWeight: 300, fontSize: "14px", textAlign: "justify" }}
+              >
+                <Typewriter
+                  words={
+                    words || "Video Summary is unavailable at the moment!!"
+                  }
+                  cursor
+                  cursorStyle="|"
+                  typeSpeed={20}
+                  delaySpeed={1000}
+                />
+              </Typography>
+            </Box>
+
             <div
               color="grey"
               id="vidDescription"
-              className="vidDescription text-white px-1 px-md-4 mt-0 mt-md-3"
+              className="vidDescription text-white px-1 px-md-4 mt-0"
               onClick={extendDescription}
               style={{ cursor: "pointer" }}
             >
+              <Typography
+                color="#fff"
+                className="commentsHeading"
+                sx={{ fontWeight: 700, fontSize: "18px", mB: "20px" }}
+              >
+                Video Description -
+              </Typography>
               {vidDetails?.snippet?.localized?.description}
             </div>
 
             <Stack
               direction="row"
-              className="d-flex flex-wrap align-items-center w-100 justify-content-between px-2 px-md-4 mt-2 mt-md-3"
+              className="d-flex flex-wrap align-items-center w-100 justify-content-between px-2 px-md-4 mt-5 mt-md-3"
             >
               <Link
                 className="d-flex align-items-center justify-content-center justify-content-md-start col-12 col-md-6 gap-1 gap-md-2 mt-2 mt-md-0"
@@ -349,7 +433,7 @@ const VideoDetail = () => {
           </Typography>
         </Box>
         <Box>
-          <Videos suggested="true" />
+          <Videos recommended="true" />
         </Box>
       </Box>
     </Box>

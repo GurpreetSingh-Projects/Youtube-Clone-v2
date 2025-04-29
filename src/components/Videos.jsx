@@ -7,9 +7,10 @@ import TimedOut from "./TimedOut";
 import VidSkeleton from "./VidSkeleton";
 import VidMapper from "./VidMapper";
 
-const Videos = ({ suggested, channelView }) => {
+const Videos = ({ suggested, channelView, recommended }) => {
   const videos = useSelector((state) => state.videos.videos);
   const recVideos = useSelector((state) => state.videos.recommendedVideos);
+  const recommendVideos = useSelector((state) => state.videos.recommendVideos);
   const [timedOut, setTimedOut] = useState(false);
 
   function timeout() {
@@ -48,6 +49,7 @@ const Videos = ({ suggested, channelView }) => {
       {/* All Videos */}
       {!suggested &&
         !channelView &&
+        !recommended &&
         (videos.items ? (
           <>
             <VidMapper videos={videos} class="videos" />
@@ -64,10 +66,14 @@ const Videos = ({ suggested, channelView }) => {
           </motion.div>
         ))}
       {/* Suggested Videos */}
-      {suggested && (
+      {/* {recommended && (
         <div className="suggestedvideos">
-          {recVideos.items ? (
-            <VidMapper videos={recVideos} class="videoCardSuggested" />
+          {recommendVideos.items ? (
+            <VidMapper
+              videos={recommendVideos}
+              recommendedVideos="true"
+              class="videoCardSuggested"
+            />
           ) : (
             <div className="text-white">
               {timedOut ? (
@@ -78,7 +84,23 @@ const Videos = ({ suggested, channelView }) => {
             </div>
           )}
         </div>
-      )}
+      )} */}
+      {recommended &&
+        (videos.items ? (
+          <>
+            <VidMapper videos={videos} class="videos" />
+          </>
+        ) : (
+          <motion.div
+            variants={outerVariant}
+            className="timedOut"
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+          >
+            {timedOut ? <TimedOut /> : <VidSkeleton />}
+          </motion.div>
+        ))}
       {/* Channel Videos */}
       {channelView && (
         <div>

@@ -33,7 +33,7 @@ export default function App() {
     keepUnusedDataFor: 3600 * 24,
   });
   let getRecVids = useSelector((state) => state?.videos?.recommendVideos);
-  console.log(getRecVids);
+  // console.log(getRecVids);
   // let getChannelVids = useSelector((state) => state.videos.recommendedVideos);
   useEffect(() => {
     if (getVideos != null) {

@@ -49,7 +49,11 @@ const VidMapper = (props) => {
         {props?.videos?.items.map((item, idx) => (
           <motion.div variants={innerVariant} key={idx}>
             {item.id && (
-              <VideoCard video={item} channelView={props?.channelView} />
+              <VideoCard
+                video={item}
+                channelView={props?.channelView}
+                recommendedVideos={props?.recommendedVideos}
+              />
             )}
             {item.id.channelId && <ChannelCard channelDetail={item} />}
           </motion.div>

@@ -33,7 +33,7 @@ const VideoDetail = () => {
   const dispatch = useDispatch();
   const [liked, setLiked] = useState(false);
   const [disliked, setDisliked] = useState(false);
-  const [summary, setSummary] = useState("");
+  const [summary, setSummary] = useState("Loading...");
   var vidDetails = useSelector((state) => {
     const items = state.videos.videos.items;
 
@@ -94,9 +94,9 @@ const VideoDetail = () => {
       // dispatch(setVideos(...getVideos));
     }
   }, [getVideos]);
+  const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
   useEffect(() => {
     const gemini = async () => {
-      const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
       const url =
         "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent";
 
@@ -120,7 +120,7 @@ const VideoDetail = () => {
         params: { key: apiKey },
       });
       setSummary(response);
-      console.log(response);
+      // console.log(response);
     };
     gemini();
   }, []);
@@ -159,7 +159,7 @@ const VideoDetail = () => {
                 className="commentsHeading"
                 sx={{ fontWeight: 700, fontSize: "18px" }}
               >
-                A.I. Generated Quick Video Summary -
+                Gemini 1.5 A.I. Generated Quick Video Summary -
               </Typography>
 
               <Typography

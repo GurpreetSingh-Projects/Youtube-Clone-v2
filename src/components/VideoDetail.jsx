@@ -33,7 +33,8 @@ const VideoDetail = () => {
   const dispatch = useDispatch();
   const [liked, setLiked] = useState(false);
   const [disliked, setDisliked] = useState(false);
-  const [summary, setSummary] = useState("Loading...");
+  const [summary, setSummary] = useState("");
+  const [words, setWords] = useState("");
   var vidDetails = useSelector((state) => {
     const items = state.videos.videos.items;
 
@@ -120,11 +121,12 @@ const VideoDetail = () => {
         params: { key: apiKey },
       });
       setSummary(response);
+      setWords([`${response?.data?.candidates[0]?.content?.parts[0]?.text}`]);
       // console.log(response);
     };
     gemini();
   }, []);
-  let words = [`${summary?.data?.candidates[0]?.content?.parts[0]?.text}`];
+  // let words = [`${summary?.data?.candidates[0]?.content?.parts[0]?.text}`];
   // console.log("Comments list - " + JSON.stringify(commentsList.items));
   return (
     <Box
@@ -159,7 +161,7 @@ const VideoDetail = () => {
                 className="commentsHeading"
                 sx={{ fontWeight: 700, fontSize: "18px" }}
               >
-                Gemini 1.5 A.I. Generated Quick Video Summary -
+                A.I. Generated Quick Video Summary (Gemini 1.5 Flash ) -
               </Typography>
 
               <Typography
@@ -170,10 +172,12 @@ const VideoDetail = () => {
                   words={
                     words || "Video Summary is unavailable at the moment!!"
                   }
+                  loop={false}
                   cursor
-                  cursorStyle="|"
+                  cursorStyle="_"
                   typeSpeed={20}
-                  delaySpeed={1000}
+                  deleteSpeed={0}
+                  delaySpeed={99999999}
                 />
               </Typography>
             </Box>

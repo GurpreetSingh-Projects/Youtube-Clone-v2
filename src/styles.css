@@ -1004,3 +1004,6 @@ a {
   top: 5px;
   right: 5px;
 }
+.rounded{
+  border-radius: 99px !important;
+}

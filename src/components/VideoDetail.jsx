@@ -1,4 +1,11 @@
-import { Avatar, Box, IconButton, Stack, Typography } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  IconButton,
+  Skeleton,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { useEffect, useState } from "react";
 import ReactPlayer from "react-player/youtube";
 import { Link } from "react-router-dom";
@@ -28,13 +35,14 @@ import { setRecommended, setVideos } from "../features/Videos/videoSlice";
 import axios from "axios";
 import SearchRecommendations from "./SearchRecommendations";
 import { Typewriter } from "react-simple-typewriter";
+
 const VideoDetail = () => {
   const id = useSelector((state) => state.vidIds.currVidId);
   const dispatch = useDispatch();
   const [liked, setLiked] = useState(false);
   const [disliked, setDisliked] = useState(false);
-  const [summary, setSummary] = useState("");
   const [words, setWords] = useState("");
+  const [showSummary, setShowSummary] = useState(false);
   var vidDetails = useSelector((state) => {
     const items = state.videos.videos.items;
 
@@ -97,9 +105,10 @@ const VideoDetail = () => {
   }, [getVideos]);
   const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
   useEffect(() => {
+    setShowSummary(false);
     const gemini = async () => {
       const url =
-        "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent";
+        "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
 
       const payload = {
         contents: [
@@ -120,12 +129,16 @@ const VideoDetail = () => {
         headers: { "Content-Type": "application/json" },
         params: { key: apiKey },
       });
-      setSummary(response);
-      setWords([`${response?.data?.candidates[0]?.content?.parts[0]?.text}`]);
-      // console.log(response);
+
+      if (response?.data?.candidates[0]?.content?.parts[0]?.text.length > 2) {
+        setWords([`${response?.data?.candidates[0]?.content?.parts[0]?.text}`]);
+        setShowSummary(true);
+      } else {
+        setWords([`${response?.data?.candidates[0]?.content?.parts[0]?.text}`]);
+      }
     };
     gemini();
-  }, []);
+  }, [vidDetails?.snippet?.title]);
   // let words = [`${summary?.data?.candidates[0]?.content?.parts[0]?.text}`];
   // console.log("Comments list - " + JSON.stringify(commentsList.items));
   return (
@@ -161,25 +174,51 @@ const VideoDetail = () => {
                 className="commentsHeading"
                 sx={{ fontWeight: 700, fontSize: "18px" }}
               >
-                A.I. Generated Quick Video Summary (Gemini 1.5 Flash ) -
+                A.I. Generated Quick Video Summary (Gemini 2.0 Flash ) -
               </Typography>
-
-              <Typography
-                variant="subtitle2"
-                sx={{ fontWeight: 300, fontSize: "14px", textAlign: "justify" }}
-              >
-                <Typewriter
-                  words={
-                    words || "Video Summary is unavailable at the moment!!"
-                  }
-                  loop={false}
-                  cursor
-                  cursorStyle="_"
-                  typeSpeed={20}
-                  deleteSpeed={0}
-                  delaySpeed={99999999}
-                />
-              </Typography>
+              {showSummary ? (
+                <Typography
+                  variant="subtitle2"
+                  sx={{
+                    fontWeight: 300,
+                    fontSize: "14px",
+                    textAlign: "justify",
+                  }}
+                >
+                  <Typewriter
+                    words={words}
+                    loop={false}
+                    cursor
+                    cursorStyle="_"
+                    typeSpeed={5}
+                    deleteSpeed={0}
+                    delaySpeed={99999999}
+                  />
+                </Typography>
+              ) : (
+                <>
+                  <Skeleton
+                    variant="rectangular"
+                    className="mt-2 bg-white rounded"
+                    height={20}
+                  />
+                  <Skeleton
+                    variant="rectangular"
+                    className="mt-2 bg-white rounded"
+                    height={20}
+                  />
+                  <Skeleton
+                    variant="rectangular"
+                    className="mt-2 bg-white rounded"
+                    height={20}
+                  />
+                  <Skeleton
+                    variant="rectangular"
+                    className="mt-2 bg-white rounded"
+                    height={20}
+                  />
+                </>
+              )}
             </Box>
 
             <div

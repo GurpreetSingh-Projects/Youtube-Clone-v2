@@ -25,6 +25,7 @@ export default function VideoCard({ video, channelView, recommendedVideos }) {
   function cardNotHovered() {
     setIsHovered(false);
   }
+  const category = useSelector((state) => state.category.selectedCategory);
 
   var currVidDetails = "",
     currChannels = "";
@@ -51,7 +52,7 @@ export default function VideoCard({ video, channelView, recommendedVideos }) {
     } else {
       setLink(video?.id);
     }
-  }, []);
+  }, [category, video?.id]);
 
   return (
     <Card

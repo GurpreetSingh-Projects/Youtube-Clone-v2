@@ -29,15 +29,24 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import moment from "moment";
 import SubscribeButton from "./SubscribeButton";
 import { setChannelId } from "../features/CurrChannel/currChannelSlice";
-import { setCurrVidId } from "../features/VidIds/vidIdsSlice";
+import { setCurrVidId, setVidIds } from "../features/VidIds/vidIdsSlice";
 import TimedOut from "./TimedOut";
 import { setRecommended, setVideos } from "../features/Videos/videoSlice";
 import axios from "axios";
 import SearchRecommendations from "./SearchRecommendations";
 import { Typewriter } from "react-simple-typewriter";
+import useGetUrl from "../features/GetUrl/getUrl";
+import { setCategory } from "../features/Category/categorySlice";
+import { geminiApi } from "../features/FetchApi/geminiApi";
+import { setChannelIds } from "../features/ChannelIds/channelidsSlice";
 
 const VideoDetail = () => {
-  const id = useSelector((state) => state.vidIds.currVidId);
+  var id = useSelector((state) => state.vidIds.currVidId);
+  const getUrl = useGetUrl();
+  if (!id) {
+    var id = getUrl();
+    // console.log(id);
+  }
   const dispatch = useDispatch();
   const [liked, setLiked] = useState(false);
   const [disliked, setDisliked] = useState(false);
@@ -47,18 +56,31 @@ const VideoDetail = () => {
     const items = state.videos.videos.items;
 
     if (!Array.isArray(items) || !id) {
-      return console.log("Video Id Not found!!");
+      return "";
+    } else {
+      return items.find((item) => {
+        return item.id == id;
+      });
     }
-    return items.find((item) => {
-      return item.id == id;
-    });
   });
+
+  var existingVidIds = useSelector((state) => {
+    return state?.vidIds?.vidIds;
+  });
+  // console.log(existingVidIds);
+
+  // console.log(id + ", " + existingVidIds);
+  useEffect(() => {
+    if (!vidDetails && !existingVidIds) {
+      dispatch(setVidIds(id + ", " + existingVidIds));
+    }
+  }, []);
 
   var channelDetails = useSelector((state) => {
     const items = state.channels.channels.items;
 
     if (!Array.isArray(items) || !vidDetails?.snippet?.channelId) {
-      return console.log("Channel Id Not found!!");
+      return "";
     }
 
     return items.find((item) => {
@@ -72,6 +94,18 @@ const VideoDetail = () => {
       dispatch(setChannelId(""));
     }
   }, [vidDetails]);
+
+  var existingChannelIds = useSelector((state) => {
+    return state?.channelIds?.channelIds;
+  });
+  // console.log(existingChannelIds);
+
+  // console.log(id + ", " + existingChannelIds);
+  useEffect(() => {
+    if (!vidDetails) {
+      dispatch(setChannelIds(id + ", " + existingChannelIds));
+    }
+  }, []);
 
   // var vidDetails = useSelector((state) => state.videos.videos.items);
   // console.log("details -" + JSON.stringify(vidDetails));
@@ -103,33 +137,37 @@ const VideoDetail = () => {
       // dispatch(setVideos(...getVideos));
     }
   }, [getVideos]);
-  const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+  // const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
   useEffect(() => {
     setShowSummary(false);
     const gemini = async () => {
-      const url =
-        "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
+      // const url =
+      //   "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
 
-      const payload = {
-        contents: [
-          {
-            parts: [
-              {
-                text: `Summarize this youtube video in atleast 100 words and in a single para with no formatting - ${
-                  vidDetails?.snippet?.title
-                } with description set as - ${
-                  vidDetails?.snippet?.localized?.description
-                } and has user comments - ${JSON.stringify(commentsList)} `,
-              },
-            ],
-          },
-        ],
-      };
-      const response = await axios.post(url, payload, {
-        headers: { "Content-Type": "application/json" },
-        params: { key: apiKey },
-      });
-
+      // const payload = {
+      //   contents: [
+      //     {
+      //       parts: [
+      //         {
+      //           text: `Summarize this youtube video in atleast 100 words and in a single para with no formatting - ${
+      //             vidDetails?.snippet?.title
+      //           } with description set as - ${
+      //             vidDetails?.snippet?.localized?.description
+      //           } and has user comments - ${JSON.stringify(commentsList)} `,
+      //         },
+      //       ],
+      //     },
+      //   ],
+      // };
+      // const response = await axios.post(url, payload, {
+      //   headers: { "Content-Type": "application/json" },
+      //   params: { key: apiKey },
+      // });
+      let response = await geminiApi(
+        vidDetails?.snippet?.title,
+        vidDetails?.snippet?.localized?.description,
+        commentsList
+      );
       if (response?.data?.candidates[0]?.content?.parts[0]?.text.length > 2) {
         setWords([`${response?.data?.candidates[0]?.content?.parts[0]?.text}`]);
         setShowSummary(true);

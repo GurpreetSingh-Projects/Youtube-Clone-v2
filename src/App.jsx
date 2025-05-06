@@ -51,7 +51,7 @@ export default function App() {
       videoIdsString = videoIdsString.substring(0, videoIdsString.length - 1);
       dispatch(setVidIds(videoIdsString));
     }
-  }, [getVideos, getRecVids]);
+  }, [getVideos, getRecVids, category]);
 
   var vidIds = useSelector((state) => state.vidIds);
   const { data: getVidDetails } = useGetVidDetailsQuery(vidIds.vidIds || null, {

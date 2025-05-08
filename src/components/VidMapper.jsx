@@ -16,6 +16,10 @@ const VidMapper = (props) => {
         duration: 0.5,
       },
     },
+    exit: {
+      opacity: 0.5,
+      scale: 0,
+    },
   };
   const outerVariant = {
     hidden: {
@@ -47,7 +51,13 @@ const VidMapper = (props) => {
         exit="exit"
       >
         {props?.videos?.items.map((item, idx) => (
-          <motion.div variants={innerVariant} key={idx}>
+          <motion.div
+            variants={innerVariant}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            key={idx}
+          >
             {item.id && (
               <VideoCard
                 video={item}

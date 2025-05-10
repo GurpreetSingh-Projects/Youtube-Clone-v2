@@ -127,7 +127,7 @@ const Navbar = () => {
         </div>
         <div className="col-7 text-white fs-6 fst-italic d-none d-md-block">
           &quot;
-          <span>
+          <span className="searchTypewriter" onClick={toggleSearch}>
             <SearchRecommendations words={words} />
           </span>
           &quot;

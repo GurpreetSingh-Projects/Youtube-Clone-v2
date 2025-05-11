@@ -300,9 +300,10 @@ a {
   inset: 0px;
   height: 100%;
   width: 100%;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
   filter: saturate(0.75);
   transition: all 0.5s;
+  overflow: scroll;
 }
 
 .searchBarContainer {
@@ -741,6 +742,8 @@ a {
   padding: 20px;
   border-radius: 20px;
   margin-top: 30px;
+  max-height: 300px;
+  overflow-y: scroll;
 }
 .searchTermContainer {
   display: flex;
@@ -748,6 +751,8 @@ a {
   flex-wrap: wrap;
   align-items: stretch;
   gap: 5px;
+  justify-content: center;
+  align-items: center;
 }
 .searchItem {
   display: flex;
@@ -763,6 +768,13 @@ a {
   border-radius: 99px;
   cursor: pointer;
   font-weight: 600;
+  text-overflow: ellipsis;
+  max-width: 33%;
+}
+.searchItemInnerText {
+  max-width: 80%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 @keyframes blink {
   50% {
@@ -1004,6 +1016,9 @@ a {
   top: 5px;
   right: 5px;
 }
-.rounded{
+.rounded {
   border-radius: 99px !important;
+}
+.searchTypewriter {
+  cursor: pointer !important;
 }

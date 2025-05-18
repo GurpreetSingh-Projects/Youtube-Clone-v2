@@ -70,7 +70,28 @@ const Navbar = () => {
       y: 500,
     },
   };
-
+  const riseUp = {
+    hidden: {
+      scale: 0.5,
+      opacity: 0,
+      y: -100,
+    },
+    visible: {
+      scale: 1,
+      opacity: 1,
+      y: 0,
+      transition: {
+        staggerChildren: 0.5,
+      },
+    },
+    exit: {
+      scale: 0.5,
+      opacity: 0,
+      y: -100,
+    },
+    transition: { duration: 2.5 },
+  };
+  const AnimatedLogo = motion(Box);
   function toggleSearch() {
     dispatch(searchbarToggle());
   }
@@ -113,9 +134,14 @@ const Navbar = () => {
           className="d-flex align-items-center justify-between"
           style={{ display: "flex", alignItems: "center" }}
         >
-          <Grow in={true}>
+          <AnimatedLogo
+            variants={riseUp}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+          >
             <img className="logoImg" src={logo} alt="logo" />
-          </Grow>
+          </AnimatedLogo>
           <IconButton className="text-white d-none">
             <MenuIcon />
           </IconButton>
@@ -154,12 +180,12 @@ const Navbar = () => {
           direction="row"
           className="d-flex align-items-center justify-content-end gap-0 gap-md-3"
         >
-          <Grow in={true}>
+          <Box>
             <IconButton className="text-white" onClick={toggleSearch}>
               <Search />
             </IconButton>
-          </Grow>
-          <Grow in={true}>
+          </Box>
+          <Box>
             <IconButton
               className="text-white"
               onClick={() => {
@@ -168,9 +194,9 @@ const Navbar = () => {
             >
               <HelpOutlineIcon />
             </IconButton>
-          </Grow>
+          </Box>
 
-          <Grow in={true}>
+          <Box>
             <IconButton
               className="text-white"
               onClick={() => {
@@ -179,8 +205,8 @@ const Navbar = () => {
             >
               <NotificationsIcon />
             </IconButton>
-          </Grow>
-          <Grow in={true}>
+          </Box>
+          <Box>
             <IconButton
               className="text-white"
               onClick={() => {
@@ -189,7 +215,7 @@ const Navbar = () => {
             >
               <AccountCircleIcon />
             </IconButton>
-          </Grow>
+          </Box>
         </Stack>
       </Box>
       <Modal

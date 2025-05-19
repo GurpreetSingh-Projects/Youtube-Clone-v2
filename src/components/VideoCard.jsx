@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Typography, Card, CardContent, CardMedia, Box } from "@mui/material";
-import { demoChannelUrl } from "../utils/constants";
+import { demoChannelUrl, handleScroll } from "../utils/constants";
 import { useEffect, useState } from "react";
 import { converter } from "../utils/constants";
 import moment from "moment";
@@ -65,6 +65,7 @@ export default function VideoCard({ video, channelView, recommendedVideos }) {
       }}
       onMouseEnter={cardHovered}
       onMouseLeave={cardNotHovered}
+      onClick={handleScroll}
     >
       <Link
         to={`/video/${link}`}

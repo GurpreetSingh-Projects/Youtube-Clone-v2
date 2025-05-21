@@ -179,6 +179,7 @@ const VideoDetail = () => {
   }, [vidDetails?.snippet?.title]);
   // let words = [`${summary?.data?.candidates[0]?.content?.parts[0]?.text}`];
   // console.log("Comments list - " + JSON.stringify(commentsList.items));
+
   return (
     <Box
       className="vidDetail flex-column flex-md-row"
@@ -191,6 +192,7 @@ const VideoDetail = () => {
         <Box flex={1} className="mb-5">
           <Box sx={{ width: "100%", position: "sticky", top: "80px" }}>
             <ReactPlayer
+              id="react-player"
               className="react-player mb-3 mb-md-0"
               url={`https://www.youtube.com/watch?v=${id}`}
               playing={true}

@@ -28,3 +28,10 @@ export function extendDescription() {
     document.getElementById("vidDescription").style.webkitLineClamp = 2;
   else document.getElementById("vidDescription").style.webkitLineClamp = 99;
 }
+
+export function handleScroll() {
+  const player = document.getElementById("react-player");
+  if (player) {
+    player.scrollIntoView();
+  }
+}

@@ -92,13 +92,13 @@ const Welcome = () => {
               <motion.h1 variants={riseUp} transition={{ delay: 2 }}>
                 v
               </motion.h1>
-              <motion.h1 variants={riseUp} transition={{ delay: 2.25 }}>
+              <motion.h1 variants={riseUp} transition={{ delay: 2.15 }}>
                 2
               </motion.h1>
-              <motion.h1 variants={riseUp} transition={{ delay: 2.5 }}>
+              <motion.h1 variants={riseUp} transition={{ delay: 2.3 }}>
                 .
               </motion.h1>
-              <motion.h1 variants={riseUp} transition={{ delay: 3 }}>
+              <motion.h1 variants={riseUp} transition={{ delay: 2.45 }}>
                 0
               </motion.h1>
             </AnimatedBox>
@@ -106,7 +106,8 @@ const Welcome = () => {
         </AnimatedBox>
       )}
 
-      {!welcome && <App />}
+      {/* {!welcome && <App />} */}
+      <App />
     </>
   );
 };

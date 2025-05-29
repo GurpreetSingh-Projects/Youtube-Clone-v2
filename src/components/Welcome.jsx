@@ -106,8 +106,8 @@ const Welcome = () => {
         </AnimatedBox>
       )}
 
-      {/* {!welcome && <App />} */}
-      <App />
+      {!welcome && <App />}
+      {/* <App /> */}
     </>
   );
 };

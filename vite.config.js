@@ -6,6 +6,7 @@ export default defineConfig({
   plugins: [react(), configDotenv()],
   build: {
     minify: "terser",
+    sourcemap: false,
     terserOptions: {
       compress: {
         drop_console: true,
@@ -14,7 +15,6 @@ export default defineConfig({
       format: {
         comments: false,
       },
-      sourcemap: false,
     },
   },
 });

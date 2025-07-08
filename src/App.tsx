@@ -1,16 +1,6 @@
-// src/App.js
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Box } from "@mui/material";
-import {
-  Navbar,
-  Feed,
-  VideoDetail,
-  ChannelDetail,
-  SearchFeed,
-} from "./components";
-
-import Footer from "./components/Footer";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setVidIds } from "./features/VidIds/vidIdsSlice";
 import {
@@ -23,18 +13,32 @@ import { searchResults } from "./features/Search/searchSlice";
 import { setChannelIds } from "./features/ChannelIds/channelidsSlice";
 import { setChannels } from "./features/Channels/channelsSlice";
 import ReactGA from "react-ga4";
-export default function App() {
-  const TRACKING_ID = "G-XPVYS3W9Z2";
-  const category = useSelector((state) => state.category.selectedCategory);
-  const dispatch = useDispatch();
+import {
+  Footer,
+  Navbar,
+  Feed,
+  VideoDetail,
+  ChannelDetail,
+  SearchFeed,
+} from "./components/index";
+import { AppDispatch, RootState } from "./app/store";
 
-  const { data: getVideos } = useGetVideosQuery(category, {
+export const App: React.FC = () => {
+  //Tracking ID Needed for Google Analytics
+  const TRACKING_ID: string = "G-XPVYS3W9Z2";
+
+  //Get Selected Category for Currently active category from redux store
+  const category: string = useSelector(
+    (state: RootState) => state.category.selectedCategory
+  );
+
+  const dispatch = useDispatch<AppDispatch>();
+
+  const { data: getVideos } = useGetVideosQuery(category as string, {
     skip: !category,
     keepUnusedDataFor: 3600 * 24,
   });
   let getRecVids = useSelector((state) => state?.videos?.recommendVideos);
-  // console.log(getRecVids);
-  // let getChannelVids = useSelector((state) => state.videos.recommendedVideos);
   useEffect(() => {
     if (getVideos != null) {
       dispatch(searchResults(getVideos));
@@ -105,14 +109,6 @@ export default function App() {
   return (
     <>
       <BrowserRouter>
-        {/* <CreateContext.Provider
-          value={{
-            sidebar,
-            setSidebar,
-            currVid,
-            setCurrVid,
-          }}
-        > */}
         <Box className="backgroundImg">
           <Navbar />
           <Routes>
@@ -124,8 +120,7 @@ export default function App() {
           </Routes>
           <Footer />
         </Box>
-        {/* </CreateContext.Provider> */}
       </BrowserRouter>
     </>
   );
-}
+};

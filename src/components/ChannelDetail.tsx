@@ -10,7 +10,7 @@ import {
   useGetVidDetailsQuery,
 } from "../features/FetchApi/fetchapi";
 import { useEffect, useState } from "react";
-import { fetchApi } from "../utils/fetchApi";
+// import { fetchApi } from "../utils/fetchApi";
 import { useDispatch, useSelector } from "react-redux";
 import { setRecommendedVideos, setVideos } from "../features/Videos/videoSlice";
 import { setChannelIds } from "../features/ChannelIds/channelidsSlice";

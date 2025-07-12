@@ -2,7 +2,9 @@ import { Box, Stack, Typography } from "@mui/material";
 import { Sidebar, Videos } from "./index";
 import { useSelector } from "react-redux";
 const Feed = () => {
-  const category = useSelector((state) => state.category.selectedCategory);
+  const category: string[] = useSelector(
+    (state) => state.category.selectedCategory
+  );
   return (
     <>
       <Stack

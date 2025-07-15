@@ -1,4 +1,3 @@
-import logo from "/assets/images/logo.jpg";
 import { Link, Navigate } from "react-router-dom";
 import {
   Searchbar,
@@ -8,41 +7,46 @@ import {
   AccountCircleIcon,
   MenuIcon,
   CloseIcon,
+  SearchRecommendations,
+  HelpModal,
+  ProfileModal,
 } from "./index";
 import {
   IconButton,
   Stack,
   Box,
-  Grow,
   Typography,
   Modal,
   Avatar,
+  BoxProps,
 } from "@mui/material";
 import { Search } from "@mui/icons-material";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, Variants } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import { searchbarToggle } from "../features/Searchbar/searchbarSlice";
 import { setCategory } from "../features/Category/categorySlice";
-import { useState } from "react";
-import SearchRecommendations from "./SearchRecommendations";
-import HelpModal from "./HelpModal";
-import ProfileModal from "./ProfileModal";
+import { CSSProperties, Suspense, useState } from "react";
+import { ModalProps, ShowModalProps } from "../utils/types";
+import { words } from "../utils/constants";
+import Welcome from "./Welcome";
 
-const Navbar = () => {
+const Navbar: React.FC = () => {
   const dispatch = useDispatch();
-  const [modalManager, setModalManager] = useState({
+
+  const [modalManager, setModalManager] = useState<ModalProps>({
     helpModal: false,
     notifyModal: false,
     profileModal: false,
   });
 
-  function showModal(modalName) {
+  function showModal(modalName: ShowModalProps["modalName"]): void {
     setModalManager((prev) => ({
+      ...prev,
       [modalName]: !prev[modalName],
     }));
   }
 
-  const style = {
+  const style: CSSProperties | any = {
     position: "fixed",
     top: "50%",
     left: "50%",
@@ -53,7 +57,14 @@ const Navbar = () => {
     p: 4,
     borderRadius: "20px",
   };
-  const containerVariants = {
+  const style2: CSSProperties | any = {
+    position: "sticky",
+    top: 0,
+    justifyContent: "space-between",
+    zIndex: 9999,
+    background: "inherit",
+  };
+  const containerVariants: Variants = {
     hidden: {
       scale: 0.5,
       opacity: 0,
@@ -70,7 +81,7 @@ const Navbar = () => {
       y: 500,
     },
   };
-  const riseUp = {
+  const riseUp: Variants = {
     hidden: {
       scale: 0.5,
       opacity: 0,
@@ -82,6 +93,7 @@ const Navbar = () => {
       y: 0,
       transition: {
         staggerChildren: 0.5,
+        duration: 2.5,
       },
     },
     exit: {
@@ -89,39 +101,20 @@ const Navbar = () => {
       opacity: 0,
       y: -100,
     },
-    transition: { duration: 2.5 },
   };
-  const AnimatedLogo = motion(Box);
+  const AnimatedLogo = motion<BoxProps>(Box);
+
   function toggleSearch() {
     dispatch(searchbarToggle());
   }
-  const replaceUrl = (url) => {
-    Navigate(url, { replace: true });
-  };
-  const searchbar = useSelector((state) => state.searchbar);
-  let words = [
-    "How to code a responsive website",
-    "Top web development trends",
-    "CSS animations tutorial for beginners",
-    "JavaScript vs TypeScript: Which is better?",
-    "Best practices for SEO in web design",
-    "How to optimize website performance",
-    "What's!",
-    "Welcome to React!",
-    "Enjoy coding!",
-  ];
+
+  const searchbar: boolean = useSelector((state) => state.searchbar);
   return (
     <Stack
       className="px-1 py-2 px-md-3 py-md-2"
       direction="row"
       alignItems="center"
-      sx={{
-        position: "sticky",
-        top: 0,
-        justifyContent: "space-between",
-        zIndex: 9999,
-        background: "inherit",
-      }}
+      sx={style2}
     >
       <Box
         className="col-3"
@@ -135,12 +128,12 @@ const Navbar = () => {
           style={{ display: "flex", alignItems: "center" }}
         >
           <AnimatedLogo
-            variants={riseUp}
+            // variants={riseUp}
             initial="hidden"
             animate="visible"
             exit="exit"
           >
-            <img className="logoImg" src={logo} alt="logo" />
+            <img className="logoImg" src="/assets/images/logo.jpg" alt="logo" />
           </AnimatedLogo>
           <IconButton className="text-white d-none">
             <MenuIcon />
@@ -148,37 +141,43 @@ const Navbar = () => {
         </Link>
       </Box>
       <div className="col-6 d-flex">
-        <div className="col-5 text-white fs-6 fst-italic d-none d-md-block text-end">
-          Search for&nbsp;
-        </div>
-        <div className="col-7 text-white fs-6 fst-italic d-none d-md-block">
-          &quot;
-          <span className="searchTypewriter" onClick={toggleSearch}>
-            <SearchRecommendations words={words} />
-          </span>
-          &quot;
-        </div>
-        <AnimatePresence>
-          {searchbar && (
+        {!searchbar && (
+          <>
+            <div className="col-5 text-white fs-6 fst-italic d-none d-md-block text-end">
+              Search for&nbsp;
+            </div>
+            <div className="col-7 text-white fs-6 fst-italic d-none d-md-block">
+              &quot;
+              <span className="searchTypewriter" onClick={toggleSearch}>
+                <SearchRecommendations words={words} />
+              </span>
+              &quot;
+            </div>
+          </>
+        )}
+        {searchbar && (
+          <AnimatePresence>
             <motion.div
+              variants={containerVariants}
               initial="hidden"
               animate="visible"
               exit="exit"
-              transition={{ duration: 0.25 }} // Adjust duration as needed
-              variants={containerVariants}
+              transition={{ duration: 0.25 }}
               className="position-fixed"
               style={{ inset: 0 }}
             >
               <div className="searchbarBox" onClick={toggleSearch} />
-              <Searchbar />
+              <Suspense fallback={<></>}>
+                <Searchbar />
+              </Suspense>
             </motion.div>
-          )}
-        </AnimatePresence>
+          </AnimatePresence>
+        )}
       </div>
       <Box className="col-3">
         <Stack
           direction="row"
-          className="d-flex align-items-center justify-content-end gap-0 gap-md-3"
+          className="d-flex align-items-center justify-content-end gap-0 gap-md-2"
         >
           <Box>
             <IconButton className="text-white" onClick={toggleSearch}>
@@ -234,6 +233,8 @@ const Navbar = () => {
           variants={containerVariants}
           className="position-fixed"
           style={{ inset: 0 }}
+          as
+          CSSProperties
         >
           <Box sx={style} className="modalWrapper">
             <Box
@@ -294,9 +295,9 @@ const Navbar = () => {
                   }}
                 >
                   <Box className="d-flex align-items-center justify-content-start gap-3 col-9">
-                    <Avatar src="https://yt3.googleusercontent.com/fxGKYucJAVme-Yz4fsdCroCFCrANWqw0ql4GYuvx8Uq4l_euNJHgE-w9MTkLQA805vWCi-kE0g=s160-c-k-c0x00ffffff-no-rj"></Avatar>
+                    <Avatar src="assets/images/mb.webp"></Avatar>
                     <Box>
-                      Don&apos;t miss this exciting new upload from{" "}
+                      Don&apos;t miss this exciting new upload from&nbsp;
                       <b>Mr Beast </b>
                     </Box>
                   </Box>
@@ -328,7 +329,7 @@ const Navbar = () => {
                   }}
                 >
                   <Box className="d-flex align-items-center justify-content-start gap-3 col-9">
-                    <Avatar src="https://yt3.googleusercontent.com/rrMcZWXHcMJ-GikSl3uEmB2gwu9uWg4gbgvI4_tFcNEkc5ys2emF0Oz6733mDVdaxz2jQ07xzQ=s160-c-k-c0x00ffffff-no-rj"></Avatar>
+                    <Avatar src="assets/images/5m.webp"></Avatar>
                     <Box>
                       Don't miss this exciting new upload from{" "}
                       <b>5-Minute Crafts</b>
@@ -362,7 +363,7 @@ const Navbar = () => {
                   }}
                 >
                   <Box className="d-flex align-items-center justify-content-start gap-3 col-9">
-                    <Avatar src="https://yt3.ggpht.com/Vy6KL7EM_apxPSxF0pPy5w_c87YDTOlBQo3MADDF0Wl51kwxmt9wmRotnt2xQXwlrcyO0Xe56w=s48-c-k-c0x00ffffff-no-rj"></Avatar>
+                    <Avatar src="assets/images/ltt.webp"></Avatar>
                     <Box>
                       Don't miss this exciting new upload from{" "}
                       <b>Linus Tech Tips</b>
@@ -396,7 +397,7 @@ const Navbar = () => {
                   }}
                 >
                   <Box className="d-flex align-items-center justify-content-start gap-3 col-9">
-                    <Avatar src="https://yt3.ggpht.com/jpY2026WmAqmhk4EfjvaVb1yCN5StBl_TZ0hY-nlTP7z4F1bSo3tfvMwTLLMCtJwKhKU6e5hEg=s88-c-k-c0x00ffffff-no-rj"></Avatar>
+                    <Avatar src="assets/images/pp.webp"></Avatar>
                     <Box>
                       Don't miss this exciting new upload from <b>Pewdipie</b>
                     </Box>

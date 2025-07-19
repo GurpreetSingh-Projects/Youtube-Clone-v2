@@ -1,37 +1,20 @@
 import { IconButton } from "@mui/material";
 import { Close, Search } from "@mui/icons-material";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { searchbarToggle } from "../features/Searchbar/searchbarSlice";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
-import { motion } from "framer-motion";
-// import { geminiApi2 } from "../features/FetchApi/geminiApi";
+import { motion, Variants } from "framer-motion";
+import { searchRecommendation } from "../utils/constants";
 export default function Searchbar() {
-  const [searchTerm, setSearchTerm] = useState("");
-  var searchRecommendation = [
-    "AI music composition",
-    "virtual concerts",
-    "Spotify music algorithm",
-    "React 19 RC",
-    "MIDI controller review",
-    "Tidal vs Spotify sound quality",
-    "Art",
-    "Top Cooking",
-    "gaming music soundtrack",
-    "Next js",
-    "digital piano vs acoustic",
-    "music production software",
-    "News",
-    "Photos App",
-    "Portfolio",
-  ];
+  const [searchTerm, setSearchTerm] = useState<string>("");
   const [searchSuggestions, setSearchSuggestions] =
-    useState(searchRecommendation);
+    useState<string[]>(searchRecommendation);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     toggleSearch();
     if (searchTerm) {
@@ -41,16 +24,15 @@ export default function Searchbar() {
   function toggleSearch() {
     dispatch(searchbarToggle());
   }
-  function setFormInput(item) {
-    var searchTerm = (document.getElementsByClassName("search-bar")[0].value =
-      item);
+  function setFormInput(item: string) {
+    var searchTerm = item;
 
     if (searchTerm) {
       toggleSearch();
       navigate(`/search/${searchTerm}`);
     }
   }
-  const slideUp = {
+  const slideUp: Variants = {
     hidden: { opacity: 0.5 },
     visible: {
       scale: 1,
@@ -60,7 +42,7 @@ export default function Searchbar() {
       },
     },
   };
-  const searchItemVariants = {
+  const searchItemVariants: Variants = {
     hidden: {
       opacity: 0.5,
       scale: 0,
@@ -128,10 +110,11 @@ export default function Searchbar() {
       </form>
       <div className="searchSuggestions">
         <motion.div variants={slideUp} className="searchTermContainer">
-          {searchSuggestions?.map((item) => (
+          {searchSuggestions?.map((item, index) => (
             <motion.div
-              key={item}
+              key={index}
               className="searchItem"
+              value={item}
               onClick={() => setFormInput(item)}
               variants={searchItemVariants}
               title={item}
@@ -140,7 +123,6 @@ export default function Searchbar() {
               <TrendingUpIcon />
             </motion.div>
           ))}
-          {/* {searchSuggestions} */}
         </motion.div>
       </div>
     </motion.div>

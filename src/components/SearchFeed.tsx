@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import { Sidebar, Videos } from "./index";
-import { fetchApi } from "../utils/fetchApi";
+// import { fetchApi } from "../utils/fetchApi";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 // import { CreateContext } from "../App";

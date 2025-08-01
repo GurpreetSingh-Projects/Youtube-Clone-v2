@@ -186,7 +186,7 @@ const VideoDetail = () => {
       sx={{ background: "inherit" }}
     >
       <Box
-        className="col-md-9 leftSide"
+        className="col-lg-9 leftSide"
         direction={{ xs: "column", md: "row" }}
       >
         <Box flex={1} className="mb-5">
@@ -509,7 +509,7 @@ const VideoDetail = () => {
           </Box>
         </Box>
       </Box>
-      <Box className="col-md-3 rightSide" direction="column">
+      <Box className="col-lg-3 rightSide" direction="column">
         <Box sx={{ m: 2 }}>
           <Typography variant="subtitle" sx={{ color: "#fff" }}>
             Recommended Videos -

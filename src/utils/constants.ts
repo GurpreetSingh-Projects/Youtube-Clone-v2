@@ -7,6 +7,34 @@ export const demoVideoTitle =
 export const demoProfilePicture =
   "http://dergipark.org.tr/assets/app/images/buddy_sample.png";
 
+export const words: string[] = [
+  "How to code a responsive website",
+  "Top web development trends",
+  "CSS animations tutorial for beginners",
+  "JavaScript vs TypeScript: Which is better?",
+  "Best practices for SEO in web design",
+  "How to optimize website performance",
+  "What's Trending!",
+  "Welcome to React!",
+  "Enjoy coding!",
+];
+export const searchRecommendation: string[] = [
+  "AI music composition",
+  "virtual concerts",
+  "Spotify music algorithm",
+  "React 19 RC",
+  "MIDI controller review",
+  "Tidal vs Spotify sound quality",
+  "Art",
+  "Top Cooking",
+  "gaming music soundtrack",
+  "Next js",
+  "digital piano vs acoustic",
+  "music production software",
+  "News",
+  "Photos App",
+  "Portfolio",
+];
 export function converter(val) {
   // console.log(val);
   val = parseInt(val);

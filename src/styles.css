@@ -1,5 +1,8 @@
 @import url("https://fonts.cdnfonts.com/css/sf-pro-display");
-
+/* @import url("./animate.css");
+@import url("./bootstrap.css");
+@import url("./googlefonts.css");
+@import url("./materialicons.css"); */
 * {
   margin: 0px;
   padding: 0px;
@@ -166,6 +169,8 @@ a {
   height: 35px;
   padding: 5px 15px;
   border-radius: 999px;
+  position: relative;
+  z-index: 1 !important;
 }
 .channelBanner {
   height: 200px;
@@ -805,10 +810,6 @@ a {
   height: 100vh !important;
   width: 100vw !important;
   /* animation: fadeAway 30s linear; */
-  position: fixed;
-  inset: 0;
-  background: #000000 !important;
-  z-index: 99999999999;
 }
 .welcomeWrapper .welcomeTo {
   font-size: 120px !important;
@@ -819,7 +820,7 @@ a {
   /* color: red; */
   font-size: 100px;
   align-content: center;
-  text-shadow: 0px 0px 105px rgb(255, 0, 0, 0.85);
+  text-shadow: 0px 0px 105px rgb(255, 0, 0, 0.5);
   /* backdrop-filter: blur(50px); */
   color: transparent;
   -webkit-text-stroke: 1px red;
@@ -1070,12 +1071,12 @@ a {
 }
 
 @keyframes fadeAway {
-  10% {
+  15% {
     transform: scale(1);
     opacity: 1;
   }
-  20% {
-    transform: scale(100);
+  25% {
+    transform: scale(10);
     opacity: 0;
   }
 }
